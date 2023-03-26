@@ -72,6 +72,6 @@ public class Consumer {
     }
     @Override
     public String toString() {
-        return "fullName: "+firstname+" "+surname+" balance: "+balance;
+        return "FullName: "+firstname+" "+surname+" Account balance: "+balance;
     }
 }
