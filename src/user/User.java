@@ -1,23 +1,23 @@
 package user;
 
-public class User {
+public abstract class User {
     protected String username;
     protected String password;
-    protected String firstname;
-    protected String surname;
-    protected User(String username,String password,String firstname,String surname){
+    protected String email;
+    protected String phoneNumber;
+    protected User(String username, String password, String email, String phoneNumber){
         this.username=username;
         this.password=password;
-        this.firstname=firstname;
-        this.surname=surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getEmail() {
+        return email;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getUsername() {
@@ -32,15 +32,15 @@ public class User {
         this.username = username;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
