@@ -1,6 +1,6 @@
 package comment;
 
-import consumer.Consumer;
+import user.consumer.Consumer;
 
 public class Comment {
     private final Consumer consumer;

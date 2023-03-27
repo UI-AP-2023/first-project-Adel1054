@@ -3,7 +3,7 @@ package commodity.digitalCommodities;
 import category.Category;
 import commodity.Commodity;
 
-public class DigitalCommodity extends Commodity {
+public abstract class DigitalCommodity extends Commodity {
     protected final double weight;
     protected final String dimensions;
     DigitalCommodity(String ID, String name, double price, int availableCount, Category category,double weight,String dimensions){

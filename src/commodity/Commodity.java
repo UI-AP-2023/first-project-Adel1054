@@ -5,7 +5,7 @@ import rating.Rating;
 
 import java.util.ArrayList;
 
-public class Commodity {
+public abstract class Commodity {
     protected final String ID;
     protected final String name;
     protected final double price;
