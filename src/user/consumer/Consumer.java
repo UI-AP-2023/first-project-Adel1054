@@ -2,78 +2,21 @@ package user.consumer;
 
 import commodity.Commodity;
 import receipt.Receipt;
+import user.User;
 
 import java.util.ArrayList;
 
-public class Consumer {
-    private String username;
-    private String password;
-    private String firstname;
-    private String surname;
+public class Consumer extends User {
     private final ArrayList<Commodity> cart;
     private final ArrayList<Receipt> shoppingHistory;
     private final ArrayList<CreditCard> creditCards;
     private double balance;
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public ArrayList<Commodity> getCart() {
-        return cart;
-    }
-
-    public ArrayList<Receipt> getShoppingHistory() {
-        return shoppingHistory;
-    }
-
-    public double getBalance() {
-        return balance;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
     Consumer(SignupRequest request){
-        username=request.getUsername();
-        password=request.getPassword();
-        firstname=request.getFirstname();
-        surname=request.getSurname();
+        super(request.getUsername(), request.getPassword(), request.getFirstname(), request.getSurname());
         cart=new ArrayList<>();
         shoppingHistory=new ArrayList<>();
         creditCards=new ArrayList<>();
         balance=0;
-    }
-    @Override
-    public String toString() {
-        return "FullName: "+firstname+" "+surname+" Account balance: "+balance;
     }
 }
