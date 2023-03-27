@@ -1,10 +1,12 @@
 package stationery;
 
+import category.Category;
+
 public class Notebook extends StationerySupply{
     private final int numberOfPages;
     private final String pageType;
-    Notebook(String country,int numberOfPages,String pageType){
-        super(country);
+    Notebook(String ID, String name, double price, int availableCount, Category category,String country, int numberOfPages, String pageType){
+        super(ID,name,price,availableCount,category,country);
         this.numberOfPages=numberOfPages;
         this.pageType=pageType;
     }
