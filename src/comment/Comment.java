@@ -15,4 +15,9 @@ public class Comment {
         status=Status.TOBECONSIDERED;
         this.userHasBought=userHasBought;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

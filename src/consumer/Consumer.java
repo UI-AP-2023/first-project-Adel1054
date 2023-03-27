@@ -12,6 +12,7 @@ public class Consumer {
     private String surname;
     private final ArrayList<Commodity> cart;
     private final ArrayList<Receipt> shoppingHistory;
+    private final ArrayList<CreditCard> creditCards;
     private double balance;
 
     public String getFirstname() {
@@ -68,6 +69,7 @@ public class Consumer {
         this.surname=surname;
         cart=new ArrayList<>();
         shoppingHistory=new ArrayList<>();
+        creditCards=new ArrayList<>();
         balance=0;
     }
     @Override
