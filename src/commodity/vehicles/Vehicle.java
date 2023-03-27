@@ -1,4 +1,4 @@
-package vehicles;
+package commodity.vehicles;
 
 import category.Category;
 import commodity.Commodity;

@@ -1,4 +1,4 @@
-package comestible;
+package commodity.comestible;
 import category.Category;
 import commodity.Commodity;
 

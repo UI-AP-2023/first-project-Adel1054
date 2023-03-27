@@ -1,8 +1,8 @@
-package vehicles;
+package commodity.vehicles;
 
 import category.Category;
 
-public class Bicycle extends Vehicle{
+public class Bicycle extends Vehicle {
     enum BicycleType{
         MOUNTAIN,ROAD,CITY,HYBRID
     }

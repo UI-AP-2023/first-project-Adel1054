@@ -1,4 +1,4 @@
-package stationery;
+package commodity.stationery;
 
 import category.Category;
 import commodity.Commodity;

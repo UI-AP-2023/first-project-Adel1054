@@ -1,8 +1,8 @@
-package stationery;
+package commodity.stationery;
 
 import category.Category;
 
-public class Pencil extends StationerySupply{
+public class Pencil extends StationerySupply {
     private enum PencilType {
         H2,H,F,B,HB
     }

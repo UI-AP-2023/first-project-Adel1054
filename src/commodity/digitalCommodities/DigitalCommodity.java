@@ -1,4 +1,4 @@
-package digitalCommodities;
+package commodity.digitalCommodities;
 
 import category.Category;
 import commodity.Commodity;

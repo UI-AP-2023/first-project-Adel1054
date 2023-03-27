@@ -1,8 +1,9 @@
-package digitalCommodities;
+package commodity.digitalCommodities;
 
 import category.Category;
+import commodity.digitalCommodities.StorageDevices;
 
-public class SSD extends StorageDevices{
+public class SSD extends StorageDevices {
     private final double readSpeed;
     private final double writeSpeed;
     SSD(String ID, String name, double price, int availableCount, Category category, double weight, String dimensions, double capacity,double readSpeed,double writeSpeed){

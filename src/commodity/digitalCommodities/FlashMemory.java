@@ -1,8 +1,8 @@
-package digitalCommodities;
+package commodity.digitalCommodities;
 
 import category.Category;
 
-public class FlashMemory extends StorageDevices{
+public class FlashMemory extends commodity.digitalCommodities.StorageDevices {
     private final double usbVersion;
     FlashMemory(String ID, String name, double price, int availableCount, Category category, double weight, String dimensions, double capacity,double usbVersion){
         super(ID,name,price,availableCount,category,weight,dimensions,capacity);
