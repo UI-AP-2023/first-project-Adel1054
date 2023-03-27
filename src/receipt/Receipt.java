@@ -13,6 +13,9 @@ public class Receipt {
         this.ID=ID;
         this.commodities=commodities;
         sumPaid=0;
+        for(Commodity commodity:commodities){
+            sumPaid+=commodity.getPrice();
+        }
         this.dateOfPurchase=dateOfPurchase;
     }
 

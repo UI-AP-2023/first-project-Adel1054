@@ -11,14 +11,51 @@ public class Notebook extends StationerySupply {
         this.pageType=pageType;
     }
 
-    public int getNumberOfPages() {
-        return numberOfPages;
+    @Override
+    public double getAverageRating() {
+        return super.getAverageRating();
+    }
+
+    @Override
+    public Category getCategory() {
+        return super.getCategory();
+    }
+
+    @Override
+    public String getCountry() {
+        return super.getCountry();
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public double getPrice() {
+        return super.getPrice();
+    }
+
+    @Override
+    public String getID() {
+        return super.getID();
+    }
+
+    @Override
+    public void setAverageRating() {
+        super.setAverageRating();
     }
 
     public String getPageType() {
         return pageType;
     }
-    public String getCountry(){
-        return country;
+
+    public int getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+" Number of pages: "+numberOfPages+" Page type: "+pageType;
     }
 }

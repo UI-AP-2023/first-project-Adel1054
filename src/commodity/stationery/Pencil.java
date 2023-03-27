@@ -11,11 +11,48 @@ public class Pencil extends StationerySupply {
         super(ID,name,price,availableCount,category,country);
         this.pencilType=pencilType;
     }
+
+    @Override
+    public double getAverageRating() {
+        return super.getAverageRating();
+    }
+
+    @Override
+    public Category getCategory() {
+        return super.getCategory();
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public String getID() {
+        return super.getID();
+    }
+
+    @Override
+    public double getPrice() {
+        return super.getPrice();
+    }
+
+    @Override
     public String getCountry() {
-        return country;
+        return super.getCountry();
+    }
+
+    @Override
+    public void setAverageRating() {
+        super.setAverageRating();
     }
 
     public PencilType getPencilType() {
         return pencilType;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+" Pencil type: "+pencilType;
     }
 }

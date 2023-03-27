@@ -12,6 +12,41 @@ public class PC extends DigitalCommodity {
         this.ramCapacity=ramCapacity;
     }
 
+    @Override
+    public double getAverageRating() {
+        return super.getAverageRating();
+    }
+
+    @Override
+    public Category getCategory() {
+        return super.getCategory();
+    }
+
+    @Override
+    public String getDimensions() {
+        return super.getDimensions();
+    }
+
+    @Override
+    public double getPrice() {
+        return super.getPrice();
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public String getID() {
+        return super.getID();
+    }
+
+    @Override
+    public void setAverageRating() {
+        super.setAverageRating();
+    }
+
     public int getRamCapacity() {
         return ramCapacity;
     }
@@ -19,5 +54,9 @@ public class PC extends DigitalCommodity {
     public String getCpuType() {
         return cpuType;
     }
-    
+
+    @Override
+    public String toString() {
+        return super.toString()+" Ram capacity: "+ramCapacity+" CPU type: "+cpuType;
+    }
 }

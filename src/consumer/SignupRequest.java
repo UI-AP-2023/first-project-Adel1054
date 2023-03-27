@@ -1,10 +1,10 @@
 package consumer;
 
 public class SignupRequest {
-    private String username;
-    private String password;
-    private String firstname;
-    private String surname;
+    private final String username;
+    private final String password;
+    private final String firstname;
+    private final String surname;
     private boolean isPermitted;
     SignupRequest(String username,String password,String firstname,String surname){
         this.username=username;
@@ -27,6 +27,10 @@ public class SignupRequest {
 
     public String getFirstname() {
         return firstname;
+    }
+
+    public void setPermitted() {
+        isPermitted = true;
     }
 
     @Override

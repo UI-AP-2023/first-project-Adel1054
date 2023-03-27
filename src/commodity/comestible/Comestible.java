@@ -11,11 +11,46 @@ public class Comestible extends Commodity {
         this.expirationDate=expirationDate;
     }
 
+    @Override
+    public double getAverageRating() {
+        return super.getAverageRating();
+    }
+
+    @Override
+    public Category getCategory() {
+        return super.getCategory();
+    }
+
+    @Override
+    public String getID() {
+        return super.getID();
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public void setAverageRating() {
+        super.setAverageRating();
+    }
+
+    @Override
+    public double getPrice() {
+        return super.getPrice();
+    }
+
     public String getExpirationDate() {
         return expirationDate;
     }
 
     public String getProductionDate() {
         return productionDate;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+" Production: "+productionDate+"\nExpiration: "+expirationDate;
     }
 }

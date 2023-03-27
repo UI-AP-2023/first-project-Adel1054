@@ -12,32 +12,56 @@ public class SSD extends StorageDevices {
         this.readSpeed=readSpeed;
     }
 
-    public double getReadSpeed() {
-        return readSpeed;
+    @Override
+    public double getAverageRating() {
+        return super.getAverageRating();
+    }
+
+    @Override
+    public String getDimensions() {
+        return super.getDimensions();
+    }
+
+    @Override
+    public Category getCategory() {
+        return super.getCategory();
+    }
+
+    @Override
+    public String getID() {
+        return super.getID();
+    }
+
+    @Override
+    public double getPrice() {
+        return super.getPrice();
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public void setAverageRating() {
+        super.setAverageRating();
+    }
+
+    @Override
+    public double getCapacity() {
+        return super.getCapacity();
     }
 
     public double getWriteSpeed() {
         return writeSpeed;
     }
-    public String getID(){
-        return ID;
+
+    public double getReadSpeed() {
+        return readSpeed;
     }
-    public String getName(){
-        return name;
-    }
-    public double getPrice(){
-        return price;
-    }
-    public int getAvailableCount(){
-        return availableCount;
-    }
-    public Category getCategory(){
-        return category;
-    }
-    public double getWeight(){
-        return weight;
-    }
-    public String getDimensions(){
-        return dimensions;
+
+    @Override
+    public String toString() {
+        return super.toString()+" Write speed: "+writeSpeed+" Read speed: "+readSpeed;
     }
 }

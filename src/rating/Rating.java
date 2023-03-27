@@ -1,9 +1,36 @@
 package rating;
 
 import commodity.Commodity;
+import consumer.Consumer;
 
 public class Rating {
-    //user
+    private Consumer consumer;
     private int userRating;
-    private Commodity commodity;
+    private final Commodity commodity;
+
+    Rating(int userRating, Commodity commodity) {
+        this.userRating = userRating;
+        this.commodity = commodity;
+    }
+
+    public int getUserRating() {
+        return userRating;
+    }
+
+    public Commodity getCommodity() {
+        return commodity;
+    }
+
+    public Consumer getConsumer() {
+        return consumer;
+    }
+
+    public void setUserRating(int userRating) {
+        this.userRating = userRating;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

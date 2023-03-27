@@ -9,28 +9,47 @@ public class FlashMemory extends commodity.digitalCommodities.StorageDevices {
         this.usbVersion=usbVersion;
     }
 
+    @Override
+    public double getAverageRating() {
+        return super.getAverageRating();
+    }
+
+    @Override
+    public Category getCategory() {
+        return super.getCategory();
+    }
+
+    @Override
+    public String getID() {
+        return super.getID();
+    }
+
+    @Override
+    public String getName() {
+        return super.getName();
+    }
+
+    @Override
+    public double getPrice() {
+        return super.getPrice();
+    }
+
+    @Override
+    public void setAverageRating() {
+        super.setAverageRating();
+    }
+
+    @Override
+    public String getDimensions() {
+        return super.getDimensions();
+    }
+
     public double getUsbVersion() {
         return usbVersion;
     }
-    public String getID(){
-        return ID;
-    }
-    public String getName(){
-        return name;
-    }
-    public double getPrice(){
-        return price;
-    }
-    public int getAvailableCount(){
-        return availableCount;
-    }
-    public Category getCategory(){
-        return category;
-    }
-    public double getWeight(){
-        return weight;
-    }
-    public String getDimensions(){
-        return dimensions;
+
+    @Override
+    public String toString() {
+        return super.toString()+" USB version: "+usbVersion;
     }
 }
