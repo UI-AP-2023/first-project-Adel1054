@@ -1,7 +1,7 @@
 package stationery;
 
 public class Pencil extends StationerySupply{
-    enum PencilType {
+    private enum PencilType {
         H2,H,F,B,HB
     }
     private final PencilType pencilType;
