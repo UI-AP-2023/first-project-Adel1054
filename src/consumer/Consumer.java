@@ -62,11 +62,11 @@ public class Consumer {
     public void setUsername(String username) {
         this.username = username;
     }
-    Consumer(String username,String password,String firstname,String surname){
-        this.username=username;
-        this.password=password;
-        this.firstname=firstname;
-        this.surname=surname;
+    Consumer(SignupRequest request){
+        username=request.getUsername();
+        password=request.getPassword();
+        firstname=request.getFirstname();
+        surname=request.getSurname();
         cart=new ArrayList<>();
         shoppingHistory=new ArrayList<>();
         creditCards=new ArrayList<>();
