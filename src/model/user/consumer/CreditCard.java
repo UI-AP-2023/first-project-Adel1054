@@ -1,4 +1,4 @@
-package user.consumer;
+package model.user.consumer;
 
 public class CreditCard {
     private final String cardNumber;

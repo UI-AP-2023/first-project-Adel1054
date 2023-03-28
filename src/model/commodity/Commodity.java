@@ -1,7 +1,7 @@
-package commodity;
+package model.commodity;
 
-import category.Category;
-import rating.Rating;
+import model.category.Category;
+import model.rating.Rating;
 
 import java.util.ArrayList;
 

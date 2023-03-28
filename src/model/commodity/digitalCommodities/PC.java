@@ -1,7 +1,6 @@
-package commodity.digitalCommodities;
+package model.commodity.digitalCommodities;
 
-import category.Category;
-import commodity.digitalCommodities.DigitalCommodity;
+import model.category.Category;
 
 public class PC extends DigitalCommodity {
     private final int ramCapacity;

@@ -1,7 +1,7 @@
-package rating;
+package model.rating;
 
-import commodity.Commodity;
-import user.consumer.Consumer;
+import model.commodity.Commodity;
+import model.user.consumer.Consumer;
 
 public class Rating {
     private Consumer consumer;

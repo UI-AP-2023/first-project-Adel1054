@@ -1,6 +1,6 @@
-package commodity.stationery;
+package model.commodity.stationery;
 
-import category.Category;
+import model.category.Category;
 
 public class Notebook extends StationerySupply {
     private final int numberOfPages;

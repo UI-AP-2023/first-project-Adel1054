@@ -1,6 +1,6 @@
-package receipt;
+package model.receipt;
 
-import commodity.Commodity;
+import model.commodity.Commodity;
 
 import java.util.ArrayList;
 

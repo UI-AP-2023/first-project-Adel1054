@@ -1,6 +1,6 @@
-package commodity.stationery;
+package model.commodity.stationery;
 
-import category.Category;
+import model.category.Category;
 
 public class Pen extends StationerySupply {
     private final String colour;

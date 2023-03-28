@@ -1,7 +1,6 @@
-package commodity.digitalCommodities;
+package model.commodity.digitalCommodities;
 
-import category.Category;
-import commodity.digitalCommodities.StorageDevices;
+import model.category.Category;
 
 public class SSD extends StorageDevices {
     private final double readSpeed;

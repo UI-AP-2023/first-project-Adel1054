@@ -1,7 +1,7 @@
-package commodity.digitalCommodities;
+package model.commodity.digitalCommodities;
 
-import category.Category;
-import commodity.Commodity;
+import model.category.Category;
+import model.commodity.Commodity;
 
 public abstract class DigitalCommodity extends Commodity {
     protected final double weight;

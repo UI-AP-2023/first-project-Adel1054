@@ -1,4 +1,4 @@
-package user.consumer;
+package model.user.consumer;
 
 public class SignupRequest {
     private final String username;

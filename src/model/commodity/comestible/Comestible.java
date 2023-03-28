@@ -1,6 +1,6 @@
-package commodity.comestible;
-import category.Category;
-import commodity.Commodity;
+package model.commodity.comestible;
+import model.category.Category;
+import model.commodity.Commodity;
 
 public class Comestible extends Commodity {
     private final String productionDate;

@@ -1,8 +1,8 @@
-package user.consumer;
+package model.user.consumer;
 
-import commodity.Commodity;
-import receipt.Receipt;
-import user.User;
+import model.commodity.Commodity;
+import model.receipt.Receipt;
+import model.user.User;
 
 import java.util.ArrayList;
 

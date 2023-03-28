@@ -1,8 +1,8 @@
-package user.admin;
+package model.user.admin;
 
 import commodity.Commodity;
-import user.User;
-import user.consumer.SignupRequest;
+import model.user.User;
+import model.user.consumer.SignupRequest;
 
 import java.util.ArrayList;
 

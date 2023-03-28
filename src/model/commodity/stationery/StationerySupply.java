@@ -1,7 +1,7 @@
-package commodity.stationery;
+package model.commodity.stationery;
 
-import category.Category;
-import commodity.Commodity;
+import model.category.Category;
+import model.commodity.Commodity;
 
 public abstract class StationerySupply extends Commodity {
     protected final String country;
