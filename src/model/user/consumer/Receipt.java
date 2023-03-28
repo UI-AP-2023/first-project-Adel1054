@@ -1,4 +1,4 @@
-package model.receipt;
+package model.user.consumer;
 
 import model.commodity.Commodity;
 

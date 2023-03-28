@@ -2,7 +2,7 @@ package model.commodity.vehicles;
 
 import model.commodity.Category;
 import model.commodity.Commodity;
-import model.rating.Rating;
+import model.user.consumer.Rating;
 
 import java.util.ArrayList;
 

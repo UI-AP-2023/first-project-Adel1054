@@ -1,4 +1,4 @@
-package model.comment;
+package model.user.consumer;
 
 import model.user.consumer.Consumer;
 

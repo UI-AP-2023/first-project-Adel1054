@@ -1,6 +1,6 @@
 package controller;
 
-import model.category.Category;
+import model.commodity.Category;
 import model.commodity.Commodity;
 import model.commodity.comestible.Comestible;
 import model.commodity.digitalCommodities.FlashMemory;

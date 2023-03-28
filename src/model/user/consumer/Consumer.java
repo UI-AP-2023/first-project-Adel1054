@@ -1,7 +1,6 @@
 package model.user.consumer;
 
 import model.commodity.Commodity;
-import model.receipt.Receipt;
 import model.user.User;
 
 import java.util.ArrayList;

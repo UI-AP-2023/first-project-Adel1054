@@ -1,4 +1,4 @@
-package model.rating;
+package model.user.consumer;
 
 import model.commodity.Commodity;
 import model.user.consumer.Consumer;
