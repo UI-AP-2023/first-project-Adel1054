@@ -1,6 +1,9 @@
 package model.commodity.comestible;
 import model.category.Category;
 import model.commodity.Commodity;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public class Comestible extends Commodity {
     private final String productionDate;
@@ -47,6 +50,16 @@ public class Comestible extends Commodity {
 
     public String getProductionDate() {
         return productionDate;
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override

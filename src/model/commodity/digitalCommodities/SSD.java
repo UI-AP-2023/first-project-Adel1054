@@ -1,6 +1,9 @@
 package model.commodity.digitalCommodities;
 
 import model.category.Category;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public class SSD extends StorageDevices {
     private final double readSpeed;
@@ -57,6 +60,21 @@ public class SSD extends StorageDevices {
 
     public double getReadSpeed() {
         return readSpeed;
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public double getWeight() {
+        return super.getWeight();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override

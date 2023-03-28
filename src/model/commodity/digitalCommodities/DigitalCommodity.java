@@ -2,14 +2,18 @@ package model.commodity.digitalCommodities;
 
 import model.category.Category;
 import model.commodity.Commodity;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public abstract class DigitalCommodity extends Commodity {
-    protected final double weight;
-    protected final String dimensions;
-    DigitalCommodity(String ID, String name, double price, int availableCount, Category category,double weight,String dimensions){
-        super(ID,name,price,availableCount,category);
-        this.dimensions=dimensions;
-        this.weight=weight;
+    private final double weight;
+    private final String dimensions;
+
+    DigitalCommodity(String ID, String name, double price, int availableCount, Category category, double weight, String dimensions) {
+        super(ID, name, price, availableCount, category);
+        this.dimensions = dimensions;
+        this.weight = weight;
     }
 
     @Override
@@ -47,7 +51,21 @@ public abstract class DigitalCommodity extends Commodity {
     }
 
     @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    @Override
     public String toString() {
-        return super.toString()+" Weight: "+weight+" Dimensions: "+dimensions;
+        return super.toString() + " Weight: " + weight + " Dimensions: " + dimensions;
     }
 }

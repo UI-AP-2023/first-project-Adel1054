@@ -1,6 +1,9 @@
 package model.commodity.digitalCommodities;
 
 import model.category.Category;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public class PC extends DigitalCommodity {
     private final int ramCapacity;
@@ -52,6 +55,21 @@ public class PC extends DigitalCommodity {
 
     public String getCpuType() {
         return cpuType;
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public double getWeight() {
+        return super.getWeight();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override

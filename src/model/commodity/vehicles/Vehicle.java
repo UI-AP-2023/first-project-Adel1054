@@ -1,7 +1,10 @@
-package commodity.vehicles;
+package model.commodity.vehicles;
 
-import category.Category;
-import commodity.Commodity;
+import model.category.Category;
+import model.commodity.Commodity;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public abstract class Vehicle extends Commodity {
     protected final String companyName;
@@ -43,6 +46,16 @@ public abstract class Vehicle extends Commodity {
     @Override
     public String getName() {
         return super.getName();
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override

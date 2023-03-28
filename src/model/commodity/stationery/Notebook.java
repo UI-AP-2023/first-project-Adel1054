@@ -1,6 +1,9 @@
 package model.commodity.stationery;
 
 import model.category.Category;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public class Notebook extends StationerySupply {
     private final int numberOfPages;
@@ -53,6 +56,17 @@ public class Notebook extends StationerySupply {
     public int getNumberOfPages() {
         return numberOfPages;
     }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
+    }
+
 
     @Override
     public String toString() {

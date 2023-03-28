@@ -6,13 +6,13 @@ import model.rating.Rating;
 import java.util.ArrayList;
 
 public abstract class Commodity {
-    protected final String ID;
-    protected final String name;
-    protected final double price;
-    protected int availableCount;
-    protected ArrayList<Rating> ratings;
-    protected double averageRating;
-    protected Category category;
+    private final String ID;
+    private final String name;
+    private final double price;
+    private int availableCount;
+    private final ArrayList<Rating> ratings;
+    private double averageRating;
+    private final Category category;
 
     protected Commodity(String ID, String name, double price, int availableCount, Category category) {
         this.availableCount = availableCount;
@@ -50,6 +50,14 @@ public abstract class Commodity {
             sum += rating.getUserRating();
         }
         averageRating = sum / (ratings.size());
+    }
+
+    public void changeAvailableCount(int change) {
+        availableCount += change;
+    }
+
+    public ArrayList<Rating> getRatings() {
+        return ratings;
     }
 
     @Override

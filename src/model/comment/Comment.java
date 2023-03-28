@@ -1,6 +1,6 @@
 package model.comment;
 
-import user.consumer.Consumer;
+import model.user.consumer.Consumer;
 
 public class Comment {
     private final Consumer consumer;

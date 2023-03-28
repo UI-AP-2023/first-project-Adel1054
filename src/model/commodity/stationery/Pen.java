@@ -1,6 +1,9 @@
 package model.commodity.stationery;
 
 import model.category.Category;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public class Pen extends StationerySupply {
     private final String colour;
@@ -46,6 +49,16 @@ public class Pen extends StationerySupply {
 
     public String getColour() {
         return colour;
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override

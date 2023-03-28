@@ -2,6 +2,9 @@ package model.commodity.stationery;
 
 import model.category.Category;
 import model.commodity.Commodity;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public abstract class StationerySupply extends Commodity {
     protected final String country;
@@ -42,6 +45,16 @@ public abstract class StationerySupply extends Commodity {
 
     public String getCountry() {
         return country;
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override

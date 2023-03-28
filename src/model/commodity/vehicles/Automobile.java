@@ -1,6 +1,9 @@
-package commodity.vehicles;
+package model.commodity.vehicles;
 
-import category.Category;
+import model.category.Category;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public class Automobile extends Vehicle {
     private final boolean isAutomatic;
@@ -52,6 +55,16 @@ public class Automobile extends Vehicle {
 
     public boolean isAutomatic() {
         return isAutomatic;
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override

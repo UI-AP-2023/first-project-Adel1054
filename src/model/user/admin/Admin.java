@@ -1,6 +1,6 @@
 package model.user.admin;
 
-import commodity.Commodity;
+import model.commodity.Commodity;
 import model.user.User;
 import model.user.consumer.SignupRequest;
 

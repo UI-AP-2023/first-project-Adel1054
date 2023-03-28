@@ -1,6 +1,10 @@
-package commodity.vehicles;
+package model.commodity.vehicles;
 
-import category.Category;
+import model.commodity.vehicles.Vehicle;
+import model.category.Category;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public class Bicycle extends Vehicle {
     enum BicycleType{
@@ -49,6 +53,16 @@ public class Bicycle extends Vehicle {
 
     public BicycleType getBicycleType() {
         return bicycleType;
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override

@@ -1,9 +1,12 @@
 package model.commodity.digitalCommodities;
 
 import model.category.Category;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public abstract class StorageDevices extends model.commodity.digitalCommodities.DigitalCommodity {
-    protected final double capacity;
+    private final double capacity;
     StorageDevices(String ID, String name, double price, int availableCount, Category category, double weight, String dimensions,double capacity){
         super(ID,name,price,availableCount,category,weight,dimensions);
         this.capacity=capacity;
@@ -46,6 +49,21 @@ public abstract class StorageDevices extends model.commodity.digitalCommodities.
 
     public double getCapacity() {
         return capacity;
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public double getWeight() {
+        return super.getWeight();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override

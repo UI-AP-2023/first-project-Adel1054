@@ -1,6 +1,9 @@
 package model.commodity.stationery;
 
 import model.category.Category;
+import model.rating.Rating;
+
+import java.util.ArrayList;
 
 public class Pencil extends StationerySupply {
     private enum PencilType {
@@ -49,6 +52,16 @@ public class Pencil extends StationerySupply {
 
     public PencilType getPencilType() {
         return pencilType;
+    }
+
+    @Override
+    public ArrayList<Rating> getRatings() {
+        return super.getRatings();
+    }
+
+    @Override
+    public void changeAvailableCount(int change) {
+        super.changeAvailableCount(change);
     }
 
     @Override
