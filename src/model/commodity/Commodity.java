@@ -7,21 +7,24 @@ import java.util.ArrayList;
 
 public abstract class Commodity {
     private final String ID;
-    private final String name;
-    private final double price;
+    private String name;
+    private double price;
     private int availableCount;
     private final ArrayList<Rating> ratings;
     private double averageRating;
     private final Category category;
-
-    protected Commodity(String ID, String name, double price, int availableCount, Category category) {
+    private static int comestibleCount;
+    private static int digitalCount;
+    private static int stationeryCount;
+    private static int vehicleCount;
+    protected Commodity( String name, double price, int availableCount, Category category) {
         this.availableCount = availableCount;
-        this.ID = ID;
         this.name = name;
         this.category = category;
         this.price = price;
         ratings = new ArrayList<>();
         averageRating = -1;
+        this.ID=IDBuilder();
     }
 
     public double getPrice() {
@@ -58,6 +61,12 @@ public abstract class Commodity {
 
     public ArrayList<Rating> getRatings() {
         return ratings;
+    }
+    private String IDBuilder(){
+        StringBuilder ID=new StringBuilder();
+        ID.append(name, 0, 4);
+        ID.append(category.toString(),0,4);
+        return ID.toString();
     }
 
     @Override

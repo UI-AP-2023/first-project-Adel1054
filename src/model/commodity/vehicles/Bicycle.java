@@ -1,6 +1,5 @@
 package model.commodity.vehicles;
 
-import model.commodity.vehicles.Vehicle;
 import model.category.Category;
 import model.rating.Rating;
 
@@ -11,8 +10,8 @@ public class Bicycle extends Vehicle {
         MOUNTAIN,ROAD,CITY,HYBRID
     }
     private final BicycleType bicycleType;
-    Bicycle(String ID, String name, double price, int availableCount, Category category, String companyName, BicycleType bicycleType){
-        super(ID,name,price,availableCount,category,companyName);
+    Bicycle(String name, double price, int availableCount, Category category, String companyName, BicycleType bicycleType){
+        super(name,price,availableCount,category,companyName);
         this.bicycleType=bicycleType;
     }
 

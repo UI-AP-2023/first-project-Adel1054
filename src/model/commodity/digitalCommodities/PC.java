@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class PC extends DigitalCommodity {
     private final int ramCapacity;
     private final String cpuType;
-    PC(String ID, String name, double price, int availableCount, Category category, double weight, String dimensions,int ramCapacity,String cpuType){
-        super(ID,name,price,availableCount,category,weight,dimensions);
+    PC(String name, double price, int availableCount, Category category, double weight, String dimensions,int ramCapacity,String cpuType){
+        super(name,price,availableCount,category,weight,dimensions);
         this.cpuType=cpuType;
         this.ramCapacity=ramCapacity;
     }

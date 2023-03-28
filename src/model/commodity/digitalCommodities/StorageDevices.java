@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public abstract class StorageDevices extends model.commodity.digitalCommodities.DigitalCommodity {
     private final double capacity;
-    StorageDevices(String ID, String name, double price, int availableCount, Category category, double weight, String dimensions,double capacity){
-        super(ID,name,price,availableCount,category,weight,dimensions);
+    StorageDevices(String name, double price, int availableCount, Category category, double weight, String dimensions,double capacity){
+        super(name,price,availableCount,category,weight,dimensions);
         this.capacity=capacity;
     }
 
