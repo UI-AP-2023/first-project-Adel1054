@@ -9,7 +9,7 @@ public class PC extends DigitalCommodity {
     private final int ramCapacity;
     private final String cpuType;
 
-    PC(String name, double price, int availableCount, double weight, String dimensions, int ramCapacity, String cpuType) {
+    public PC(String name, double price, int availableCount, double weight, String dimensions, int ramCapacity, String cpuType) {
         super(name, price, availableCount, weight, dimensions);
         this.cpuType = cpuType;
         this.ramCapacity = ramCapacity;

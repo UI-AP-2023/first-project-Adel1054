@@ -9,7 +9,7 @@ public class SSD extends StorageDevices {
     private final double readSpeed;
     private final double writeSpeed;
 
-    SSD(String name, double price, int availableCount, double weight, String dimensions, double capacity, double readSpeed, double writeSpeed) {
+    public SSD(String name, double price, int availableCount, double weight, String dimensions, double capacity, double readSpeed, double writeSpeed) {
         super(name, price, availableCount, weight, dimensions, capacity);
         this.writeSpeed = writeSpeed;
         this.readSpeed = readSpeed;

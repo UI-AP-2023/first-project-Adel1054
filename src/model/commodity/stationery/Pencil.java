@@ -6,13 +6,13 @@ import model.rating.Rating;
 import java.util.ArrayList;
 
 public class Pencil extends StationerySupply {
-    private enum PencilType {
+    public enum PencilType {
         H2, H, F, B, HB
     }
 
     private final PencilType pencilType;
 
-    Pencil(String name, double price, int availableCount, String country, PencilType pencilType) {
+    public Pencil(String name, double price, int availableCount, String country, PencilType pencilType) {
         super(name, price, availableCount, country);
         this.pencilType = pencilType;
     }

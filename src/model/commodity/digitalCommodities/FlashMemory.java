@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class FlashMemory extends model.commodity.digitalCommodities.StorageDevices {
     private final double usbVersion;
 
-    FlashMemory(String name, double price, int availableCount, Category category, double weight, String dimensions, double capacity, double usbVersion) {
+    public FlashMemory(String name, double price, int availableCount, double weight, String dimensions, double capacity, double usbVersion) {
         super(name, price, availableCount, weight, dimensions, capacity);
         this.usbVersion = usbVersion;
     }
