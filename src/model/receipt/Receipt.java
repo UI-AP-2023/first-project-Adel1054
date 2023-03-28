@@ -9,14 +9,15 @@ public class Receipt {
     private final String dateOfPurchase;
     private double sumPaid;
     private final ArrayList<Commodity> commodities;
-    Receipt(String ID,String dateOfPurchase,ArrayList<Commodity> commodities){
-        this.ID=ID;
-        this.commodities=commodities;
-        sumPaid=0;
-        for(Commodity commodity:commodities){
-            sumPaid+=commodity.getPrice();
+
+    Receipt(String ID, String dateOfPurchase, ArrayList<Commodity> commodities) {
+        this.ID = ID;
+        this.commodities = commodities;
+        sumPaid = 0;
+        for (Commodity commodity : commodities) {
+            sumPaid += commodity.getPrice();
         }
-        this.dateOfPurchase=dateOfPurchase;
+        this.dateOfPurchase = dateOfPurchase;
     }
 
     public String getID() {

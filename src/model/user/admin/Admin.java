@@ -10,11 +10,12 @@ public class Admin extends User {
     private final ArrayList<Commodity> commodities;
     private final ArrayList<SignupRequest> requests;
     private static Admin admin;
-    static boolean adminMade=false;
-    private Admin(String username,String password,String email,String phoneNumber){
-        super(username,password,email,phoneNumber);
-        requests=new ArrayList<>();
-        commodities=new ArrayList<>();
+    static boolean adminMade = false;
+
+    private Admin(String username, String password, String email, String phoneNumber) {
+        super(username, password, email, phoneNumber);
+        requests = new ArrayList<>();
+        commodities = new ArrayList<>();
     }
 
     public ArrayList<Commodity> getCommodities() {
@@ -49,12 +50,12 @@ public class Admin extends User {
         return admin;
     }
 
-    public static void initializeAdmin(String username,String password,String email,String phoneNumber) {
-        if(adminMade){
+    public static void initializeAdmin(String username, String password, String email, String phoneNumber) {
+        if (adminMade) {
             return;
         }
-        admin=new Admin(username,password,email,phoneNumber);
-        adminMade=true;
+        admin = new Admin(username, password, email, phoneNumber);
+        adminMade = true;
     }
 
     @Override

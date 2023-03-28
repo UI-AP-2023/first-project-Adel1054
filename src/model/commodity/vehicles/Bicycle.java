@@ -6,13 +6,15 @@ import model.rating.Rating;
 import java.util.ArrayList;
 
 public class Bicycle extends Vehicle {
-    enum BicycleType{
-        MOUNTAIN,ROAD,CITY,HYBRID
+    enum BicycleType {
+        MOUNTAIN, ROAD, CITY, HYBRID
     }
+
     private final BicycleType bicycleType;
-    Bicycle(String name, double price, int availableCount, String companyName, BicycleType bicycleType){
-        super(name,price,availableCount,companyName);
-        this.bicycleType=bicycleType;
+
+    Bicycle(String name, double price, int availableCount, String companyName, BicycleType bicycleType) {
+        super(name, price, availableCount, companyName);
+        this.bicycleType = bicycleType;
     }
 
     @Override
@@ -66,6 +68,6 @@ public class Bicycle extends Vehicle {
 
     @Override
     public String toString() {
-        return super.toString()+" Bicycle type: "+bicycleType;
+        return super.toString() + " Bicycle type: " + bicycleType;
     }
 }

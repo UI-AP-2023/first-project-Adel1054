@@ -8,10 +8,11 @@ import java.util.ArrayList;
 public class Automobile extends Vehicle {
     private final boolean isAutomatic;
     private final int motorVolume;
-    Automobile(String name, double price, int availableCount, String companyName, boolean isAutomatic, int motorVolume){
-        super(name,price,availableCount,companyName);
-        this.isAutomatic=isAutomatic;
-        this.motorVolume=motorVolume;
+
+    Automobile(String name, double price, int availableCount, String companyName, boolean isAutomatic, int motorVolume) {
+        super(name, price, availableCount, companyName);
+        this.isAutomatic = isAutomatic;
+        this.motorVolume = motorVolume;
     }
 
     @Override
@@ -69,6 +70,6 @@ public class Automobile extends Vehicle {
 
     @Override
     public String toString() {
-        return super.toString()+" Motor Volume: "+ motorVolume+" Is automatic: "+isAutomatic;
+        return super.toString() + " Motor Volume: " + motorVolume + " Is automatic: " + isAutomatic;
     }
 }

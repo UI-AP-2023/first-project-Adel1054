@@ -8,10 +8,11 @@ import java.util.ArrayList;
 public class Notebook extends StationerySupply {
     private final int numberOfPages;
     private final String pageType;
-    Notebook(String name, double price, int availableCount, String country, int numberOfPages, String pageType){
-        super(name,price,availableCount,country);
-        this.numberOfPages=numberOfPages;
-        this.pageType=pageType;
+
+    Notebook(String name, double price, int availableCount, String country, int numberOfPages, String pageType) {
+        super(name, price, availableCount, country);
+        this.numberOfPages = numberOfPages;
+        this.pageType = pageType;
     }
 
     @Override
@@ -70,6 +71,6 @@ public class Notebook extends StationerySupply {
 
     @Override
     public String toString() {
-        return super.toString()+" Number of pages: "+numberOfPages+" Page type: "+pageType;
+        return super.toString() + " Number of pages: " + numberOfPages + " Page type: " + pageType;
     }
 }

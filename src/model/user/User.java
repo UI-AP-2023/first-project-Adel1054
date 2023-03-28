@@ -5,9 +5,10 @@ public abstract class User {
     private String password;
     private String email;
     private String phoneNumber;
-    protected User(String username, String password, String email, String phoneNumber){
-        this.username=username;
-        this.password=password;
+
+    protected User(String username, String password, String email, String phoneNumber) {
+        this.username = username;
+        this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
@@ -46,6 +47,6 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "Username: "+username;
+        return "Username: " + username;
     }
 }

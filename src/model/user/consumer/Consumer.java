@@ -12,12 +12,12 @@ public class Consumer extends User {
     private final ArrayList<CreditCard> creditCards;
     private double balance;
 
-    Consumer(SignupRequest request){
+    Consumer(SignupRequest request) {
         super(request.getUsername(), request.getPassword(), request.getEmail(), request.getPhoneNumber());
-        cart=new ArrayList<>();
-        shoppingHistory=new ArrayList<>();
-        creditCards=new ArrayList<>();
-        balance=0;
+        cart = new ArrayList<>();
+        shoppingHistory = new ArrayList<>();
+        creditCards = new ArrayList<>();
+        balance = 0;
     }
 
     public ArrayList<Receipt> getShoppingHistory() {
@@ -82,6 +82,6 @@ public class Consumer extends User {
 
     @Override
     public String toString() {
-        return super.toString()+"\nNumber of commodities bought: "+shoppingHistory.size()+"\nCurrent balance: "+balance;
+        return super.toString() + "\nNumber of commodities bought: " + shoppingHistory.size() + "\nCurrent balance: " + balance;
     }
 }

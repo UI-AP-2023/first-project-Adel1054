@@ -87,6 +87,6 @@ public abstract class Commodity {
 
     @Override
     public String toString() {
-        return "Name: " + name + " ID: " + ID + " Category: " + category + " Average rating: " + averageRating + " Price: " + price;
+        return "Name: " + name + " ID: " + ID + " Category: " + category + " Average rating: " + averageRating + " Price: " + price + "$";
     }
 }

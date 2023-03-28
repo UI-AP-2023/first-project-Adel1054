@@ -4,10 +4,11 @@ public class CreditCard {
     private final String cardNumber;
     private final String CVV2;
     private final String password;
-    CreditCard(String cardNumber,String CVV2,String password){
-        this.cardNumber=cardNumber;
-        this.CVV2=CVV2;
-        this.password=password;
+
+    CreditCard(String cardNumber, String CVV2, String password) {
+        this.cardNumber = cardNumber;
+        this.CVV2 = CVV2;
+        this.password = password;
     }
 
     public String getPassword() {
@@ -24,6 +25,6 @@ public class CreditCard {
 
     @Override
     public String toString() {
-        return "Credit card number: "+cardNumber;
+        return "Credit card number: " + cardNumber;
     }
 }

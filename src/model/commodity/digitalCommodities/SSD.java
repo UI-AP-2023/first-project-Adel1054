@@ -8,10 +8,11 @@ import java.util.ArrayList;
 public class SSD extends StorageDevices {
     private final double readSpeed;
     private final double writeSpeed;
-    SSD(String name, double price, int availableCount, double weight, String dimensions, double capacity,double readSpeed,double writeSpeed){
-        super(name,price,availableCount, weight,dimensions,capacity);
-        this.writeSpeed=writeSpeed;
-        this.readSpeed=readSpeed;
+
+    SSD(String name, double price, int availableCount, double weight, String dimensions, double capacity, double readSpeed, double writeSpeed) {
+        super(name, price, availableCount, weight, dimensions, capacity);
+        this.writeSpeed = writeSpeed;
+        this.readSpeed = readSpeed;
     }
 
     @Override
@@ -79,6 +80,6 @@ public class SSD extends StorageDevices {
 
     @Override
     public String toString() {
-        return super.toString()+" Write speed: "+writeSpeed+" Read speed: "+readSpeed;
+        return super.toString() + " Write speed: " + writeSpeed + " Read speed: " + readSpeed;
     }
 }

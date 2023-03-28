@@ -7,9 +7,10 @@ import java.util.ArrayList;
 
 public abstract class StorageDevices extends model.commodity.digitalCommodities.DigitalCommodity {
     private final double capacity;
-    StorageDevices(String name, double price, int availableCount, double weight, String dimensions,double capacity){
-        super(name,price,availableCount,weight,dimensions);
-        this.capacity=capacity;
+
+    StorageDevices(String name, double price, int availableCount, double weight, String dimensions, double capacity) {
+        super(name, price, availableCount, weight, dimensions);
+        this.capacity = capacity;
     }
 
     @Override
@@ -68,6 +69,6 @@ public abstract class StorageDevices extends model.commodity.digitalCommodities.
 
     @Override
     public String toString() {
-        return super.toString()+" Capacity: "+capacity;
+        return super.toString() + " Capacity: " + capacity;
     }
 }

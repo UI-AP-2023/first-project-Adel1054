@@ -6,17 +6,20 @@ public class Comment {
     private final Consumer consumer;
     private final String commodityID;
     private String text;
-    enum Status{
-        ACCEPTED,REJECTED,TOBECONSIDERED
+
+    enum Status {
+        ACCEPTED, REJECTED, TOBECONSIDERED
     }
+
     private Status status;
     boolean userHasBought;
-    Comment(String commodityID,String text,boolean userHasBought,Consumer consumer){
-        this.consumer=consumer;
-        this.commodityID=commodityID;
-        this.text=text;
-        status=Status.TOBECONSIDERED;
-        this.userHasBought=userHasBought;
+
+    Comment(String commodityID, String text, boolean userHasBought, Consumer consumer) {
+        this.consumer = consumer;
+        this.commodityID = commodityID;
+        this.text = text;
+        status = Status.TOBECONSIDERED;
+        this.userHasBought = userHasBought;
     }
 
     public Consumer getConsumer() {
@@ -41,6 +44,6 @@ public class Comment {
 
     @Override
     public String toString() {
-        return consumer.getUsername()+" about commodity "+commodityID+"\n"+"    "+text;
+        return consumer.getUsername() + " about commodity " + commodityID + "\n" + "    " + text;
     }
 }

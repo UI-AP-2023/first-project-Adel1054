@@ -7,12 +7,14 @@ import java.util.ArrayList;
 
 public class Pencil extends StationerySupply {
     private enum PencilType {
-        H2,H,F,B,HB
+        H2, H, F, B, HB
     }
+
     private final PencilType pencilType;
-    Pencil(String name, double price, int availableCount,String country, PencilType pencilType){
-        super(name,price,availableCount,country);
-        this.pencilType=pencilType;
+
+    Pencil(String name, double price, int availableCount, String country, PencilType pencilType) {
+        super(name, price, availableCount, country);
+        this.pencilType = pencilType;
     }
 
     @Override
@@ -66,6 +68,6 @@ public class Pencil extends StationerySupply {
 
     @Override
     public String toString() {
-        return super.toString()+" Pencil type: "+pencilType;
+        return super.toString() + " Pencil type: " + pencilType;
     }
 }

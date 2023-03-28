@@ -7,9 +7,10 @@ import java.util.ArrayList;
 
 public class Pen extends StationerySupply {
     private final String colour;
-    Pen(String name, double price, int availableCount, String country, String colour){
-        super(name,price,availableCount,country);
-        this.colour=colour;
+
+    Pen(String name, double price, int availableCount, String country, String colour) {
+        super(name, price, availableCount, country);
+        this.colour = colour;
     }
 
     @Override
@@ -63,6 +64,6 @@ public class Pen extends StationerySupply {
 
     @Override
     public String toString() {
-        return super.toString()+" Pen colour: "+colour;
+        return super.toString() + " Pen colour: " + colour;
     }
 }

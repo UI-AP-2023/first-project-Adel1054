@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public abstract class Vehicle extends Commodity {
     protected final String companyName;
 
-    Vehicle(String name, double price, int availableCount,String companyName) {
+    Vehicle(String name, double price, int availableCount, String companyName) {
         super(name, price, availableCount, Category.VEHICLE);
         this.companyName = companyName;
     }

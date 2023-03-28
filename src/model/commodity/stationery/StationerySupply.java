@@ -8,9 +8,10 @@ import java.util.ArrayList;
 
 public abstract class StationerySupply extends Commodity {
     protected final String country;
-    StationerySupply(String name, double price, int availableCount, String country){
-        super(name,price,availableCount,Category.STATIONERY);
-        this.country=country;
+
+    StationerySupply(String name, double price, int availableCount, String country) {
+        super(name, price, availableCount, Category.STATIONERY);
+        this.country = country;
     }
 
     @Override
@@ -59,6 +60,6 @@ public abstract class StationerySupply extends Commodity {
 
     @Override
     public String toString() {
-        return super.toString()+" Made in "+country;
+        return super.toString() + " Made in " + country;
     }
 }
