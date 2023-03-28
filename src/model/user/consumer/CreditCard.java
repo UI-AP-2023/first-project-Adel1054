@@ -21,4 +21,9 @@ public class CreditCard {
     public String getCVV2() {
         return CVV2;
     }
+
+    @Override
+    public String toString() {
+        return "Credit card number: "+cardNumber;
+    }
 }

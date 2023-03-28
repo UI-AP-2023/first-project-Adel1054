@@ -1,10 +1,10 @@
 package model.user;
 
 public abstract class User {
-    protected String username;
-    protected String password;
-    protected String email;
-    protected String phoneNumber;
+    private String username;
+    private String password;
+    private String email;
+    private String phoneNumber;
     protected User(String username, String password, String email, String phoneNumber){
         this.username=username;
         this.password=password;
