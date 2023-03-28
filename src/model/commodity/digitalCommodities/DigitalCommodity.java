@@ -10,8 +10,8 @@ public abstract class DigitalCommodity extends Commodity {
     private final double weight;
     private final String dimensions;
 
-    DigitalCommodity(String name, double price, int availableCount, Category category, double weight, String dimensions) {
-        super(name, price, availableCount, category);
+    DigitalCommodity(String name, double price, int availableCount, double weight, String dimensions) {
+        super(name, price, availableCount, Category.DIGITAL);
         this.dimensions = dimensions;
         this.weight = weight;
     }

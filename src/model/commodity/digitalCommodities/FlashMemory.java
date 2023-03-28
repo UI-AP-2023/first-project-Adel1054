@@ -9,7 +9,7 @@ public class FlashMemory extends model.commodity.digitalCommodities.StorageDevic
     private final double usbVersion;
 
     FlashMemory(String name, double price, int availableCount, Category category, double weight, String dimensions, double capacity, double usbVersion) {
-        super(name, price, availableCount, category, weight, dimensions, capacity);
+        super(name, price, availableCount, weight, dimensions, capacity);
         this.usbVersion = usbVersion;
     }
 

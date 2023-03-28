@@ -10,8 +10,8 @@ public class Bicycle extends Vehicle {
         MOUNTAIN,ROAD,CITY,HYBRID
     }
     private final BicycleType bicycleType;
-    Bicycle(String name, double price, int availableCount, Category category, String companyName, BicycleType bicycleType){
-        super(name,price,availableCount,category,companyName);
+    Bicycle(String name, double price, int availableCount, String companyName, BicycleType bicycleType){
+        super(name,price,availableCount,companyName);
         this.bicycleType=bicycleType;
     }
 

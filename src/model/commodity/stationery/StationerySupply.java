@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public abstract class StationerySupply extends Commodity {
     protected final String country;
-    StationerySupply(String name, double price, int availableCount, Category category,String country){
-        super(name,price,availableCount,category);
+    StationerySupply(String name, double price, int availableCount, String country){
+        super(name,price,availableCount,Category.STATIONERY);
         this.country=country;
     }
 

@@ -10,8 +10,8 @@ public class Pencil extends StationerySupply {
         H2,H,F,B,HB
     }
     private final PencilType pencilType;
-    Pencil(String name, double price, int availableCount, Category category,String country, PencilType pencilType){
-        super(name,price,availableCount,category,country);
+    Pencil(String name, double price, int availableCount,String country, PencilType pencilType){
+        super(name,price,availableCount,country);
         this.pencilType=pencilType;
     }
 

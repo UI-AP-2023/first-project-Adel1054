@@ -7,8 +7,8 @@ import java.util.ArrayList;
 
 public class Pen extends StationerySupply {
     private final String colour;
-    Pen(String name, double price, int availableCount, Category category,String country, String colour){
-        super(name,price,availableCount,category,country);
+    Pen(String name, double price, int availableCount, String country, String colour){
+        super(name,price,availableCount,country);
         this.colour=colour;
     }
 

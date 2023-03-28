@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Comestible extends Commodity {
     private final String productionDate;
     private final String expirationDate;
-    Comestible(String name, double price, int availableCount, Category category,String productionDate,String expirationDate){
-        super(name,price,availableCount,category);
+    Comestible(String name, double price, int availableCount,String productionDate,String expirationDate){
+        super(name,price,availableCount,Category.COMESTIBLE);
         this.productionDate=productionDate;
         this.expirationDate=expirationDate;
     }

@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Automobile extends Vehicle {
     private final boolean isAutomatic;
     private final int motorVolume;
-    Automobile(String name, double price, int availableCount, Category category, String companyName, boolean isAutomatic, int motorVolume){
-        super(name,price,availableCount,category,companyName);
+    Automobile(String name, double price, int availableCount, String companyName, boolean isAutomatic, int motorVolume){
+        super(name,price,availableCount,companyName);
         this.isAutomatic=isAutomatic;
         this.motorVolume=motorVolume;
     }
