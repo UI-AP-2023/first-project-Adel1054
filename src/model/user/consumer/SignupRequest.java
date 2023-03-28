@@ -7,7 +7,7 @@ public class SignupRequest {
     private final String phoneNumber;
     private boolean isPermitted;
 
-    SignupRequest(String username, String password, String firstname, String surname) {
+    public SignupRequest(String username, String password, String firstname, String surname) {
         this.username = username;
         this.password = password;
         this.email = firstname;

@@ -5,7 +5,7 @@ public class CreditCard {
     private final String CVV2;
     private final String password;
 
-    CreditCard(String cardNumber, String CVV2, String password) {
+    public CreditCard(String cardNumber, String CVV2, String password) {
         this.cardNumber = cardNumber;
         this.CVV2 = CVV2;
         this.password = password;

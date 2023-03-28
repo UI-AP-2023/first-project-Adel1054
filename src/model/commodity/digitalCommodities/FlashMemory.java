@@ -1,6 +1,6 @@
 package model.commodity.digitalCommodities;
 
-import model.category.Category;
+import model.commodity.Category;
 import model.rating.Rating;
 
 import java.util.ArrayList;
@@ -21,6 +21,26 @@ public class FlashMemory extends model.commodity.digitalCommodities.StorageDevic
     @Override
     public Category getCategory() {
         return super.getCategory();
+    }
+
+    @Override
+    public int getAvailableCount() {
+        return super.getAvailableCount();
+    }
+
+    @Override
+    public void setAvailableCount(int availableCount) {
+        super.setAvailableCount(availableCount);
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+    }
+
+    @Override
+    public void setPrice(double price) {
+        super.setPrice(price);
     }
 
     @Override

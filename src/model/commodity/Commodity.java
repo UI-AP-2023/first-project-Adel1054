@@ -1,6 +1,5 @@
 package model.commodity;
 
-import model.category.Category;
 import model.rating.Rating;
 
 import java.util.ArrayList;
@@ -102,34 +101,58 @@ public abstract class Commodity {
         ID.append(name, 0, 4);
         switch (category) {
             case COMESTIBLE:
-                switch (String.valueOf(comestibleCount).length()){
-                    case 1: ID.append("000");break;
-                    case 2: ID.append("00");break;
-                    case 3: ID.append("0");break;
+                switch (String.valueOf(comestibleCount).length()) {
+                    case 1:
+                        ID.append("000");
+                        break;
+                    case 2:
+                        ID.append("00");
+                        break;
+                    case 3:
+                        ID.append("0");
+                        break;
                 }
                 ID.append(comestibleCount++);
                 break;
             case DIGITAL:
-                switch (String.valueOf(digitalCount).length()){
-                    case 1: ID.append("000");break;
-                    case 2: ID.append("00");break;
-                    case 3: ID.append("0");break;
+                switch (String.valueOf(digitalCount).length()) {
+                    case 1:
+                        ID.append("000");
+                        break;
+                    case 2:
+                        ID.append("00");
+                        break;
+                    case 3:
+                        ID.append("0");
+                        break;
                 }
                 ID.append(digitalCount++);
                 break;
             case STATIONERY:
-                switch (String.valueOf(stationeryCount).length()){
-                    case 1: ID.append("000");break;
-                    case 2: ID.append("00");break;
-                    case 3: ID.append("0");break;
+                switch (String.valueOf(stationeryCount).length()) {
+                    case 1:
+                        ID.append("000");
+                        break;
+                    case 2:
+                        ID.append("00");
+                        break;
+                    case 3:
+                        ID.append("0");
+                        break;
                 }
                 ID.append(stationeryCount++);
                 break;
             case VEHICLE:
-                switch (String.valueOf(vehicleCount).length()){
-                    case 1: ID.append("000");break;
-                    case 2: ID.append("00");break;
-                    case 3: ID.append("0");break;
+                switch (String.valueOf(vehicleCount).length()) {
+                    case 1:
+                        ID.append("000");
+                        break;
+                    case 2:
+                        ID.append("00");
+                        break;
+                    case 3:
+                        ID.append("0");
+                        break;
                 }
                 ID.append(vehicleCount++);
                 break;
@@ -140,27 +163,35 @@ public abstract class Commodity {
     public static void addToDigitalCount() {
         Commodity.digitalCount++;
     }
+
     public static void decreaseDigitalCount() {
         Commodity.digitalCount--;
     }
-    public static void addToComestibleCount(){
+
+    public static void addToComestibleCount() {
         comestibleCount++;
     }
-    public static void decreaseComestibleCount(){
+
+    public static void decreaseComestibleCount() {
         comestibleCount--;
     }
+
     public static void addToStationeryCount() {
         Commodity.stationeryCount++;
     }
+
     public static void decreaseStationeryCount() {
         Commodity.stationeryCount--;
     }
+
     public static void addToVehicleCount() {
         Commodity.vehicleCount++;
     }
+
     public static void decreaseVehicleCount() {
         Commodity.vehicleCount--;
     }
+
     @Override
     public String toString() {
         return "Name: " + name + " ID: " + ID + " Category: " + category + " Average rating: " + averageRating + " Price: " + price + "$";

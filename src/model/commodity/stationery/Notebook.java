@@ -1,6 +1,6 @@
 package model.commodity.stationery;
 
-import model.category.Category;
+import model.commodity.Category;
 import model.rating.Rating;
 
 import java.util.ArrayList;
@@ -38,6 +38,26 @@ public class Notebook extends StationerySupply {
     @Override
     public double getPrice() {
         return super.getPrice();
+    }
+
+    @Override
+    public void setAvailableCount(int availableCount) {
+        super.setAvailableCount(availableCount);
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+    }
+
+    @Override
+    public void setPrice(double price) {
+        super.setPrice(price);
+    }
+
+    @Override
+    public int getAvailableCount() {
+        return super.getAvailableCount();
     }
 
     @Override

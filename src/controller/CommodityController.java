@@ -65,39 +65,43 @@ public class CommodityController {
     private void removeCommodity(Commodity commodity) {
         commodities.remove(commodity);
     }
-    private void changeCommodityName(String ID,String newName){
-        int commodityIndex=-1;
-        for(Commodity commodity:commodities){
-            if(commodity.getID().equals(ID)){
-                commodityIndex=commodities.indexOf(commodity);
+
+    private void changeCommodityName(String ID, String newName) {
+        int commodityIndex = -1;
+        for (Commodity commodity : commodities) {
+            if (commodity.getID().equals(ID)) {
+                commodityIndex = commodities.indexOf(commodity);
             }
         }
-        if(commodityIndex!=-1){
+        if (commodityIndex != -1) {
             commodities.get(commodityIndex).setName(newName);
         }
     }
-    private void changeCommodityPrice(String ID,double newPrice){
-        int commodityIndex=-1;
-        for(Commodity commodity:commodities){
-            if(commodity.getID().equals(ID)){
-                commodityIndex=commodities.indexOf(commodity);
+
+    private void changeCommodityPrice(String ID, double newPrice) {
+        int commodityIndex = -1;
+        for (Commodity commodity : commodities) {
+            if (commodity.getID().equals(ID)) {
+                commodityIndex = commodities.indexOf(commodity);
             }
         }
-        if(commodityIndex!=-1){
+        if (commodityIndex != -1) {
             commodities.get(commodityIndex).setPrice(newPrice);
         }
     }
-    private void changeCommodityAvailableCount(String ID,int newAvailableCount){
-        int commodityIndex=-1;
-        for(Commodity commodity:commodities){
-            if(commodity.getID().equals(ID)){
-                commodityIndex=commodities.indexOf(commodity);
+
+    private void changeCommodityAvailableCount(String ID, int newAvailableCount) {
+        int commodityIndex = -1;
+        for (Commodity commodity : commodities) {
+            if (commodity.getID().equals(ID)) {
+                commodityIndex = commodities.indexOf(commodity);
             }
         }
-        if(commodityIndex!=-1){
+        if (commodityIndex != -1) {
             commodities.get(commodityIndex).setAvailableCount(newAvailableCount);
         }
     }
+
     CommodityController() {
         commodities = new ArrayList<>();
     }

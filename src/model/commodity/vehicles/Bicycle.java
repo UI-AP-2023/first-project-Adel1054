@@ -1,6 +1,6 @@
 package model.commodity.vehicles;
 
-import model.category.Category;
+import model.commodity.Category;
 import model.rating.Rating;
 
 import java.util.ArrayList;
@@ -25,6 +25,26 @@ public class Bicycle extends Vehicle {
     @Override
     public Category getCategory() {
         return super.getCategory();
+    }
+
+    @Override
+    public void setAvailableCount(int availableCount) {
+        super.setAvailableCount(availableCount);
+    }
+
+    @Override
+    public void setPrice(double price) {
+        super.setPrice(price);
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+    }
+
+    @Override
+    public int getAvailableCount() {
+        return super.getAvailableCount();
     }
 
     @Override

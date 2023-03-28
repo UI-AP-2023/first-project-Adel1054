@@ -1,6 +1,6 @@
 package model.commodity.comestible;
 
-import model.category.Category;
+import model.commodity.Category;
 import model.commodity.Commodity;
 import model.rating.Rating;
 
@@ -62,6 +62,26 @@ public class Comestible extends Commodity {
     @Override
     public void changeAvailableCount(int change) {
         super.changeAvailableCount(change);
+    }
+
+    @Override
+    public void setAvailableCount(int availableCount) {
+        super.setAvailableCount(availableCount);
+    }
+
+    @Override
+    public void setPrice(double price) {
+        super.setPrice(price);
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+    }
+
+    @Override
+    public int getAvailableCount() {
+        return super.getAvailableCount();
     }
 
     @Override

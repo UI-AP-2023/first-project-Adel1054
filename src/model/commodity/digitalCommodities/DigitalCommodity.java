@@ -1,6 +1,6 @@
 package model.commodity.digitalCommodities;
 
-import model.category.Category;
+import model.commodity.Category;
 import model.commodity.Commodity;
 import model.rating.Rating;
 
@@ -62,6 +62,26 @@ public abstract class DigitalCommodity extends Commodity {
 
     public double getWeight() {
         return weight;
+    }
+
+    @Override
+    public int getAvailableCount() {
+        return super.getAvailableCount();
+    }
+
+    @Override
+    public void setAvailableCount(int availableCount) {
+        super.setAvailableCount(availableCount);
+    }
+
+    @Override
+    public void setPrice(double price) {
+        super.setPrice(price);
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
     }
 
     @Override

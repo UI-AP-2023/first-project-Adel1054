@@ -12,7 +12,7 @@ public class Consumer extends User {
     private final ArrayList<CreditCard> creditCards;
     private double balance;
 
-    Consumer(SignupRequest request) {
+    public Consumer(SignupRequest request) {
         super(request.getUsername(), request.getPassword(), request.getEmail(), request.getPhoneNumber());
         cart = new ArrayList<>();
         shoppingHistory = new ArrayList<>();
