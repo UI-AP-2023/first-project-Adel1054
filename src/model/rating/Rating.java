@@ -1,7 +1,7 @@
 package rating;
 
 import commodity.Commodity;
-import consumer.Consumer;
+import user.consumer.Consumer;
 
 public class Rating {
     private Consumer consumer;
