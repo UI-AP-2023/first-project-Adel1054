@@ -131,13 +131,12 @@ public class ConsumerController {
         }
     }
 
-    public double changeAccBalance(String username, double change) {
+    public void changeAccBalance(String username, double change) {
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
-                return consumer.getBalance();
+                consumer.changeBalance(change);
             }
         }
-        return -1;
     }
 
     public String getCommoditiesBought(String username, int page) {
@@ -148,19 +147,17 @@ public class ConsumerController {
                     int row=1;
                     if (consumer.getCommoditiesBought().size() >= page  * 10) {
                         for (int i = (page - 1) * 10; i < page * 10; i++) {
-                            commodities.append(row);
+                            commodities.append(row++);
                             commodities.append(".");
                             commodities.append(consumer.getCommoditiesBought().get(i).toString());
                             commodities.append("\n");
-                            row++;
                         }
                     } else {
                         for (int i = (page - 1) * 10; i < consumer.getCommoditiesBought().size(); i++) {
-                            commodities.append(row);
+                            commodities.append(row++);
                             commodities.append(".");
                             commodities.append(consumer.getCommoditiesBought().get(i).toString());
                             commodities.append("\n");
-                            row++;
                         }
                     }
                 }
@@ -176,19 +173,17 @@ public class ConsumerController {
                     int row=1;
                     if (consumer.getShoppingHistory().size() >= page  * 10) {
                         for (int i = (page - 1) * 10; i < page * 10; i++) {
-                            commodities.append(row);
+                            commodities.append(row++);
                             commodities.append(".");
                             commodities.append(consumer.getShoppingHistory().get(i).toString());
                             commodities.append("\n");
-                            row++;
                         }
                     } else {
                         for (int i = (page - 1) * 10; i < consumer.getShoppingHistory().size(); i++) {
-                            commodities.append(row);
+                            commodities.append(row++);
                             commodities.append(".");
                             commodities.append(consumer.getCommoditiesBought().get(i).toString());
                             commodities.append("\n");
-                            row++;
                         }
                     }
                 }

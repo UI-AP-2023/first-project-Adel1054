@@ -10,6 +10,7 @@ import model.commodity.stationery.Pen;
 import model.commodity.stationery.Pencil;
 import model.commodity.vehicles.Automobile;
 import model.commodity.vehicles.Bicycle;
+import model.user.consumer.Rating;
 
 import java.util.ArrayList;
 
@@ -66,39 +67,50 @@ public class CommodityController {
     }
 
     public void changeCommodityName(String ID, String newName) {
-        int commodityIndex = -1;
         for (Commodity commodity : commodities) {
             if (commodity.getID().equals(ID)) {
-                commodityIndex = commodities.indexOf(commodity);
+                commodity.setName(newName);
             }
-        }
-        if (commodityIndex != -1) {
-            commodities.get(commodityIndex).setName(newName);
         }
     }
 
     public void changeCommodityPrice(String ID, double newPrice) {
-        int commodityIndex = -1;
         for (Commodity commodity : commodities) {
             if (commodity.getID().equals(ID)) {
-                commodityIndex = commodities.indexOf(commodity);
+                commodity.setPrice(newPrice);
             }
-        }
-        if (commodityIndex != -1) {
-            commodities.get(commodityIndex).setPrice(newPrice);
         }
     }
 
     public void changeCommodityAvailableCount(String ID, int newAvailableCount) {
-        int commodityIndex = -1;
         for (Commodity commodity : commodities) {
             if (commodity.getID().equals(ID)) {
-                commodityIndex = commodities.indexOf(commodity);
+                commodity.setAvailableCount(newAvailableCount);
             }
         }
-        if (commodityIndex != -1) {
-            commodities.get(commodityIndex).setAvailableCount(newAvailableCount);
+    }
+    public String getRatings(String ID,int page){
+        page--;
+        StringBuilder ratings=new StringBuilder();
+        for (Commodity commodity:commodities){
+            if(commodity.getID().equals(ID)){
+                if(commodity.getRatings().size()>=page*10){
+                    if(commodity.getRatings().size()>=(page+1)*10){
+                        for (int i=page*10;i<(page+1)*10;i++){
+                            ratings.append(commodity.getRatings().get(i));
+                            ratings.append("\n");
+                        }
+                    }
+                    else {
+                        for(int i=page*10;i<(page+1)*10;i++){
+                            ratings.append(commodity.getRatings().get(i));
+                            ratings.append("\n");
+                        }
+                    }
+                }
+            }
         }
+        return ratings.toString();
     }
 
     public CommodityController() {

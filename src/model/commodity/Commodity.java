@@ -25,8 +25,8 @@ public abstract class Commodity {
         this.category = category;
         this.price = price;
         ratings = new ArrayList<>();
-        comments=new ArrayList<>();
-        averageRating = -1;
+        comments = new ArrayList<>();
+        averageRating = 0;
         ID = IDBuilder();
     }
 
@@ -80,22 +80,6 @@ public abstract class Commodity {
 
     public void setAvailableCount(int availableCount) {
         this.availableCount = availableCount;
-    }
-
-    public static int getComestibleCount() {
-        return comestibleCount;
-    }
-
-    public static int getDigitalCount() {
-        return digitalCount;
-    }
-
-    public static int getStationeryCount() {
-        return stationeryCount;
-    }
-
-    public static int getVehicleCount() {
-        return vehicleCount;
     }
 
     private String IDBuilder() {
@@ -167,24 +151,12 @@ public abstract class Commodity {
         Commodity.digitalCount++;
     }
 
-    public static void decreaseDigitalCount() {
-        Commodity.digitalCount--;
-    }
-
     public static void addToComestibleCount() {
         comestibleCount++;
     }
 
-    public static void decreaseComestibleCount() {
-        comestibleCount--;
-    }
-
     public static void addToStationeryCount() {
         Commodity.stationeryCount++;
-    }
-
-    public static void decreaseStationeryCount() {
-        Commodity.stationeryCount--;
     }
 
     public static void addToVehicleCount() {
@@ -193,10 +165,6 @@ public abstract class Commodity {
 
     public ArrayList<Comment> getComments() {
         return comments;
-    }
-
-    public static void decreaseVehicleCount() {
-        Commodity.vehicleCount--;
     }
 
     @Override
