@@ -9,6 +9,7 @@ public class Consumer extends User {
     private final ArrayList<Commodity> cart;
     private final ArrayList<Receipt> shoppingHistory;
     private final ArrayList<CreditCard> creditCards;
+    private final ArrayList<Comment> comments;
     private double balance;
 
     public Consumer(SignupRequest request) {
@@ -16,6 +17,7 @@ public class Consumer extends User {
         cart = new ArrayList<>();
         shoppingHistory = new ArrayList<>();
         creditCards = new ArrayList<>();
+        comments=new ArrayList<>();
         balance = 0;
     }
 
@@ -77,6 +79,10 @@ public class Consumer extends User {
     @Override
     public void setUsername(String username) {
         super.setUsername(username);
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
     }
 
     @Override

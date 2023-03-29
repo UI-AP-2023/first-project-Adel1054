@@ -1,5 +1,6 @@
 package model.commodity;
 
+import model.user.consumer.Comment;
 import model.user.consumer.Rating;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public abstract class Commodity {
     private double price;
     private int availableCount;
     private final ArrayList<Rating> ratings;
+    private final ArrayList<Comment> comments;
     private double averageRating;
     private final Category category;
     private static int comestibleCount = 1;
@@ -23,6 +25,7 @@ public abstract class Commodity {
         this.category = category;
         this.price = price;
         ratings = new ArrayList<>();
+        comments=new ArrayList<>();
         averageRating = -1;
         ID = IDBuilder();
     }
@@ -186,6 +189,10 @@ public abstract class Commodity {
 
     public static void addToVehicleCount() {
         Commodity.vehicleCount++;
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
     }
 
     public static void decreaseVehicleCount() {
