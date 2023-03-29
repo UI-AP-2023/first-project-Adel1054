@@ -31,6 +31,6 @@ public class Rating {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Username: "+consumer.getUsername()+" Rating: "+userRating;
     }
 }
