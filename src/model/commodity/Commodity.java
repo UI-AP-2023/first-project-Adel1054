@@ -167,8 +167,12 @@ public abstract class Commodity {
         return comments;
     }
 
+    public int getRatingsCount() {
+        return ratings.size();
+    }
+
     @Override
     public String toString() {
-        return "Name: " + name + " ID: " + ID + " Category: " + category + " Average rating: " + averageRating + " Price: " + price + "$";
+        return "Name: " + name + " ID: " + ID + " Category: " + category + " Number of ratings: " + getRatingsCount() + " Average rating: " + averageRating + " Price: " + price + "$";
     }
 }
