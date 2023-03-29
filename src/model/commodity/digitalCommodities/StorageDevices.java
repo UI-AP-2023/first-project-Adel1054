@@ -6,9 +6,9 @@ import model.user.consumer.Rating;
 import java.util.ArrayList;
 
 public abstract class StorageDevices extends model.commodity.digitalCommodities.DigitalCommodity {
-    private final double capacity;
+    private final int capacity;
 
-    protected StorageDevices(String name, double price, int availableCount, double weight, String dimensions, double capacity) {
+    protected StorageDevices(String name, double price, int availableCount, double weight, String dimensions, int capacity) {
         super(name, price, availableCount, weight, dimensions);
         this.capacity = capacity;
     }

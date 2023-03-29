@@ -1,6 +1,5 @@
 package controller;
 
-import model.commodity.Category;
 import model.commodity.Commodity;
 import model.commodity.comestible.Comestible;
 import model.commodity.digitalCommodities.FlashMemory;
@@ -22,7 +21,7 @@ public class CommodityController {
         Commodity.addToComestibleCount();
     }
 
-    public void addFlashMemory(String name, double price, int availableCount, double weight, String dimensions, double capacity, double usbVersion) {
+    public void addFlashMemory(String name, double price, int availableCount, double weight, String dimensions, int capacity, double usbVersion) {
         commodities.add(new FlashMemory(name, price, availableCount, weight, dimensions, capacity, usbVersion));
         Commodity.addToDigitalCount();
     }
@@ -32,7 +31,7 @@ public class CommodityController {
         Commodity.addToDigitalCount();
     }
 
-    public void addSSD(String name, double price, int availableCount, double weight, String dimensions, double capacity, double readSpeed, double writeSpeed) {
+    public void addSSD(String name, double price, int availableCount, double weight, String dimensions, int capacity, double readSpeed, double writeSpeed) {
         commodities.add(new SSD(name, price, availableCount, weight, dimensions, capacity, readSpeed, writeSpeed));
         Commodity.addToDigitalCount();
     }
