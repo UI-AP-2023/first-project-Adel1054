@@ -8,7 +8,7 @@ public class Rating {
     private int userRating;
     private final Commodity commodity;
 
-    Rating(int userRating, Commodity commodity) {
+    public Rating(int userRating, Commodity commodity) {
         this.userRating = userRating;
         this.commodity = commodity;
     }

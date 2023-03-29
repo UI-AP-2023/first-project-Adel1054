@@ -8,7 +8,7 @@ public class Comment {
     private String text;
     boolean userHasBought;
 
-    Comment(String commodityID, String text, boolean userHasBought, Consumer consumer) {
+    public Comment(String commodityID, String text, boolean userHasBought, Consumer consumer) {
         this.consumer = consumer;
         this.commodityID = commodityID;
         this.text = text;

@@ -1,10 +1,7 @@
 package controller;
 
 import model.commodity.Commodity;
-import model.user.consumer.Comment;
-import model.user.consumer.CommentRequest;
-import model.user.consumer.Consumer;
-import model.user.consumer.SignupRequest;
+import model.user.consumer.*;
 
 import java.util.ArrayList;
 
@@ -73,13 +70,54 @@ public class ConsumerController {
             }
         }
     }
-    /*public void addComment(CommentRequest commentRequest){
+    public void addComment(CommentRequest commentRequest){
         String username=commentRequest.getUsername();
+        boolean userHasBought =false;
         for(Consumer consumer:consumers){
             if(consumer.getUsername().equals(username)){
-                for (Commodity commodity)
-                consumer.getComments().add(new Comment(commentRequest.getCommodityID(),commentRequest.getText()))
+                for (Commodity commodity:consumer.getCommoditiesBought()){
+                    if(commodity.getID().equals(commentRequest.getCommodityID())){
+                        userHasBought =true;
+                        break;
+                    }
+                }
+                consumer.getComments().add(new Comment(commentRequest.getCommodityID(),commentRequest.getText(), userHasBought,consumer));
+                break;
             }
         }
-    }*/
+    }
+    public void addCommentRequest(String commodityID,String username,String text){
+        commentRequests.add(new CommentRequest(commodityID,username,text));
+    }
+    public void addCommodity(String username,Commodity commodity){
+        for (Consumer consumer:consumers){
+            if(consumer.getUsername().equals(username)){
+                consumer.getCommoditiesBought().add(commodity);
+                break;
+            }
+        }
+    }
+    public void addCreditCard(String username,String cardNumber, String CVV2, String password){
+        for(Consumer consumer:consumers){
+            if(consumer.getUsername().equals(username)){
+                consumer.getCreditCards().add(new CreditCard(cardNumber,CVV2,password));
+                break;
+            }
+        }
+    }
+    public void addRating(String username,int userRating, Commodity commodity){
+        for(Consumer consumer:consumers){
+            if(consumer.getUsername().equals(username)){
+                consumer.getRatings().add(new Rating(userRating,commodity));
+            }
+        }
+    }
+    public void addToCart(String username,Commodity commodity){
+        for (Consumer consumer:consumers){
+            if(consumer.getUsername().equals(username)){
+                consumer.getCart().add(commodity);
+                break;
+            }
+        }
+    }
 }

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 public class Consumer extends User {
     private final ArrayList<Commodity> cart;
     private final ArrayList<Receipt> shoppingHistory;
+    private final ArrayList<Rating> ratings;
+    private final ArrayList<Commodity> commoditiesBought;
     private final ArrayList<CreditCard> creditCards;
     private final ArrayList<Comment> comments;
     private double balance;
@@ -18,6 +20,8 @@ public class Consumer extends User {
         shoppingHistory = new ArrayList<>();
         creditCards = new ArrayList<>();
         comments=new ArrayList<>();
+        commoditiesBought=new ArrayList<>();
+        ratings=new ArrayList<>();
         balance = 0;
     }
 
@@ -81,8 +85,16 @@ public class Consumer extends User {
         super.setUsername(username);
     }
 
+    public ArrayList<Commodity> getCommoditiesBought() {
+        return commoditiesBought;
+    }
+
     public ArrayList<Comment> getComments() {
         return comments;
+    }
+
+    public ArrayList<Rating> getRatings() {
+        return ratings;
     }
 
     @Override
