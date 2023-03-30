@@ -1,21 +1,23 @@
 package model.user.consumer;
 
+import model.commodity.Commodity;
+
 public class CommentRequest {
-    private final String commodityID;
-    private final String username;
+    private final Commodity commodity;
+    private final Consumer consumer;
     private final String text;
-    public CommentRequest(String commodityID,String username,String text){
-        this.commodityID=commodityID;
-        this.username=username;
+    public CommentRequest(Commodity commodity,Consumer consumer,String text){
+        this.commodity= commodity;
+        this.consumer=consumer;
         this.text=text;
     }
 
-    public String getUsername() {
-        return username;
+    public Consumer getConsumer() {
+        return consumer;
     }
 
-    public String getCommodityID() {
-        return commodityID;
+    public Commodity getCommodity() {
+        return commodity;
     }
 
     public String getText() {

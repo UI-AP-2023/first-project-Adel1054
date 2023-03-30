@@ -99,6 +99,6 @@ public class Consumer extends User {
 
     @Override
     public String toString() {
-        return super.toString() + "\nNumber of commodities bought: " + shoppingHistory.size() + "\nCurrent balance: " + balance;
+        return super.toString() + "\nNumber of commodities bought: " + shoppingHistory.size() + " Current balance: " + balance+"$";
     }
 }

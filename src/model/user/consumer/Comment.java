@@ -6,13 +6,17 @@ public class Comment {
     private final Consumer consumer;
     private final String commodityID;
     private String text;
-    boolean userHasBought;
+    private final boolean userHasBought;
 
-    public Comment(String commodityID, String text, boolean userHasBought, Consumer consumer) {
-        this.consumer = consumer;
-        this.commodityID = commodityID;
-        this.text = text;
-        this.userHasBought = userHasBought;
+    public Comment(CommentRequest commentRequest) {
+        consumer = commentRequest.getConsumer();
+        commodityID = commentRequest.getCommodity().getID();
+        text = commentRequest.getText();
+        if (commentRequest.getConsumer().getCommoditiesBought().contains(commentRequest.getCommodity())) {
+            userHasBought = true;
+        } else {
+            userHasBought = false;
+        }
     }
 
     public Consumer getConsumer() {
@@ -27,8 +31,16 @@ public class Comment {
         this.text = text;
     }
 
+    public boolean UserHasBought() {
+        return userHasBought;
+    }
+
+    public String getText() {
+        return text;
+    }
+
     @Override
     public String toString() {
-        return "By user: "+consumer.getUsername() + " about commodity " + commodityID + "\n" + "    " + text;
+        return "By user: " + consumer.getUsername() + " about commodity " + commodityID + " User has bought the product: " + userHasBought + "\n" + "    " + text;
     }
 }

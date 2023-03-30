@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import model.commodity.Category;
 import model.commodity.Commodity;
 import model.user.consumer.*;
@@ -10,17 +9,19 @@ import java.util.regex.Pattern;
 
 public class ConsumerController {
     private final ArrayList<Consumer> consumers;
-    private final ArrayList<SignupRequest> signupRequests;
-    private final ArrayList<CommentRequest> commentRequests;
     private final ArrayList<Comment> comments;
     private final ArrayList<Commodity> commodities;
+    private final ArrayList<SignupRequest> signupRequests;
+    private final ArrayList<CommentRequest> commentRequests;
+    private final ArrayList<ChargeRequest> chargeRequests;
 
-    public ConsumerController(ArrayList<Consumer> consumers, ArrayList<SignupRequest> signupRequests, ArrayList<CommentRequest> commentRequests, ArrayList<Comment> comments, ArrayList<Commodity> commodities) {
+    public ConsumerController(ArrayList<Consumer> consumers, ArrayList<SignupRequest> signupRequests, ArrayList<CommentRequest> commentRequests, ArrayList<Comment> comments, ArrayList<Commodity> commodities, ArrayList<ChargeRequest> chargeRequests) {
         this.consumers = consumers;
         this.signupRequests = signupRequests;
         this.commentRequests = commentRequests;
         this.comments = comments;
         this.commodities = commodities;
+        this.chargeRequests = chargeRequests;
     }
 
     public void addSignupRequest(String username, String password, String firstname, String surname) {
@@ -80,25 +81,8 @@ public class ConsumerController {
         }
     }
 
-    public void addComment(CommentRequest commentRequest) {
-        String username = commentRequest.getUsername();
-        boolean userHasBought = false;
-        for (Consumer consumer : consumers) {
-            if (consumer.getUsername().equals(username)) {
-                for (Commodity commodity : consumer.getCommoditiesBought()) {
-                    if (commodity.getID().equals(commentRequest.getCommodityID())) {
-                        userHasBought = true;
-                        break;
-                    }
-                }
-                consumer.getComments().add(new Comment(commentRequest.getCommodityID(), commentRequest.getText(), userHasBought, consumer));
-                break;
-            }
-        }
-    }
-
-    public void addCommentRequest(String commodityID, String username, String text) {
-        commentRequests.add(new CommentRequest(commodityID, username, text));
+    public void addCommentRequest(Commodity commodity, Consumer consumer, String text) {
+        commentRequests.add(new CommentRequest(commodity, consumer, text));
     }
 
     public void addCreditCard(String username, String cardNumber, String CVV2, String password) {
@@ -251,14 +235,22 @@ public class ConsumerController {
             if (consumer.getUsername().equals(username)) {
                 for (Commodity commodity : cart) {
                     consumer.getCommoditiesBought().add(commodity);
+                    commodity.changeAvailableCount(-1);
                 }
                 break;
             }
         }
     }
-    public void chargeRequest(String username,CreditCard creditCard,double amountCharged){
 
+    public void chargeRequest(String username, CreditCard creditCard, double amountCharged) {
+        for (Consumer consumer : consumers) {
+            if (consumer.getUsername().equals(username)) {
+                chargeRequests.add(new ChargeRequest(consumer, amountCharged, creditCard));
+                break;
+            }
+        }
     }
+
     public ArrayList<Commodity> filterByCategory(Category category, ArrayList<Commodity> commodities) {
         ArrayList<Commodity> filteredCommodities = new ArrayList<>();
         for (Commodity commodity : commodities) {
@@ -309,7 +301,7 @@ public class ConsumerController {
         return filteredCommodities;
     }
 
-    public String getRatings(String ID, int page) {
+    public String getRatingsOfCommodity(String ID, int page) {
         page--;
         StringBuilder ratings = new StringBuilder();
         for (Commodity commodity : commodities) {

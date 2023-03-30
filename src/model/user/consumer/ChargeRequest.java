@@ -4,10 +4,11 @@ public class ChargeRequest {
     private final Consumer consumer;
     private final double amount;
     private final CreditCard creditCard;
-    ChargeRequest(Consumer consumer,double amount,CreditCard creditCard){
-        this.amount=amount;
-        this.creditCard=creditCard;
-        this.consumer=consumer;
+
+    public ChargeRequest(Consumer consumer, double amount, CreditCard creditCard) {
+        this.amount = amount;
+        this.creditCard = creditCard;
+        this.consumer = consumer;
     }
 
     public Consumer getConsumer() {
@@ -24,6 +25,6 @@ public class ChargeRequest {
 
     @Override
     public String toString() {
-        return "Charge request by user: "+consumer.getUsername()+" With amount of: "+amount;
+        return "Charge request by user: " + consumer.getUsername() + " With amount of: " + amount;
     }
 }

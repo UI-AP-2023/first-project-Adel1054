@@ -47,6 +47,6 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return "Username: " + username;
+        return "Username: " + username+" Email: "+email+" Phone number: "+phoneNumber;
     }
 }

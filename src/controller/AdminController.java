@@ -10,9 +10,7 @@ import model.commodity.stationery.Pen;
 import model.commodity.stationery.Pencil;
 import model.commodity.vehicles.Automobile;
 import model.commodity.vehicles.Bicycle;
-import model.user.consumer.Comment;
-import model.user.consumer.Consumer;
-import model.user.consumer.SignupRequest;
+import model.user.consumer.*;
 
 import java.util.ArrayList;
 
@@ -20,6 +18,9 @@ public class AdminController {
     private final ArrayList<Commodity> commodities;
     private final ArrayList<Consumer> consumers;
     private final ArrayList<Comment> comments;
+    private final ArrayList<SignupRequest> signupRequests;
+    private final ArrayList<CommentRequest> commentRequests;
+    private final ArrayList<ChargeRequest> chargeRequests;
 
     public void addComestible(String name, double price, int availableCount, String productionDate, String expirationDate) {
         commodities.add(new Comestible(name, price, availableCount, productionDate, expirationDate));
@@ -94,8 +95,8 @@ public class AdminController {
         }
     }
 
-    public void addConsumer(SignupRequest request) {
-        consumers.add(new Consumer(request));
+    public void addConsumer(SignupRequest signupRequest) {
+        consumers.add(new Consumer(signupRequest));
     }
 
     public String getAllComments(int page) {
@@ -116,17 +117,106 @@ public class AdminController {
         return comments.toString();
     }
 
-    public void addToBalance(String username, double amountCharged) {
+    public void addToBalance(ChargeRequest chargeRequest) {
         for (Consumer consumer : consumers) {
-            if (consumer.getUsername().equals(username)) {
-                consumer.changeBalance(amountCharged);
+            if (consumer.getUsername().equals(chargeRequest.getConsumer().getUsername())) {
+                if (chargeRequest.getCreditCard().getBalance() >= chargeRequest.getAmount()) {
+                    consumer.changeBalance(chargeRequest.getAmount());
+                    chargeRequest.getCreditCard().changeBalance(-chargeRequest.getAmount());
+                }
             }
         }
     }
 
-    AdminController(ArrayList<Consumer> consumers, ArrayList<Commodity> commodities, ArrayList<Comment> comments) {
+    public void addComment(CommentRequest commentRequest) {
+        for (Consumer consumer : consumers) {
+            if (consumer.equals(commentRequest.getConsumer())) {
+                commentRequest.getCommodity().getComments().add(new Comment(commentRequest));
+                commentRequest.getConsumer().getComments().add(new Comment(commentRequest));
+                break;
+            }
+        }
+    }
+
+    public String consumerInfo(int page) {
+        StringBuilder consumers = new StringBuilder();
+        if (this.consumers.size() >= (page - 1) * 5) {
+            if (this.consumers.size() >= page * 5) {
+                for (int i = (page - 1) * 5; i < page * 5; i++) {
+                    consumers.append(this.consumers.get(i));
+                    consumers.append("\n");
+                }
+            } else {
+                for (int i = (page - 1) * 5; i < this.consumers.size(); i++) {
+                    consumers.append(this.consumers.get(i));
+                    consumers.append("\n");
+                }
+            }
+        }
+        return consumers.toString();
+    }
+
+    public String getSignupRequests(int page) {
+        StringBuilder signupRequests = new StringBuilder();
+        if (this.signupRequests.size() >= (page - 1) * 10) {
+            if (this.signupRequests.size() >= page * 10) {
+                for (int i = (page - 1) * 10; i < page * 10; i++) {
+                    signupRequests.append(this.signupRequests.get(i));
+                    signupRequests.append("\n");
+                }
+            } else {
+                for (int i = (page - 1) * 10; i < this.signupRequests.size(); i++) {
+                    signupRequests.append(this.signupRequests.get(i));
+                    signupRequests.append("\n");
+                }
+            }
+        }
+        return signupRequests.toString();
+    }
+
+    public String getCommentRequests(int page) {
+        StringBuilder commentRequests = new StringBuilder();
+        if (this.commentRequests.size() >= (page - 1) * 10) {
+            if (this.commentRequests.size() >= page * 10) {
+                for (int i = (page - 1) * 10; i < page * 10; i++) {
+                    commentRequests.append(this.commentRequests.get(i));
+                    commentRequests.append("\n");
+                }
+            } else {
+                for (int i = (page - 1) * 10; i < this.commentRequests.size(); i++) {
+                    commentRequests.append(this.commentRequests.get(i));
+                    commentRequests.append("\n");
+                }
+            }
+        }
+        return commentRequests.toString();
+    }
+
+    public String getChargeRequests(int page) {
+        StringBuilder chargeRequests = new StringBuilder();
+        if (this.chargeRequests.size() >= (page - 1) * 10) {
+            if (this.chargeRequests.size() >= page * 10) {
+                for (int i = (page - 1) * 10; i < page * 10; i++) {
+                    chargeRequests.append(this.chargeRequests.get(i));
+                    chargeRequests.append("\n");
+                }
+            } else {
+                for (int i = (page - 1) * 10; i < this.chargeRequests.size(); i++) {
+                    chargeRequests.append(this.chargeRequests.get(i));
+                    chargeRequests.append("\n");
+                }
+            }
+        }
+        return chargeRequests.toString();
+    }
+
+    public AdminController(ArrayList<Consumer> consumers, ArrayList<Commodity> commodities, ArrayList<Comment> comments, ArrayList<SignupRequest> signupRequests, ArrayList<CommentRequest> commentRequests, ArrayList<ChargeRequest> chargeRequests) {
         this.consumers = consumers;
         this.commodities = commodities;
         this.comments = comments;
+        this.signupRequests = signupRequests;
+        this.commentRequests = commentRequests;
+        this.chargeRequests = chargeRequests;
     }
+
 }
