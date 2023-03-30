@@ -1,16 +1,8 @@
 package controller;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import model.commodity.Category;
 import model.commodity.Commodity;
-import model.commodity.comestible.Comestible;
-import model.commodity.digitalCommodities.FlashMemory;
-import model.commodity.digitalCommodities.PC;
-import model.commodity.digitalCommodities.SSD;
-import model.commodity.stationery.Notebook;
-import model.commodity.stationery.Pen;
-import model.commodity.stationery.Pencil;
-import model.commodity.vehicles.Automobile;
-import model.commodity.vehicles.Bicycle;
 import model.user.consumer.*;
 
 import java.util.ArrayList;
@@ -23,12 +15,12 @@ public class ConsumerController {
     private final ArrayList<Comment> comments;
     private final ArrayList<Commodity> commodities;
 
-    public ConsumerController() {
-        consumers = new ArrayList<>();
-        signupRequests = new ArrayList<>();
-        commentRequests = new ArrayList<>();
-        comments = new ArrayList<>();
-        commodities = new ArrayList<>();
+    public ConsumerController(ArrayList<Consumer> consumers, ArrayList<SignupRequest> signupRequests, ArrayList<CommentRequest> commentRequests, ArrayList<Comment> comments, ArrayList<Commodity> commodities) {
+        this.consumers = consumers;
+        this.signupRequests = signupRequests;
+        this.commentRequests = commentRequests;
+        this.comments = comments;
+        this.commodities = commodities;
     }
 
     public void addSignupRequest(String username, String password, String firstname, String surname) {
@@ -109,15 +101,6 @@ public class ConsumerController {
         commentRequests.add(new CommentRequest(commodityID, username, text));
     }
 
-    public void addCommodity(String username, Commodity commodity) {
-        for (Consumer consumer : consumers) {
-            if (consumer.getUsername().equals(username)) {
-                consumer.getCommoditiesBought().add(commodity);
-                break;
-            }
-        }
-    }
-
     public void addCreditCard(String username, String cardNumber, String CVV2, String password) {
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
@@ -130,7 +113,10 @@ public class ConsumerController {
     public void addRating(String username, int userRating, Commodity commodity) {
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
-                consumer.getRatings().add(new Rating(userRating, commodity));
+                if (consumer.getCommoditiesBought().contains(commodity)) {
+                    consumer.getRatings().add(new Rating(userRating, commodity));
+                    break;
+                }
             }
         }
     }
@@ -148,6 +134,7 @@ public class ConsumerController {
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
                 consumer.changeBalance(change);
+                break;
             }
         }
     }
@@ -174,12 +161,13 @@ public class ConsumerController {
                         }
                     }
                 }
+                break;
             }
         }
         return commodities.toString();
     }
 
-    public String getCShoppingHistory(String username, int page) {
+    public String getShoppingHistory(String username, int page) {
         StringBuilder commodities = new StringBuilder();
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
@@ -201,12 +189,41 @@ public class ConsumerController {
                         }
                     }
                 }
+                break;
             }
         }
         return commodities.toString();
     }
 
-    public String getCommodities(ArrayList<Commodity> commodities, int page) {
+    public String getCart(String username, int page) {
+        StringBuilder commodities = new StringBuilder();
+        for (Consumer consumer : consumers) {
+            if (consumer.getUsername().equals(username)) {
+                if (consumer.getCart().size() >= (page - 1) * 10) {
+                    int row = 1;
+                    if (consumer.getCart().size() >= page * 10) {
+                        for (int i = (page - 1) * 10; i < page * 10; i++) {
+                            commodities.append(row++);
+                            commodities.append(".");
+                            commodities.append(consumer.getCart().get(i).toString());
+                            commodities.append("\n");
+                        }
+                    } else {
+                        for (int i = (page - 1) * 10; i < consumer.getCart().size(); i++) {
+                            commodities.append(row++);
+                            commodities.append(".");
+                            commodities.append(consumer.getCart().get(i).toString());
+                            commodities.append("\n");
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        return commodities.toString();
+    }
+
+    public String getAllCommodities(ArrayList<Commodity> commodities, int page) {
         StringBuilder commodities1 = new StringBuilder();
         if (commodities.size() >= (page - 1) * 10) {
             int row = 1;
@@ -229,6 +246,19 @@ public class ConsumerController {
         return commodities1.toString();
     }
 
+    public void buyCommodities(String username, ArrayList<Commodity> cart) {
+        for (Consumer consumer : consumers) {
+            if (consumer.getUsername().equals(username)) {
+                for (Commodity commodity : cart) {
+                    consumer.getCommoditiesBought().add(commodity);
+                }
+                break;
+            }
+        }
+    }
+    public void chargeRequest(String username,CreditCard creditCard,double amountCharged){
+
+    }
     public ArrayList<Commodity> filterByCategory(Category category, ArrayList<Commodity> commodities) {
         ArrayList<Commodity> filteredCommodities = new ArrayList<>();
         for (Commodity commodity : commodities) {

@@ -29,6 +29,6 @@ public class Comment {
 
     @Override
     public String toString() {
-        return consumer.getUsername() + " about commodity " + commodityID + "\n" + "    " + text;
+        return "By user: "+consumer.getUsername() + " about commodity " + commodityID + "\n" + "    " + text;
     }
 }

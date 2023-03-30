@@ -10,11 +10,17 @@ import model.commodity.stationery.Pen;
 import model.commodity.stationery.Pencil;
 import model.commodity.vehicles.Automobile;
 import model.commodity.vehicles.Bicycle;
+import model.user.consumer.Comment;
+import model.user.consumer.Consumer;
+import model.user.consumer.SignupRequest;
 
 import java.util.ArrayList;
 
 public class AdminController {
-    ArrayList<Commodity> commodities;
+    private final ArrayList<Commodity> commodities;
+    private final ArrayList<Consumer> consumers;
+    private final ArrayList<Comment> comments;
+
     public void addComestible(String name, double price, int availableCount, String productionDate, String expirationDate) {
         commodities.add(new Comestible(name, price, availableCount, productionDate, expirationDate));
         Commodity.addToComestibleCount();
@@ -86,5 +92,41 @@ public class AdminController {
                 commodity.setAvailableCount(newAvailableCount);
             }
         }
+    }
+
+    public void addConsumer(SignupRequest request) {
+        consumers.add(new Consumer(request));
+    }
+
+    public String getAllComments(int page) {
+        StringBuilder comments = new StringBuilder();
+        if (this.comments.size() >= (page - 1) * 5) {
+            if (this.comments.size() >= page * 5) {
+                for (int i = (page - 1) * 5; i < page * 5; i++) {
+                    comments.append(this.comments.get(i).toString());
+                    comments.append("\n");
+                }
+            } else {
+                for (int i = (page - 1) * 5; i < this.comments.size(); i++) {
+                    comments.append(this.comments.get(i).toString());
+                    comments.append("\n");
+                }
+            }
+        }
+        return comments.toString();
+    }
+
+    public void addToBalance(String username, double amountCharged) {
+        for (Consumer consumer : consumers) {
+            if (consumer.getUsername().equals(username)) {
+                consumer.changeBalance(amountCharged);
+            }
+        }
+    }
+
+    AdminController(ArrayList<Consumer> consumers, ArrayList<Commodity> commodities, ArrayList<Comment> comments) {
+        this.consumers = consumers;
+        this.commodities = commodities;
+        this.comments = comments;
     }
 }

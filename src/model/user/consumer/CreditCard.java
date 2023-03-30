@@ -4,6 +4,7 @@ public class CreditCard {
     private final String cardNumber;
     private final String CVV2;
     private final String password;
+    private double balance;
 
     public CreditCard(String cardNumber, String CVV2, String password) {
         this.cardNumber = cardNumber;
@@ -21,6 +22,14 @@ public class CreditCard {
 
     public String getCVV2() {
         return CVV2;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void changeBalance(double change) {
+        balance += change;
     }
 
     @Override
