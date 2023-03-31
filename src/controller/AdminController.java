@@ -140,7 +140,7 @@ public class AdminController {
         }
     }
 
-    public String consumerInfo(int page) {
+    public String getConsumers(int page) {
         StringBuilder consumers = new StringBuilder();
         if (this.consumers.size() >= (page - 1) * 5) {
             if (this.consumers.size() >= page * 5) {
@@ -161,15 +161,14 @@ public class AdminController {
     public String getSignupRequests(int page) {
         StringBuilder signupRequests = new StringBuilder();
         if (this.signupRequests.size() >= (page - 1) * 10) {
+            int number=1;
             if (this.signupRequests.size() >= page * 10) {
                 for (int i = (page - 1) * 10; i < page * 10; i++) {
-                    signupRequests.append(this.signupRequests.get(i));
-                    signupRequests.append("\n");
+                    signupRequests.append(number++).append(".").append(this.signupRequests.get(i)).append("\n");
                 }
             } else {
                 for (int i = (page - 1) * 10; i < this.signupRequests.size(); i++) {
-                    signupRequests.append(this.signupRequests.get(i));
-                    signupRequests.append("\n");
+                    signupRequests.append(number++).append(".").append(this.signupRequests.get(i)).append("\n");
                 }
             }
         }
@@ -179,15 +178,14 @@ public class AdminController {
     public String getCommentRequests(int page) {
         StringBuilder commentRequests = new StringBuilder();
         if (this.commentRequests.size() >= (page - 1) * 10) {
+            int number=1;
             if (this.commentRequests.size() >= page * 10) {
                 for (int i = (page - 1) * 10; i < page * 10; i++) {
-                    commentRequests.append(this.commentRequests.get(i));
-                    commentRequests.append("\n");
+                    commentRequests.append(number++).append(".").append(this.commentRequests.get(i)).append("\n");
                 }
             } else {
                 for (int i = (page - 1) * 10; i < this.commentRequests.size(); i++) {
-                    commentRequests.append(this.commentRequests.get(i));
-                    commentRequests.append("\n");
+                    commentRequests.append(number++).append(".").append(this.commentRequests.get(i)).append("\n");
                 }
             }
         }
@@ -197,37 +195,57 @@ public class AdminController {
     public String getChargeRequests(int page) {
         StringBuilder chargeRequests = new StringBuilder();
         if (this.chargeRequests.size() >= (page - 1) * 10) {
+            int number=1;
             if (this.chargeRequests.size() >= page * 10) {
                 for (int i = (page - 1) * 10; i < page * 10; i++) {
-                    chargeRequests.append(this.chargeRequests.get(i));
-                    chargeRequests.append("\n");
+                    chargeRequests.append(number++).append(".").append(this.chargeRequests.get(i)).append("\n");
                 }
             } else {
                 for (int i = (page - 1) * 10; i < this.chargeRequests.size(); i++) {
-                    chargeRequests.append(this.chargeRequests.get(i));
-                    chargeRequests.append("\n");
+                    chargeRequests.append(number++).append(".").append(this.chargeRequests.get(i)).append("\n");
                 }
             }
         }
         return chargeRequests.toString();
     }
+    public String getCommodities(int page){
+        StringBuilder commodities = new StringBuilder();
+        if (this.commodities.size() >= (page - 1) * 10) {
+            int number=1;
+            if (this.commodities.size() >= page * 10) {
+                for (int i = (page - 1) * 10; i < page * 10; i++) {
+                    commodities.append(number++).append(".").append(this.commodities.get(i)).append("\n");
+                }
+            } else {
+                for (int i = (page - 1) * 10; i < this.commodities.size(); i++) {
+                    commodities.append(number++).append(".").append(this.commodities.get(i)).append("\n");
+                }
+            }
+        }
+        return commodities.toString();
+    }
 
     public int getConsumerCount() {
         return consumers.size();
     }
-    public int getCommentCount(){
+
+    public int getCommentCount() {
         return comments.size();
     }
-    public int getCommodityCount(){
+
+    public int getCommodityCount() {
         return commodities.size();
     }
-    public int getSignupRequestCount(){
+
+    public int getSignupRequestCount() {
         return signupRequests.size();
     }
-    public int getCommentRequestCount(){
+
+    public int getCommentRequestCount() {
         return commentRequests.size();
     }
-    public int getChargeRequestCount(){
+
+    public int getChargeRequestCount() {
         return chargeRequests.size();
     }
 
@@ -238,7 +256,7 @@ public class AdminController {
         this.signupRequests = signupRequests;
         this.commentRequests = commentRequests;
         this.chargeRequests = chargeRequests;
-        admin=Admin.initializeAdmin("Adel","PasSwOrd@","adelp1054@gmail.com","09137284754");
+        admin = Admin.initializeAdmin("Adel", "PasSwOrd@", "adelp1054@gmail.com", "09137284754");
     }
 
 }

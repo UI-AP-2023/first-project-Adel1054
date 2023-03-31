@@ -8,18 +8,25 @@ import java.util.Scanner;
 
 public class MainPanel {
     private final Scanner input;
-    private ArrayList<Consumer> consumers;
-    private ArrayList<Commodity> commodities;
-    private ArrayList<Comment> comments;
-    private ArrayList<SignupRequest> signupRequests;
-    private ArrayList<CommentRequest> commentRequests;
-    private ArrayList<ChargeRequest> chargeRequests;
+    private final ArrayList<Consumer> consumers;
+    private final ArrayList<Commodity> commodities;
+    private final ArrayList<Comment> comments;
+    private final ArrayList<SignupRequest> signupRequests;
+    private final ArrayList<CommentRequest> commentRequests;
+    private final ArrayList<ChargeRequest> chargeRequests;
 
     public MainPanel() {
         input = new Scanner(System.in);
+        commodities=new ArrayList<>();
+        chargeRequests=new ArrayList<>();
+        comments=new ArrayList<>();
+        consumers=new ArrayList<>();
+        commentRequests=new ArrayList<>();
+        signupRequests=new ArrayList<>();
     }
 
     public void mainPage() {
+        System.out.println("1.Consumer\t2.Admin");
         int command1 = input.nextInt();
         switch (command1) {
             case 1: {
@@ -27,10 +34,12 @@ public class MainPanel {
                 break;
             }
             case 2: {
-                AdminPage adminPage = new AdminPage(consumers,commodities,comments,signupRequests,commentRequests,chargeRequests);
+                AdminPanel adminPanel = new AdminPanel(consumers,commodities,comments,signupRequests,commentRequests,chargeRequests);
+                while (!adminPanel.shouldExit()){
+                    adminPanel.adminPage();
+                }
                 break;
             }
         }
-        System.out.println("Shutting down the online shop.");
     }
 }

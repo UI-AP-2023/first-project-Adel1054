@@ -86,6 +86,6 @@ public class Comestible extends Commodity {
 
     @Override
     public String toString() {
-        return super.toString() + " Production: " + productionDate + "\nExpiration: " + expirationDate;
+        return super.toString() + " Production: " + productionDate + "Expiration: " + expirationDate;
     }
 }

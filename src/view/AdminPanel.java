@@ -9,13 +9,15 @@ import model.user.consumer.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdminPage {
-    AdminController adminController;
+public class AdminPanel {
+    private final AdminController adminController;
     private final Scanner input;
+    private boolean exit;
 
-    AdminPage(ArrayList<Consumer> consumers, ArrayList<Commodity> commodities, ArrayList<Comment> comments, ArrayList<SignupRequest> signupRequests, ArrayList<CommentRequest> commentRequests, ArrayList<ChargeRequest> chargeRequests) {
+    AdminPanel(ArrayList<Consumer> consumers, ArrayList<Commodity> commodities, ArrayList<Comment> comments, ArrayList<SignupRequest> signupRequests, ArrayList<CommentRequest> commentRequests, ArrayList<ChargeRequest> chargeRequests) {
         input = new Scanner(System.in);
         adminController = new AdminController(consumers, commodities, comments, signupRequests, commentRequests, chargeRequests);
+        exit=false;
     }
 
     private Bicycle.BicycleType getBicycleType(String type) {
@@ -49,11 +51,11 @@ public class AdminPage {
     }
 
     public void adminPage() {
-        System.out.println("Enter next command in one line:\n");
+        System.out.println("Enter next command in one line:");
         String command = input.nextLine();
         String[] commands = command.split(" ");
         switch (commands[0]) {
-            case "Add": {
+            case "Add":
                 switch (commands[1]) {
                     case "Comestible":
                         adminController.addComestible(commands[2], Double.parseDouble(commands[3]), Integer.parseInt(commands[4]), commands[5], commands[6]);
@@ -83,13 +85,13 @@ public class AdminPage {
                         adminController.addBicycle(commands[2], Double.parseDouble(commands[3]), Integer.parseInt(commands[4]), commands[5], getBicycleType(commands[6]));
                         break;
                 }
-            }
+                break;
             case "ShowConsumers": {
                 int page = 1;
-                boolean exit=false;
+                boolean exit = false;
                 int pageCount = (int) Math.ceil((double) adminController.getConsumerCount() / 10);
                 while (!exit) {
-                    adminController.consumerInfo(page);
+                    System.out.println(adminController.getConsumers(page));
                     if (page != pageCount && page != 1) {
                         System.out.println("1.Last page\t2.Next page\t3.quit");
                         int pageCommand = input.nextInt();
@@ -101,45 +103,46 @@ public class AdminPage {
                                 page++;
                                 break;
                             case 3:
-                                exit=true;
+                                exit = true;
                                 break;
                         }
                     }
                     if (page == 1 && page != pageCount) {
                         System.out.println("1.Next page\t2.quit");
                         int pageCommand = input.nextInt();
-                        if(pageCommand==1){
+                        if (pageCommand == 1) {
                             page++;
                         }
-                        if(pageCommand==2){
-                            exit=true;
+                        if (pageCommand == 2) {
+                            exit = true;
                         }
                     }
                     if (page == pageCount && page != 1) {
                         System.out.println("1.last page\t2.quit");
-                        int pageCommand= input.nextInt();
-                        if(pageCommand==1){
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
                             page--;
                         }
-                        if(pageCommand==2){
-                            exit=true;
+                        if (pageCommand == 2) {
+                            exit = true;
                         }
                     }
                     if (page == 1 && page == pageCount) {
                         System.out.println("1.quit");
-                        int pageCommand= input.nextInt();
-                        if(pageCommand==1){
-                            exit=true;
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
+                            exit = true;
                         }
                     }
                 }
             }
+            break;
             case "ShowComments": {
                 int page = 1;
-                boolean exit=false;
+                boolean exit = false;
                 int pageCount = (int) Math.ceil((double) adminController.getConsumerCount() / 10);
                 while (!exit) {
-                    adminController.consumerInfo(page);
+                    System.out.println(adminController.getAllComments(page));
                     if (page != pageCount && page != 1) {
                         System.out.println("1.Last page\t2.Next page\t3.quit");
                         int pageCommand = input.nextInt();
@@ -151,39 +154,148 @@ public class AdminPage {
                                 page++;
                                 break;
                             case 3:
-                                exit=true;
+                                exit = true;
                                 break;
                         }
                     }
                     if (page == 1 && page != pageCount) {
                         System.out.println("1.Next page\t2.quit");
                         int pageCommand = input.nextInt();
-                        if(pageCommand==1){
+                        if (pageCommand == 1) {
                             page++;
                         }
-                        if(pageCommand==2){
-                            exit=true;
+                        if (pageCommand == 2) {
+                            exit = true;
                         }
                     }
                     if (page == pageCount && page != 1) {
                         System.out.println("1.last page\t2.quit");
-                        int pageCommand= input.nextInt();
-                        if(pageCommand==1){
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
                             page--;
                         }
-                        if(pageCommand==2){
-                            exit=true;
+                        if (pageCommand == 2) {
+                            exit = true;
                         }
                     }
                     if (page == 1 && page == pageCount) {
                         System.out.println("1.quit");
-                        int pageCommand= input.nextInt();
-                        if(pageCommand==1){
-                            exit=true;
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
+                            exit = true;
                         }
                     }
                 }
             }
+            break;
+            case "ShowCommodities": {
+                int page = 1;
+                boolean exit = false;
+                int pageCount = (int) Math.ceil((double) adminController.getCommodityCount() / 10);
+                while (!exit) {
+                    System.out.println(adminController.getCommodities(page));
+                    if (page != pageCount && page != 1) {
+                        System.out.println("1.Last page\t2.Next page\t3.quit");
+                        int pageCommand = input.nextInt();
+                        switch (pageCommand) {
+                            case 1:
+                                page--;
+                                break;
+                            case 2:
+                                page++;
+                                break;
+                            case 3:
+                                exit = true;
+                                break;
+                        }
+                    }
+                    if (page == 1 && page != pageCount) {
+                        System.out.println("1.Next page\t2.quit");
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
+                            page++;
+                        }
+                        if (pageCommand == 2) {
+                            exit = true;
+                        }
+                    }
+                    if (page == pageCount && page != 1) {
+                        System.out.println("1.last page\t2.quit");
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
+                            page--;
+                        }
+                        if (pageCommand == 2) {
+                            exit = true;
+                        }
+                    }
+                    if (page == 1 && page == pageCount) {
+                        System.out.println("1.quit");
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
+                            exit = true;
+                        }
+                    }
+                }
+            }
+            break;
+            case "SignupRequests": {
+                int page = 1;
+                boolean exit = false;
+                int pageCount = (int) Math.ceil((double) adminController.getSignupRequestCount() / 10);
+                while (!exit) {
+                    System.out.println(adminController.getSignupRequests(page));
+                    if (page != pageCount && page != 1) {
+                        System.out.println("1.Last page\t2.Next page\t3.quit");
+                        int pageCommand = input.nextInt();
+                        switch (pageCommand) {
+                            case 1:
+                                page--;
+                                break;
+                            case 2:
+                                page++;
+                                break;
+                            case 3:
+                                exit = true;
+                                break;
+                        }
+                    }
+                    if (page == 1 && page != pageCount) {
+                        System.out.println("1.Next page\t2.quit");
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
+                            page++;
+                        }
+                        if (pageCommand == 2) {
+                            exit = true;
+                        }
+                    }
+                    if (page == pageCount && page != 1) {
+                        System.out.println("1.last page\t2.quit");
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
+                            page--;
+                        }
+                        if (pageCommand == 2) {
+                            exit = true;
+                        }
+                    }
+                    if (page == 1 && page == pageCount) {
+                        System.out.println("1.quit");
+                        int pageCommand = input.nextInt();
+                        if (pageCommand == 1) {
+                            exit = true;
+                        }
+                    }
+                }
+            }
+            break;
+            case "Exit":
+                exit=true;
+                break;
         }
+    }
+    public boolean shouldExit(){
+        return exit;
     }
 }
