@@ -50,12 +50,13 @@ public class Admin extends User {
         return admin;
     }
 
-    public static void initializeAdmin(String username, String password, String email, String phoneNumber) {
+    public static Admin initializeAdmin(String username, String password, String email, String phoneNumber) {
         if (adminMade) {
-            return;
+            return admin;
         }
         admin = new Admin(username, password, email, phoneNumber);
         adminMade = true;
+        return admin;
     }
 
     @Override

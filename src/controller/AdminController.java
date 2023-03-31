@@ -10,11 +10,13 @@ import model.commodity.stationery.Pen;
 import model.commodity.stationery.Pencil;
 import model.commodity.vehicles.Automobile;
 import model.commodity.vehicles.Bicycle;
+import model.user.admin.Admin;
 import model.user.consumer.*;
 
 import java.util.ArrayList;
 
 public class AdminController {
+    private final Admin admin;
     private final ArrayList<Commodity> commodities;
     private final ArrayList<Consumer> consumers;
     private final ArrayList<Comment> comments;
@@ -210,6 +212,25 @@ public class AdminController {
         return chargeRequests.toString();
     }
 
+    public int getConsumerCount() {
+        return consumers.size();
+    }
+    public int getCommentCount(){
+        return comments.size();
+    }
+    public int getCommodityCount(){
+        return commodities.size();
+    }
+    public int getSignupRequestCount(){
+        return signupRequests.size();
+    }
+    public int getCommentRequestCount(){
+        return commentRequests.size();
+    }
+    public int getChargeRequestCount(){
+        return chargeRequests.size();
+    }
+
     public AdminController(ArrayList<Consumer> consumers, ArrayList<Commodity> commodities, ArrayList<Comment> comments, ArrayList<SignupRequest> signupRequests, ArrayList<CommentRequest> commentRequests, ArrayList<ChargeRequest> chargeRequests) {
         this.consumers = consumers;
         this.commodities = commodities;
@@ -217,6 +238,7 @@ public class AdminController {
         this.signupRequests = signupRequests;
         this.commentRequests = commentRequests;
         this.chargeRequests = chargeRequests;
+        admin=Admin.initializeAdmin("Adel","PasSwOrd@","adelp1054@gmail.com","09137284754");
     }
 
 }
