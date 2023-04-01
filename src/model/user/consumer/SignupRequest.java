@@ -5,7 +5,6 @@ public class SignupRequest {
     private final String password;
     private final String email;
     private final String phoneNumber;
-    private boolean isPermitted;
 
     public SignupRequest(String username, String password, String firstname, String surname) {
         this.username = username;
@@ -28,10 +27,6 @@ public class SignupRequest {
 
     public String getEmail() {
         return email;
-    }
-
-    public void setPermitted() {
-        isPermitted = true;
     }
 
     @Override

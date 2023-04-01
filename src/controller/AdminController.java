@@ -97,8 +97,28 @@ public class AdminController {
         }
     }
 
-    public void addConsumer(SignupRequest signupRequest) {
-        consumers.add(new Consumer(signupRequest));
+    public boolean addConsumer(String username) {
+        boolean hasAdded=false;
+        for(SignupRequest signupRequest:signupRequests) {
+            if(signupRequest.getUsername().equals(username)){
+                consumers.add(new Consumer(signupRequest));
+                signupRequests.remove(signupRequest);
+                hasAdded=true;
+                break;
+            }
+        }
+        return hasAdded;
+    }
+    public boolean denySignupRequest(String username){
+        boolean hasDenied=false;
+        for (SignupRequest signupRequest:signupRequests){
+            if(signupRequest.getUsername().equals(username)){
+                signupRequests.remove(signupRequest);
+                hasDenied=true;
+                break;
+            }
+        }
+        return hasDenied;
     }
 
     public String getAllComments(int page) {
@@ -119,27 +139,44 @@ public class AdminController {
         return comments.toString();
     }
 
-    public void addToBalance(ChargeRequest chargeRequest) {
-        for (Consumer consumer : consumers) {
-            if (consumer.getUsername().equals(chargeRequest.getConsumer().getUsername())) {
+    public boolean addToBalance(String username,double amount) {
+        boolean added=false;
+        for (ChargeRequest chargeRequest:chargeRequests) {
+            if (chargeRequest.getConsumer().getUsername().equals(chargeRequest.getConsumer().getUsername())&&chargeRequest.getAmount()==amount) {
                 if (chargeRequest.getCreditCard().getBalance() >= chargeRequest.getAmount()) {
-                    consumer.changeBalance(chargeRequest.getAmount());
+                    chargeRequest.getConsumer().changeBalance(chargeRequest.getAmount());
                     chargeRequest.getCreditCard().changeBalance(-chargeRequest.getAmount());
+                    added=true;
+                    break;
                 }
             }
         }
+        return added;
     }
 
-    public void addComment(CommentRequest commentRequest) {
-        for (Consumer consumer : consumers) {
-            if (consumer.equals(commentRequest.getConsumer())) {
-                commentRequest.getCommodity().getComments().add(new Comment(commentRequest));
-                commentRequest.getConsumer().getComments().add(new Comment(commentRequest));
+    public boolean addComment(String username,String commodityName) {
+        boolean hasAdded =false;
+        for(CommentRequest commentRequest:commentRequests){
+            if(commentRequest.getConsumer().getUsername().equals(username)&&commentRequest.getCommodity().getName().equals(commodityName)){
+                comments.add(new Comment(commentRequest));
+                commentRequests.remove(commentRequest);
+                hasAdded=true;
                 break;
             }
         }
+        return hasAdded;
     }
-
+    public boolean denyComment(String username,String commodityName) {
+        boolean hasDenied=false;
+        for(CommentRequest commentRequest:commentRequests){
+            if(commentRequest.getConsumer().getUsername().equals(username)&&commentRequest.getCommodity().getName().equals(commodityName)){
+                commentRequests.remove(commentRequest);
+                hasDenied=true;
+                break;
+            }
+        }
+        return hasDenied;
+    }
     public String getConsumers(int page) {
         StringBuilder consumers = new StringBuilder();
         if (this.consumers.size() >= (page - 1) * 5) {
