@@ -27,6 +27,9 @@ public class ConsumerPanel {
     private String nameFragment = "";
     private final Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9._-]{6,16}$");
     private final Pattern passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+    private final Pattern creditCardPattern=Pattern.compile("[0-9]{16}");
+    private final Pattern cvv2Pattern=Pattern.compile("[0-9]{3,4}");
+    private final Pattern cardPasswordPattern=Pattern.compile("[0-9]{6}");
 
     ConsumerPanel(ArrayList<Consumer> consumers, ArrayList<Commodity> commodities, ArrayList<Comment> comments, ArrayList<SignupRequest> signupRequests, ArrayList<CommentRequest> commentRequests, ArrayList<ChargeRequest> chargeRequests, Consumer consumer) {
         input = new Scanner(System.in);
@@ -58,7 +61,7 @@ public class ConsumerPanel {
                         }
                     }
                     break;
-                    case "2":{
+                    case "2": {
                         System.out.println("Enter new password: ");
                         String newPassword = input.nextLine();
                         if (usernamePattern.matcher(newPassword).matches()) {
@@ -78,11 +81,27 @@ public class ConsumerPanel {
             case 2: {
                 int page = 1;
                 boolean exit = false;
-                int pageCount = (int) Math.ceil((double) consumerController.getCommodityCount() / 10);
                 while (!exit) {
-                    System.out.println(consumerController.showCommodities(page,consumerController.getCommodities()));
+                    ArrayList<Commodity> filteredCommodities = consumerController.getCommodities();
+                    if (filterByCategory) {
+                        filteredCommodities = consumerController.filterByCategory(category, filteredCommodities);
+                    }
+                    if (filterByRating) {
+                        filteredCommodities = consumerController.filterByRating(ratingLow, ratingHigh, filteredCommodities);
+                    }
+                    if (filterByAvailability) {
+                        filteredCommodities = consumerController.filterByAvailability(filteredCommodities);
+                    }
+                    if (filterByPrice) {
+                        filteredCommodities = consumerController.filterByPrice(priceLow, priceHigh, filteredCommodities);
+                    }
+                    if (filterByNameFragment) {
+                        filteredCommodities = consumerController.filterByNameFragment(nameFragment, filteredCommodities);
+                    }
+                    int pageCount = (int) Math.ceil((double) filteredCommodities.size() / 10);
+                    System.out.println(consumerController.showCommodities(page, filteredCommodities));
                     if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.quit\nEnter commodity ID to go to its page");
+                        System.out.println("1.Last page\t2.Next page\t3.quit\t4.filters\nEnter commodity ID to go to its page");
                         String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             switch (Integer.parseInt(pageCommand)) {
@@ -95,14 +114,33 @@ public class ConsumerPanel {
                                 case 3:
                                     exit = true;
                                     break;
+                                case 4:
+                                    filters();
+                                    break;
                             }
                             continue;
                         } else {
-                            consumerController.commodityPage(pageCommand);
+                            System.out.println(consumerController.commodityPage(pageCommand));
+                            for (Commodity commodity:filteredCommodities){
+                                if(commodity.getID().equals(pageCommand)){
+                                    System.out.println("1.Comment\t2.Add to cart\tanything else to quit");
+                                    String command= input.nextLine();
+                                    if(command.equals("1")){
+                                        String comment= input.nextLine();
+                                        consumerController.addCommentRequest(commodity,consumer,comment);
+                                        System.out.println("Comment request submitted.");
+                                    }
+                                    if(command.equals("2")){
+                                        consumerController.addToCart(consumer.getUsername(),commodity);
+                                        System.out.println("Commodity added to cart.");
+                                    }
+                                    break;
+                                }
+                            }
                         }
                     }
                     if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.quit\nEnter commodity ID to go to its page");
+                        System.out.println("1.Next page\t2.quit\t3.filters\nEnter commodity ID to go to its page");
                         String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
@@ -112,12 +150,31 @@ public class ConsumerPanel {
                             if (Integer.parseInt(pageCommand) == 2) {
                                 exit = true;
                             }
+                            if (Integer.parseInt(pageCommand) == 3) {
+                                filters();
+                            }
                         } else {
-                            consumerController.commodityPage(pageCommand);
+                            System.out.println(consumerController.commodityPage(pageCommand));
+                            for (Commodity commodity:filteredCommodities){
+                                if(commodity.getID().equals(pageCommand)){
+                                    System.out.println("1.Comment\t2.Add to cart\tanything else to quit");
+                                    String command= input.nextLine();
+                                    if(command.equals("1")){
+                                        String comment= input.nextLine();
+                                        consumerController.addCommentRequest(commodity,consumer,comment);
+                                        System.out.println("Comment request submitted.");
+                                    }
+                                    if(command.equals("2")){
+                                        consumerController.addToCart(consumer.getUsername(),commodity);
+                                        System.out.println("Commodity added to cart.");
+                                    }
+                                    break;
+                                }
+                            }
                         }
                     }
                     if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.quit\nEnter commodity ID to go to its page");
+                        System.out.println("1.last page\t2.quit\t3.filters\nEnter commodity ID to go to its page");
                         String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
@@ -127,35 +184,189 @@ public class ConsumerPanel {
                             if (Integer.parseInt(pageCommand) == 2) {
                                 exit = true;
                             }
+                            if (Integer.parseInt(pageCommand) == 3) {
+                                filters();
+                            }
                         } else {
-                            consumerController.commodityPage(pageCommand);
+                            System.out.println(consumerController.commodityPage(pageCommand));
+                            for (Commodity commodity:filteredCommodities){
+                                if(commodity.getID().equals(pageCommand)){
+                                    System.out.println("1.Comment\t2.Add to cart\tanything else to quit");
+                                    String command= input.nextLine();
+                                    if(command.equals("1")){
+                                        String comment= input.nextLine();
+                                        consumerController.addCommentRequest(commodity,consumer,comment);
+                                        System.out.println("Comment request submitted.");
+                                    }
+                                    if(command.equals("2")){
+                                        consumerController.addToCart(consumer.getUsername(),commodity);
+                                        System.out.println("Commodity added to cart.");
+                                    }
+                                    break;
+                                }
+                            }
                         }
                     }
                     if (page == 1 && page == pageCount) {
-                        System.out.println("1.quit\nEnter commodity ID to go to its page");
+                        System.out.println("1.quit\t2.filters\nEnter commodity ID to go to its page");
                         String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
                                 exit = true;
                             }
+                            if (Integer.parseInt(pageCommand) == 2) {
+                                filters();
+                            }
                         } else {
-                            consumerController.commodityPage(pageCommand);
+                            System.out.println(consumerController.commodityPage(pageCommand));
+                            for (Commodity commodity:filteredCommodities){
+                                if(commodity.getID().equals(pageCommand)){
+                                    System.out.println("1.Comment\t2.Add to cart\tanything else to quit");
+                                    String command= input.nextLine();
+                                    if(command.equals("1")){
+                                        String comment= input.nextLine();
+                                        consumerController.addCommentRequest(commodity,consumer,comment);
+                                        System.out.println("Comment request submitted.");
+                                    }
+                                    if(command.equals("2")){
+                                        consumerController.addToCart(consumer.getUsername(),commodity);
+                                        System.out.println("Commodity added to cart.");
+                                    }
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
             }
             break;
             case 3: {
-
+                System.out.println(consumerController.commoditiesBought(consumer));
+                System.out.println("1.Comment request\t2.rate");
+                String command = input.nextLine();
+                switch (command) {
+                    case "1": {
+                        int num =-1;
+                        while(num>=0&&num<consumer.getCommoditiesBought().size()){
+                            System.out.println("Enter commodity number: ");
+                            num= input.nextInt();
+                            input.nextLine();
+                        }
+                        System.out.println("Enter your comment: ");
+                        String comment = input.nextLine();
+                        consumerController.addCommentRequest(consumer.getCommoditiesBought().get(num - 1), consumer, comment);
+                        System.out.println("Comment request successfully submitted.");
+                    }
+                    break;
+                    case "2": {
+                        System.out.println("Enter commodity number: ");
+                        int num = input.nextInt();
+                        input.nextLine();
+                        int rating = 0;
+                        while (!(rating <= 6 && rating >= 1)) {
+                            System.out.println("Enter a rating within 1 and 5: ");
+                            rating = input.nextInt();
+                            input.nextLine();
+                        }
+                        consumerController.addRating(consumer.getUsername(), rating, consumer.getCommoditiesBought().get(num - 1));
+                    }
+                    break;
+                }
+            }
+            break;
+            case 4:{
+                System.out.println("Enter credit card details in one line(CardNumber CVV2 Password):");
+                String card= input.nextLine();
+                String[] cardDetails=card.split(" ");
+                if(cardDetails.length==3){
+                    while (!creditCardPattern.matcher(cardDetails[0]).matches()||!cvv2Pattern.matcher(cardDetails[1]).matches()||!cardPasswordPattern.matcher(cardDetails[2]).matches()){
+                        System.out.println("Enter credit card details in one line(CardNumber CVV2 Password):");
+                        card= input.nextLine();
+                        cardDetails=card.split(" ");
+                    }
+                    System.out.println("Enter the amount you wish to add to your balance: ");
+                    double amount= input.nextDouble();
+                    input.nextLine();
+                    consumerController.chargeRequest(consumer.getUsername(),new CreditCard(cardDetails[0],cardDetails[1],cardDetails[2]),amount);
+                    System.out.println("Charge request submitted.");
+                }
+            }
+            break;
+            case 5:{
+                int page = 1;
+                boolean exit = false;
+                int pageCount = (int) Math.ceil((double) consumer.getCart().size() / 10);
+                while (!exit) {
+                    System.out.println(consumerController.getCart(consumer.getUsername(),page));
+                    if (page != pageCount && page != 1) {
+                        System.out.println("1.Last page\t2.Next page\t3.quit");
+                        int pageCommand = input.nextInt();
+                        input.nextLine();
+                        switch (pageCommand) {
+                            case 1:
+                                page--;
+                                break;
+                            case 2:
+                                page++;
+                                break;
+                            case 3:
+                                exit = true;
+                                break;
+                        }
+                        continue;
+                    }
+                    if (page == 1 && page != pageCount) {
+                        System.out.println("1.Next page\t2.quit");
+                        int pageCommand = input.nextInt();
+                        input.nextLine();
+                        if (pageCommand == 1) {
+                            page++;
+                            continue;
+                        }
+                        if (pageCommand == 2) {
+                            exit = true;
+                        }
+                    }
+                    if (page == pageCount && page != 1) {
+                        System.out.println("1.last page\t2.quit");
+                        int pageCommand = input.nextInt();
+                        input.nextLine();
+                        if (pageCommand == 1) {
+                            page--;
+                            continue;
+                        }
+                        if (pageCommand == 2) {
+                            exit = true;
+                        }
+                    }
+                    if (page == 1 && page == pageCount) {
+                        System.out.println("1.quit");
+                        int pageCommand = input.nextInt();
+                        input.nextLine();
+                        if (pageCommand == 1) {
+                            exit = true;
+                        }
+                    }
+                }
+            }
+            break;
+            case 6:{
+                boolean bool=consumerController.buyCommodities(consumer.getUsername());
+                if(bool){
+                    System.out.println("Thank you for your purchase receipt added.");
+                    Receipt receipt=new Receipt("4/4/2023",consumer.getCart());
+                    consumer.getShoppingHistory().add(receipt);
+                    System.out.println(receipt);
+                }
             }
             break;
         }
-
     }
 
     public String consumerCommands() {
         StringBuilder commands = new StringBuilder();
-        commands.append("1.Edit info").append("\n2.Show commodities").append("\n3.Show commodities bought");
+        commands.append("1.Edit info\t2.Show commodities\t3.Show commodities bought\n4.Increase balance\t5.View cart");
+        commands.append("\t6.Finalize purchase");
         return commands.toString();
     }
 
@@ -163,112 +374,86 @@ public class ConsumerPanel {
         return exit;
     }
 
-    private void filters(String pageCommand) {
-        for (Commodity commodity : consumerController.getCommodities()) {
-            if (commodity.getID().equals(pageCommand)) {
-                System.out.println("2.filter by availability\t3.filter by price\t4.filter by rating\t5.filter by category\t6.filter by name fragment");
-                System.out.println("7.remove availability filter\t8.remove price filter\t9.remove rating filter\t10.remove category filter\t11.remove name filter");
-                String command2 = input.next();
-                switch (command2) {
-                    case "1": {
-                        consumer.getCart().add(commodity);
-                        System.out.println("Commodity " + pageCommand + " added to cart.");
-                    }
-                    break;
-                    case "2": {
-                        filterByAvailability = true;
-                    }
-                    break;
-                    case "3": {
-                        filterByPrice = true;
-                        System.out.println("Enter the low price: ");
-                        priceLow = input.nextInt();
-                        System.out.println("Enter the high price: ");
-                        priceHigh = input.nextInt();
-                    }
-                    break;
-                    case "4": {
-                        filterByRating = true;
-                        System.out.println("Enter the low rating: ");
-                        priceLow = input.nextInt();
-                        System.out.println("Enter the high rating: ");
-                        priceHigh = input.nextInt();
-                    }
-                    break;
-                    case "5": {
-                        filterByCategory = true;
-                        System.out.println("1.Comestible\t2.Digital\t3.Stationery\t4.Vehicle");
-                        int command3 = input.nextInt();
-                        switch (command3) {
-                            case 1: {
-                                category = Category.COMESTIBLE;
-                            }
-                            break;
-                            case 2: {
-                                category = Category.DIGITAL;
-                            }
-                            break;
-                            case 3: {
-                                category = Category.STATIONERY;
-                            }
-                            break;
-                            case 4: {
-                                category = Category.VEHICLE;
-                            }
-                            break;
+    private void filters() {
+        System.out.println("1.filter by availability\t2.filter by price\t3.filter by rating\t4.filter by category\t5.filter by name fragment");
+        System.out.println("6.remove availability filter\t7.remove price filter\t8.remove rating filter\t9.remove category filter\t10.remove name filter");
+        String command2 = input.nextLine();
+        switch (command2) {
+            case "1": {
+                filterByAvailability = true;
+            }
+            break;
+            case "2": {
+                filterByPrice = true;
+                System.out.println("Enter the low price: ");
+                priceLow = input.nextInt();
+                System.out.println("Enter the high price: ");
+                priceHigh = input.nextInt();
+            }
+            break;
+            case "3": {
+                filterByRating = true;
+                System.out.println("Enter the low rating: ");
+                priceLow = input.nextInt();
+                System.out.println("Enter the high rating: ");
+                priceHigh = input.nextInt();
+            }
+            break;
+            case "4": {
+                filterByCategory = true;
+                while (category == null) {
+                    System.out.println("1.Comestible\t2.Digital\t3.Stationery\t4.Vehicle");
+                    int command3 = input.nextInt();
+                    input.nextLine();
+                    switch (command3) {
+                        case 1: {
+                            category = Category.COMESTIBLE;
                         }
+                        break;
+                        case 2: {
+                            category = Category.DIGITAL;
+                        }
+                        break;
+                        case 3: {
+                            category = Category.STATIONERY;
+                        }
+                        break;
+                        case 4: {
+                            category = Category.VEHICLE;
+                        }
+                        break;
                     }
-                    break;
-                    case "6": {
-                        filterByNameFragment = true;
-                        System.out.println("Enter name fragment: ");
-                        nameFragment = input.next();
-                    }
-                    break;
-                    case "7": {
-                        filterByAvailability = false;
-                    }
-                    break;
-                    case "8": {
-                        filterByPrice = false;
-                    }
-                    break;
-                    case "9": {
-                        filterByRating = false;
-                    }
-                    break;
-                    case "10": {
-                        filterByCategory = false;
-                        category=null;
-                    }
-                    break;
-                    case "11": {
-                        filterByNameFragment = false;
-                    }
-                    break;
                 }
             }
+            break;
+            case "5": {
+                filterByNameFragment = true;
+                System.out.println("Enter name fragment: ");
+                nameFragment = input.nextLine();
+            }
+            break;
+            case "6": {
+                filterByAvailability = false;
+            }
+            break;
+            case "7": {
+                filterByPrice = false;
+            }
+            break;
+            case "8": {
+                filterByRating = false;
+            }
+            break;
+            case "9": {
+                filterByCategory = false;
+                category = null;
+            }
+            break;
+            case "10": {
+                filterByNameFragment = false;
+            }
+            break;
         }
     }
-    private Category getCategory(String str){
-        Category category=null;
-        switch (str.toUpperCase()){
-            case "COMESTIBLE":{
-                category=Category.COMESTIBLE;
-            }
-            break;
-            case "DIGITAL":{
-                category=Category.DIGITAL;
-            }
-            break;
-            case "STATIONERY":{
-                category=Category.STATIONERY;
-            }
-            break;
-            case "VEHICLE":{
-                category=Category.VEHICLE;
-            }
-        }
-        return category;
-    }
+
 }

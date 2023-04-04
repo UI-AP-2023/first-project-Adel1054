@@ -10,7 +10,6 @@ public class Consumer extends User {
     private final ArrayList<Receipt> shoppingHistory;
     private final ArrayList<Rating> ratings;
     private final ArrayList<Commodity> commoditiesBought;
-    private final ArrayList<CreditCard> creditCards;
     private final ArrayList<Comment> comments;
     private double balance;
 
@@ -18,7 +17,6 @@ public class Consumer extends User {
         super(request.getUsername(), request.getPassword(), request.getEmail(), request.getPhoneNumber());
         cart = new ArrayList<>();
         shoppingHistory = new ArrayList<>();
-        creditCards = new ArrayList<>();
         comments=new ArrayList<>();
         commoditiesBought=new ArrayList<>();
         ratings=new ArrayList<>();
@@ -37,52 +35,8 @@ public class Consumer extends User {
         return cart;
     }
 
-    @Override
-    public String getPhoneNumber() {
-        return super.getPhoneNumber();
-    }
-
-    public ArrayList<CreditCard> getCreditCards() {
-        return creditCards;
-    }
-
-    @Override
-    public String getEmail() {
-        return super.getEmail();
-    }
-
-    @Override
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return super.getUsername();
-    }
-
     public void changeBalance(double change) {
         balance += change;
-    }
-
-    @Override
-    public void setEmail(String email) {
-        super.setEmail(email);
-    }
-
-    @Override
-    public void setPassword(String password) {
-        super.setPassword(password);
-    }
-
-    @Override
-    public void setPhoneNumber(String phoneNumber) {
-        super.setPhoneNumber(phoneNumber);
-    }
-
-    @Override
-    public void setUsername(String username) {
-        super.setUsername(username);
     }
 
     public ArrayList<Commodity> getCommoditiesBought() {

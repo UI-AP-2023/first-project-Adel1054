@@ -46,53 +46,8 @@ public class ConsumerController {
         return comments;
     }
 
-    public ArrayList<CommentRequest> getCommentRequests() {
-        return commentRequests;
-    }
-
-    public void changeUsername(String username, String password, String newUsername) {
-        for (Consumer consumer : consumers) {
-            if (consumer.getUsername().equals(username) && consumer.getPassword().equals(password)) {
-                consumer.setUsername(newUsername);
-            }
-        }
-    }
-
-    public void changePassword(String username, String password, String newPassword) {
-        for (Consumer consumer : consumers) {
-            if (consumer.getUsername().equals(username) && consumer.getPassword().equals(password)) {
-                consumer.setPassword(newPassword);
-            }
-        }
-    }
-
-    public void changeEmail(String username, String password, String newEmail) {
-        for (Consumer consumer : consumers) {
-            if (consumer.getUsername().equals(username) && consumer.getPassword().equals(password)) {
-                consumer.setEmail(newEmail);
-            }
-        }
-    }
-
-    public void changePhoneNumber(String username, String password, String newPhoneNumber) {
-        for (Consumer consumer : consumers) {
-            if (consumer.getUsername().equals(username) && consumer.getPassword().equals(password)) {
-                consumer.setPhoneNumber(newPhoneNumber);
-            }
-        }
-    }
-
     public void addCommentRequest(Commodity commodity, Consumer consumer, String text) {
         commentRequests.add(new CommentRequest(commodity, consumer, text));
-    }
-
-    public void addCreditCard(String username, String cardNumber, String CVV2, String password) {
-        for (Consumer consumer : consumers) {
-            if (consumer.getUsername().equals(username)) {
-                consumer.getCreditCards().add(new CreditCard(cardNumber, CVV2, password));
-                break;
-            }
-        }
     }
 
     public void addRating(String username, int userRating, Commodity commodity) {
@@ -130,7 +85,7 @@ public class ConsumerController {
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
                 if (consumer.getCommoditiesBought().size() >= (page - 1) * 10) {
-                    int row = 1;
+                    int row = (page - 1) * 10 + 1;
                     if (consumer.getCommoditiesBought().size() >= page * 10) {
                         for (int i = (page - 1) * 10; i < page * 10; i++) {
                             commodities.append(row++);
@@ -186,7 +141,7 @@ public class ConsumerController {
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
                 if (consumer.getCart().size() >= (page - 1) * 10) {
-                    int row = 1;
+                    int row = (page - 1) * 10 + 1;
                     if (consumer.getCart().size() >= page * 10) {
                         for (int i = (page - 1) * 10; i < page * 10; i++) {
                             commodities.append(row++);
@@ -209,39 +164,24 @@ public class ConsumerController {
         return commodities.toString();
     }
 
-    public String getAllCommodities(ArrayList<Commodity> commodities, int page) {
-        StringBuilder commodities1 = new StringBuilder();
-        if (commodities.size() >= (page - 1) * 10) {
-            int row = 1;
-            if (commodities.size() >= page * 10) {
-                for (int i = (page - 1) * 10; i < page * 10; i++) {
-                    commodities1.append(row++);
-                    commodities1.append(".");
-                    commodities1.append(commodities.get(i).toString());
-                    commodities1.append("\n");
-                }
-            } else {
-                for (int i = (page - 1) * 10; i < commodities.size(); i++) {
-                    commodities1.append(row++);
-                    commodities1.append(".");
-                    commodities1.append(commodities.get(i).toString());
-                    commodities1.append("\n");
-                }
-            }
-        }
-        return commodities1.toString();
-    }
-
-    public void buyCommodities(String username, ArrayList<Commodity> cart) {
+    public boolean buyCommodities(String username) {
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
-                for (Commodity commodity : cart) {
-                    consumer.getCommoditiesBought().add(commodity);
-                    commodity.changeAvailableCount(-1);
+                double totalPrice = 0;
+                for (Commodity commodity : consumer.getCart()) {
+                    totalPrice += commodity.getPrice();
+                }
+                if (consumer.getBalance() >= totalPrice) {
+                    for (Commodity commodity : consumer.getCart()) {
+                        consumer.getCommoditiesBought().add(commodity);
+                        commodity.changeAvailableCount(-1);
+                    }
+                    return true;
                 }
                 break;
             }
         }
+        return false;
     }
 
     public void chargeRequest(String username, CreditCard creditCard, double amountCharged) {
@@ -276,7 +216,7 @@ public class ConsumerController {
     public ArrayList<Commodity> filterByPrice(double price1, double price2, ArrayList<Commodity> commodities) {
         ArrayList<Commodity> filteredCommodities = new ArrayList<>();
         for (Commodity commodity : commodities) {
-            if (commodity.getAverageRating() <= price2 && commodity.getAverageRating() >= price1) {
+            if (commodity.getPrice() <= price2 && commodity.getPrice() >= price1) {
                 filteredCommodities.add(commodity);
             }
         }
@@ -312,7 +252,7 @@ public class ConsumerController {
     public String showCommodities(int page, ArrayList<Commodity> commodities) {
         StringBuilder commoditiesList = new StringBuilder();
         if (commodities.size() >= (page - 1) * 10) {
-            int number = 1;
+            int number = (page - 1) * 10 + 1;
             if (commodities.size() >= page * 10) {
                 for (int i = (page - 1) * 10; i < page * 10; i++) {
                     commoditiesList.append(number++).append(".").append(commodities.get(i)).append("\n");
@@ -371,5 +311,14 @@ public class ConsumerController {
             }
         }
         return ratings.toString();
+    }
+
+    public String commoditiesBought(Consumer consumer) {
+        StringBuilder commodities = new StringBuilder();
+        int number = 1;
+        for (Commodity commodity : consumer.getCommoditiesBought()) {
+            commodities.append(number).append(".").append(commodity).append("\n");
+        }
+        return commodities.toString();
     }
 }

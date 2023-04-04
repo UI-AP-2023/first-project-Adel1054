@@ -177,6 +177,6 @@ public abstract class Commodity {
 
     @Override
     public String toString() {
-        return "Name: " + name + " ID: " + ID + " Category: " + category + " Price: " + price + "$"+" Number of comments: "+comments.size()+" Number of ratings: " + getRatingsCount() + " Average rating: " + averageRating;
+        return "Name: " + name + " ID: " + ID + " Category: " + category + " Price: " + price + "$"+" Available count: "+availableCount+" Number of comments: "+comments.size()+" Number of ratings: " + getRatingsCount() + " Average rating: " + averageRating;
     }
 }

@@ -14,26 +14,6 @@ public class Admin extends User {
         super(username, password, email, phoneNumber);
     }
 
-    @Override
-    public String getUsername() {
-        return super.getUsername();
-    }
-
-    @Override
-    public String getPassword() {
-        return super.getPassword();
-    }
-
-    @Override
-    public String getEmail() {
-        return super.getEmail();
-    }
-
-    @Override
-    public String getPhoneNumber() {
-        return super.getPhoneNumber();
-    }
-
     public static void makeAdmin(){
         admin=new Admin("admin","admin","admin@admin.admin","0992299292");
     }

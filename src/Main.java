@@ -3,6 +3,7 @@ import view.MainPanel;
 public class Main {
     public static void main(String[] args) {
         MainPanel mainPanel=new MainPanel();
+        System.out.println("-----------------Welcome to the online shop-----------------");
         while(!MainPanel.shouldExit()){
             mainPanel.mainPage();
         }

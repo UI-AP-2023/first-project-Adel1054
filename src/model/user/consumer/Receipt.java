@@ -11,7 +11,7 @@ public class Receipt {
     private final ArrayList<Commodity> commodities;
     static private int receiptCount=0;
 
-    Receipt(String dateOfPurchase, ArrayList<Commodity> commodities) {
+    public Receipt(String dateOfPurchase, ArrayList<Commodity> commodities) {
         ID=IDBuilder();
         this.commodities = commodities;
         sumPaid = 0;
