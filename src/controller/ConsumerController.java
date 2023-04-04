@@ -309,21 +309,21 @@ public class ConsumerController {
         return commodities.size();
     }
 
-    public String showCommodities(int page) {
-        StringBuilder commodities = new StringBuilder();
-        if (this.commodities.size() >= (page - 1) * 10) {
+    public String showCommodities(int page, ArrayList<Commodity> commodities) {
+        StringBuilder commoditiesList = new StringBuilder();
+        if (commodities.size() >= (page - 1) * 10) {
             int number = 1;
-            if (this.commodities.size() >= page * 10) {
+            if (commodities.size() >= page * 10) {
                 for (int i = (page - 1) * 10; i < page * 10; i++) {
-                    commodities.append(number++).append(".").append(this.commodities.get(i)).append("\n");
+                    commoditiesList.append(number++).append(".").append(commodities.get(i)).append("\n");
                 }
             } else {
-                for (int i = (page - 1) * 10; i < this.commodities.size(); i++) {
-                    commodities.append(number++).append(".").append(this.commodities.get(i)).append("\n");
+                for (int i = (page - 1) * 10; i < commodities.size(); i++) {
+                    commoditiesList.append(number++).append(".").append(commodities.get(i)).append("\n");
                 }
             }
         }
-        return commodities.toString();
+        return commoditiesList.toString();
     }
 
     public String commodityPage(String commodityID) {
@@ -344,6 +344,10 @@ public class ConsumerController {
             }
         }
         return page.toString();
+    }
+
+    public ArrayList<Commodity> getCommodities() {
+        return commodities;
     }
 
     public String getRatingsOfCommodity(String ID, int page) {

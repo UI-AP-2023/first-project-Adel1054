@@ -40,12 +40,13 @@ public class MainPanel {
     public void mainPage() {
         System.out.println("1.ConsumerLogin\t2.AdminLogin\t3.SeeCommodities\t4.Signup");
         int command1 = input.nextInt();
+        input.nextLine();
         switch (command1) {
             case 1: {
                 System.out.println("Enter username:");
-                String username = input.next();
+                String username = input.nextLine();
                 System.out.println("Enter password:");
-                String password = input.next();
+                String password = input.nextLine();
                 for (Consumer consumer : consumers) {
                     if (consumer.getUsername().equals(username) && consumer.getPassword().equals(password)) {
                         ConsumerPanel consumerPanel = new ConsumerPanel(consumers, commodities, comments, signupRequests, commentRequests, chargeRequests, consumer);
@@ -59,9 +60,9 @@ public class MainPanel {
             break;
             case 2: {
                 System.out.print("Enter Admin username: ");
-                String inputUsername = input.next();
+                String inputUsername = input.nextLine();
                 System.out.print("Enter Admin password: ");
-                String inputPassword = input.next();
+                String inputPassword = input.nextLine();
                 AdminPanel adminPanel = new AdminPanel(consumers, commodities, comments, signupRequests, commentRequests, chargeRequests);
                 if (adminPanel.login(inputUsername, inputPassword)) {
                     while (!adminPanel.shouldExit()) {
@@ -74,44 +75,44 @@ public class MainPanel {
                 break;
             case 4: {
                 System.out.print("Enter a unique username: ");
-                String username = input.next();
+                String username = input.nextLine();
                 while (!usernamePattern.matcher(username).matches() || usernames.contains(username)) {
                     if(!usernamePattern.matcher(username).matches()){
-                        System.out.print("Enter a valid username: ");
+                        System.out.print("Enter username between 6 and 16 letters: ");
                     }
                     else {
-                        System.out.print("Username already taken: ");
+                        System.out.print("Username already taken. Choose another username: ");
                     }
-                    username= input.next();
+                    username= input.nextLine();
                 }
                 System.out.print("Create a password for the account: ");
-                String password = input.next();
+                String password = input.nextLine();
                 while (!passwordPattern.matcher(password).matches()){
                     System.out.println("Enter a valid password between 8 and 14 letters using special characters and lower and upper case letters and numbers:");
-                    password= input.next();
+                    password= input.nextLine();
                 }
                 System.out.print("Enter a unique email address: ");
-                String email= input.next();
+                String email= input.nextLine();
                 while (!emailPattern.matcher(email).matches()||emails.contains(email)){
                     if(!emailPattern.matcher(email).matches()){
                         System.out.println("Enter a valid email address:");
-                        email= input.next();
+                        email= input.nextLine();
                     }
                     else {
-                        System.out.println("Email already taken. enter another email: ");
-                        email= input.next();
+                        System.out.println("Email already taken. Enter another email: ");
+                        email= input.nextLine();
                     }
                 }
                 System.out.print("Enter a unique phone number: ");
-                String phoneNumber= input.next();
+                String phoneNumber= input.nextLine();
                 while (!phoneNumberPattern.matcher(phoneNumber).matches()||phoneNumbers.contains(phoneNumber)){
                     if(!phoneNumberPattern.matcher(phoneNumber).matches()){
                         System.out.println("Enter a valid phoneNumbers starting with '09':");
-                        phoneNumber= input.next();
+                        phoneNumber= input.nextLine();
                     }
                     else {
                         System.out.println("Phone number already taken. enter another phone number: ");
-                        phoneNumber= input.next();
+                        phoneNumber= input.nextLine();
                     }
                 }
                 signupRequests.add(new SignupRequest(username,password,email,phoneNumber));
@@ -120,7 +121,6 @@ public class MainPanel {
             break;
         }
     }
-
 
     public static boolean shouldExit() {
         return exit;

@@ -97,6 +97,7 @@ public class AdminPanel {
                     if (page != pageCount && page != 1) {
                         System.out.println("1.Last page\t2.Next page\t3.quit");
                         int pageCommand = input.nextInt();
+                        input.nextLine();
                         switch (pageCommand) {
                             case 1:
                                 page--;
@@ -113,6 +114,7 @@ public class AdminPanel {
                     if (page == 1 && page != pageCount) {
                         System.out.println("1.Next page\t2.quit");
                         int pageCommand = input.nextInt();
+                        input.nextLine();
                         if (pageCommand == 1) {
                             page++;
                             continue;
@@ -124,6 +126,7 @@ public class AdminPanel {
                     if (page == pageCount && page != 1) {
                         System.out.println("1.last page\t2.quit");
                         int pageCommand = input.nextInt();
+                        input.nextLine();
                         if (pageCommand == 1) {
                             page--;
                             continue;
@@ -135,6 +138,7 @@ public class AdminPanel {
                     if (page == 1 && page == pageCount) {
                         System.out.println("1.quit");
                         int pageCommand = input.nextInt();
+                        input.nextLine();
                         if (pageCommand == 1) {
                             exit = true;
                         }
@@ -289,7 +293,7 @@ public class AdminPanel {
                     System.out.println(adminController.showSignupRequests(page));
                     if (page != pageCount && page != 1) {
                         System.out.println("1.Last page\t2.Next page\t3.quit\nTo accept request enter the username");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             switch (Integer.parseInt(pageCommand)) {
                                 case 1:
@@ -314,7 +318,7 @@ public class AdminPanel {
                     }
                     if (page == 1 && page != pageCount) {
                         System.out.println("1.Next page\t2.quit\nTo accept request enter the username");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
                                 page++;
@@ -330,7 +334,7 @@ public class AdminPanel {
                     }
                     if (page == pageCount && page != 1) {
                         System.out.println("1.last page\t2.quit\nTo accept request enter the username");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
                                 page--;
@@ -350,7 +354,7 @@ public class AdminPanel {
                     }
                     if (page == 1 && page == pageCount) {
                         System.out.println("1.quit\nTo accept request enter the username");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
                                 exit = true;
@@ -375,7 +379,7 @@ public class AdminPanel {
                     System.out.println(adminController.showCommentRequests(page));
                     if (page != pageCount && page != 1) {
                         System.out.println("1.Last page\t2.Next page\t3.quit\tTo accept request enter the username and commodity name");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             switch (Integer.parseInt(pageCommand)) {
                                 case 1:
@@ -399,7 +403,7 @@ public class AdminPanel {
                     }
                     if (page == 1 && page != pageCount) {
                         System.out.println("1.Next page\t2.quit\tTo accept request enter the username and commodity name");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
                                 page++;
@@ -437,7 +441,7 @@ public class AdminPanel {
                     }
                     if (page == 1 && page == pageCount) {
                         System.out.println("1.quit\tTo accept request enter the username and commodity name");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
                                 exit = true;
@@ -460,7 +464,7 @@ public class AdminPanel {
                     System.out.println(adminController.showChargeRequests(page));
                     if (page != pageCount && page != 1) {
                         System.out.println("1.Last page\t2.Next page\t3.quit\nTo accept request enter the username and requested amount");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             switch (Integer.parseInt(pageCommand)) {
                                 case 1:
@@ -484,7 +488,7 @@ public class AdminPanel {
                     }
                     if (page == 1 && page != pageCount) {
                         System.out.println("1.Next page\t2.quit\nTo accept request enter the username and requested amount");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
                                 page++;
@@ -522,7 +526,7 @@ public class AdminPanel {
                     }
                     if (page == 1 && page == pageCount) {
                         System.out.println("1.quit\nTo accept request enter the username and requested amount");
-                        String pageCommand = input.next();
+                        String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             if (Integer.parseInt(pageCommand) == 1) {
                                 exit = true;
@@ -581,6 +585,7 @@ public class AdminPanel {
                     case "AvailableCount": {
                         System.out.println("Enter new available count: ");
                         String newAvailableCount = input.next();
+                        input.nextLine();
                         commodity.setAvailableCount(Integer.parseInt(newAvailableCount));
                         System.out.println("New available count for commodity " + commodityID + " is: " + newAvailableCount + ".");
                     }
@@ -588,6 +593,7 @@ public class AdminPanel {
                     case "Name": {
                         System.out.println("Enter new name: ");
                         String newName = input.next();
+                        input.nextLine();
                         commodity.setName(newName);
                         commodity.setID();
                         System.out.println("New name for commodity " + commodityID + " is: " + newName + ".");
@@ -596,6 +602,7 @@ public class AdminPanel {
                     case "Price": {
                         System.out.println("Enter new price: ");
                         String newPrice = input.next();
+                        input.nextLine();
                         commodity.setPrice(Double.parseDouble(newPrice));
                         System.out.println("New price for commodity " + commodityID + " is: " + newPrice + ".");
                     }
@@ -604,7 +611,6 @@ public class AdminPanel {
                 break;
             }
         }
-
     }
 
     public boolean login(String inputUsername, String inputPassword) {
