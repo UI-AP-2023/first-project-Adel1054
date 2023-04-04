@@ -75,8 +75,8 @@ public class MainPanel {
                         if(command.equals("1")) {
                             for (Commodity commodity : cart) {
                                 consumer.getCart().add(commodity);
-                                cart.remove(commodity);
                             }
+                            cart.clear();
                         }
                         ConsumerPanel consumerPanel = new ConsumerPanel(consumers, commodities, comments, signupRequests, commentRequests, chargeRequests, consumer);
                         while (!consumerPanel.shouldExit()) {

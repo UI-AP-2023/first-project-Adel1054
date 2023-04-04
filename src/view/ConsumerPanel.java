@@ -360,6 +360,10 @@ public class ConsumerPanel {
                 }
             }
             break;
+            case 7:{
+                exit=true;
+            }
+            break;
         }
     }
 
