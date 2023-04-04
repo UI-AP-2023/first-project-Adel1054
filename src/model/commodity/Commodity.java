@@ -6,7 +6,7 @@ import model.user.consumer.Rating;
 import java.util.ArrayList;
 
 public abstract class Commodity {
-    private final String ID;
+    private String ID;
     private String name;
     private double price;
     private int availableCount;
@@ -171,8 +171,12 @@ public abstract class Commodity {
         return ratings.size();
     }
 
+    public void setID() {
+        this.ID = IDBuilder();
+    }
+
     @Override
     public String toString() {
-        return "Name: " + name + " ID: " + ID + " Category: " + category + " Number of ratings: " + getRatingsCount() + " Average rating: " + averageRating + " Price: " + price + "$";
+        return "Name: " + name + " ID: " + ID + " Category: " + category + " Price: " + price + "$"+" Number of comments: "+comments.size()+" Number of ratings: " + getRatingsCount() + " Average rating: " + averageRating;
     }
 }

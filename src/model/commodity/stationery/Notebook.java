@@ -15,61 +15,6 @@ public class Notebook extends StationerySupply {
         this.pageType = pageType;
     }
 
-    @Override
-    public double getAverageRating() {
-        return super.getAverageRating();
-    }
-
-    @Override
-    public Category getCategory() {
-        return super.getCategory();
-    }
-
-    @Override
-    public String getCountry() {
-        return super.getCountry();
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public double getPrice() {
-        return super.getPrice();
-    }
-
-    @Override
-    public void setAvailableCount(int availableCount) {
-        super.setAvailableCount(availableCount);
-    }
-
-    @Override
-    public void setName(String name) {
-        super.setName(name);
-    }
-
-    @Override
-    public void setPrice(double price) {
-        super.setPrice(price);
-    }
-
-    @Override
-    public int getAvailableCount() {
-        return super.getAvailableCount();
-    }
-
-    @Override
-    public String getID() {
-        return super.getID();
-    }
-
-    @Override
-    public void setAverageRating() {
-        super.setAverageRating();
-    }
-
     public String getPageType() {
         return pageType;
     }
@@ -77,17 +22,6 @@ public class Notebook extends StationerySupply {
     public int getNumberOfPages() {
         return numberOfPages;
     }
-
-    @Override
-    public ArrayList<Rating> getRatings() {
-        return super.getRatings();
-    }
-
-    @Override
-    public void changeAvailableCount(int change) {
-        super.changeAvailableCount(change);
-    }
-
 
     @Override
     public String toString() {

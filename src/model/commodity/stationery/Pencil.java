@@ -17,73 +17,8 @@ public class Pencil extends StationerySupply {
         this.pencilType = pencilType;
     }
 
-    @Override
-    public double getAverageRating() {
-        return super.getAverageRating();
-    }
-
-    @Override
-    public Category getCategory() {
-        return super.getCategory();
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public String getID() {
-        return super.getID();
-    }
-
-    @Override
-    public double getPrice() {
-        return super.getPrice();
-    }
-
-    @Override
-    public String getCountry() {
-        return super.getCountry();
-    }
-
-    @Override
-    public void setAverageRating() {
-        super.setAverageRating();
-    }
-
-    @Override
-    public void setAvailableCount(int availableCount) {
-        super.setAvailableCount(availableCount);
-    }
-
-    @Override
-    public void setName(String name) {
-        super.setName(name);
-    }
-
-    @Override
-    public void setPrice(double price) {
-        super.setPrice(price);
-    }
-
-    @Override
-    public int getAvailableCount() {
-        return super.getAvailableCount();
-    }
-
     public PencilType getPencilType() {
         return pencilType;
-    }
-
-    @Override
-    public ArrayList<Rating> getRatings() {
-        return super.getRatings();
-    }
-
-    @Override
-    public void changeAvailableCount(int change) {
-        super.changeAvailableCount(change);
     }
 
     @Override

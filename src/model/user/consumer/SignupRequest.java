@@ -6,11 +6,11 @@ public class SignupRequest {
     private final String email;
     private final String phoneNumber;
 
-    public SignupRequest(String username, String password, String firstname, String surname) {
+    public SignupRequest(String username, String password, String email, String phoneNumber) {
         this.username = username;
         this.password = password;
-        this.email = firstname;
-        this.phoneNumber = surname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getPassword() {
@@ -31,6 +31,6 @@ public class SignupRequest {
 
     @Override
     public String toString() {
-        return "Username: " + username + "\n" + "Full name: " + email + " " + phoneNumber;
+        return "Username: " + username +" Email address: " + email + " Phone number: " + phoneNumber;
     }
 }

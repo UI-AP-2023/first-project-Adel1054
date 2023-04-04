@@ -13,73 +13,8 @@ public class Pen extends StationerySupply {
         this.colour = colour;
     }
 
-    @Override
-    public double getAverageRating() {
-        return super.getAverageRating();
-    }
-
-    @Override
-    public String getCountry() {
-        return super.getCountry();
-    }
-
-    @Override
-    public Category getCategory() {
-        return super.getCategory();
-    }
-
-    @Override
-    public String getID() {
-        return super.getID();
-    }
-
-    @Override
-    public double getPrice() {
-        return super.getPrice();
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public void setAverageRating() {
-        super.setAverageRating();
-    }
-
-    @Override
-    public int getAvailableCount() {
-        return super.getAvailableCount();
-    }
-
-    @Override
-    public void setAvailableCount(int availableCount) {
-        super.setAvailableCount(availableCount);
-    }
-
-    @Override
-    public void setPrice(double price) {
-        super.setPrice(price);
-    }
-
-    @Override
-    public void setName(String name) {
-        super.setName(name);
-    }
-
     public String getColour() {
         return colour;
-    }
-
-    @Override
-    public ArrayList<Rating> getRatings() {
-        return super.getRatings();
-    }
-
-    @Override
-    public void changeAvailableCount(int change) {
-        super.changeAvailableCount(change);
     }
 
     @Override

@@ -5,6 +5,7 @@ import model.commodity.Commodity;
 import model.user.consumer.*;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConsumerController {
@@ -99,6 +100,7 @@ public class ConsumerController {
             if (consumer.getUsername().equals(username)) {
                 if (consumer.getCommoditiesBought().contains(commodity)) {
                     consumer.getRatings().add(new Rating(userRating, commodity));
+                    commodity.setAverageRating();
                     break;
                 }
             }
@@ -293,12 +295,55 @@ public class ConsumerController {
 
     public ArrayList<Commodity> filterByNameFragment(String fragment, ArrayList<Commodity> commodities) {
         ArrayList<Commodity> filteredCommodities = new ArrayList<>();
+        Pattern pattern = Pattern.compile(fragment);
         for (Commodity commodity : commodities) {
-            if (Pattern.matches("\\w" + fragment, "")) {
+            Matcher matcher = pattern.matcher(commodity.getName());
+            if (matcher.find()) {
                 filteredCommodities.add(commodity);
             }
         }
         return filteredCommodities;
+    }
+
+    public int getCommodityCount() {
+        return commodities.size();
+    }
+
+    public String showCommodities(int page) {
+        StringBuilder commodities = new StringBuilder();
+        if (this.commodities.size() >= (page - 1) * 10) {
+            int number = 1;
+            if (this.commodities.size() >= page * 10) {
+                for (int i = (page - 1) * 10; i < page * 10; i++) {
+                    commodities.append(number++).append(".").append(this.commodities.get(i)).append("\n");
+                }
+            } else {
+                for (int i = (page - 1) * 10; i < this.commodities.size(); i++) {
+                    commodities.append(number++).append(".").append(this.commodities.get(i)).append("\n");
+                }
+            }
+        }
+        return commodities.toString();
+    }
+
+    public String commodityPage(String commodityID) {
+        StringBuilder page = new StringBuilder();
+        for (Commodity commodity : commodities) {
+            if (commodity.getID().equals(commodityID)) {
+                page.append(commodity).append("\n");
+                if (commodity.getComments().size() > 4) {
+                    for (int i = 0; i < 5; i++) {
+                        page.append(commodity.getComments().get(i));
+                    }
+                } else {
+                    for (int i = 0; i < commodity.getComments().size(); i++) {
+                        page.append(commodity.getComments().get(i));
+                    }
+                }
+                break;
+            }
+        }
+        return page.toString();
     }
 
     public String getRatingsOfCommodity(String ID, int page) {

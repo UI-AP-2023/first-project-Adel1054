@@ -15,77 +15,12 @@ public class Automobile extends Vehicle {
         this.motorVolume = motorVolume;
     }
 
-    @Override
-    public double getAverageRating() {
-        return super.getAverageRating();
-    }
-
-    @Override
-    public void setAvailableCount(int availableCount) {
-        super.setAvailableCount(availableCount);
-    }
-
-    @Override
-    public void setName(String name) {
-        super.setName(name);
-    }
-
-    @Override
-    public void setPrice(double price) {
-        super.setPrice(price);
-    }
-
-    @Override
-    public int getAvailableCount() {
-        return super.getAvailableCount();
-    }
-
-    @Override
-    public String getCompanyName() {
-        return super.getCompanyName();
-    }
-
-    @Override
-    public Category getCategory() {
-        return super.getCategory();
-    }
-
-    @Override
-    public double getPrice() {
-        return super.getPrice();
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public String getID() {
-        return super.getID();
-    }
-
-    @Override
-    public void setAverageRating() {
-        super.setAverageRating();
-    }
-
     public int getMotorVolume() {
         return motorVolume;
     }
 
     public boolean isAutomatic() {
         return isAutomatic;
-    }
-
-    @Override
-    public ArrayList<Rating> getRatings() {
-        return super.getRatings();
-    }
-
-    @Override
-    public void changeAvailableCount(int change) {
-        super.changeAvailableCount(change);
     }
 
     @Override
