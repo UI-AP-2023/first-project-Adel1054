@@ -127,7 +127,7 @@ public class ConsumerController {
                         for (int i = (page - 1) * 10; i < consumer.getShoppingHistory().size(); i++) {
                             commodities.append(row++);
                             commodities.append(".");
-                            commodities.append(consumer.getCommoditiesBought().get(i).toString());
+                            commodities.append(consumer.getShoppingHistory().get(i).toString());
                             commodities.append("\n");
                         }
                     }
