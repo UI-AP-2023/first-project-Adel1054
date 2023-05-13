@@ -9,7 +9,7 @@ public class Receipt {
     private final String dateOfPurchase;
     private double sumPaid;
     private final ArrayList<Commodity> commodities;
-    static private int receiptCount=0;
+    static private int receiptCount=1;
 
     public Receipt(String dateOfPurchase, ArrayList<Commodity> commodities) {
         ID=IDBuilder();

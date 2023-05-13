@@ -360,7 +360,64 @@ public class ConsumerPanel {
                 }
             }
             break;
-            case 7:{
+            case 7: {
+                int page = 1;
+                int pageCount = (int) Math.ceil((double) consumer.getShoppingHistory().size() / 10);
+                boolean exit = false;
+                while (!exit) {
+                    System.out.println(consumerController.getShoppingHistory(consumer.getUsername(), page));
+                    if (page != pageCount && page != 1) {
+                        System.out.println("1.Last page\t2.Next page\t3.quit");
+                        int pageCommand = input.nextInt();
+                        input.nextLine();
+                        switch (pageCommand) {
+                            case 1:
+                                page--;
+                                break;
+                            case 2:
+                                page++;
+                                break;
+                            case 3:
+                                exit = true;
+                                break;
+                        }
+                        continue;
+                    }
+                    if (page == 1 && page != pageCount) {
+                        System.out.println("1.Next page\t2.quit");
+                        int pageCommand = input.nextInt();
+                        input.nextLine();
+                        if (pageCommand == 1) {
+                            page++;
+                            continue;
+                        }
+                        if (pageCommand == 2) {
+                            exit = true;
+                        }
+                    }
+                    if (page == pageCount && page != 1) {
+                        System.out.println("1.last page\t2.quit");
+                        int pageCommand = input.nextInt();
+                        input.nextLine();
+                        if (pageCommand == 1) {
+                            page--;
+                            continue;
+                        }
+                        if (pageCommand == 2) {
+                            exit = true;
+                        }
+                    }
+                    if (page == 1 && page == pageCount) {
+                        System.out.println("1.quit");
+                        int pageCommand = input.nextInt();
+                        input.nextLine();
+                        if (pageCommand == 1) {
+                            exit = true;
+                        }
+                    }
+                }
+            }
+            case 8:{
                 exit=true;
             }
             break;
@@ -370,7 +427,7 @@ public class ConsumerPanel {
     public String consumerCommands() {
         StringBuilder commands = new StringBuilder();
         commands.append("1.Edit info\t2.Show commodities\t3.Show commodities bought\n4.Increase balance\t5.View cart");
-        commands.append("\t6.Finalize purchase");
+        commands.append("\t6.Finalize purchase\t7.Shopping history\t8.Exit");
         return commands.toString();
     }
 

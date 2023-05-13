@@ -10,6 +10,7 @@ public class CreditCard {
         this.cardNumber = cardNumber;
         this.CVV2 = CVV2;
         this.password = password;
+        balance=100000;
     }
 
     public String getPassword() {

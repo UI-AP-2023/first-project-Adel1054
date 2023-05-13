@@ -5,7 +5,11 @@ public class Main {
         MainPanel mainPanel=new MainPanel();
         System.out.println("-----------------Welcome to the online shop-----------------");
         while(!MainPanel.shouldExit()){
-            mainPanel.mainPage();
+            try {
+                mainPanel.mainPage();
+            }catch (Exception exception){
+                System.out.println(exception.getMessage());
+            }
         }
     }
 }

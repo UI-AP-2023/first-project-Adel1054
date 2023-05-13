@@ -54,7 +54,9 @@ public class ConsumerController {
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
                 if (consumer.getCommoditiesBought().contains(commodity)) {
-                    consumer.getRatings().add(new Rating(userRating, commodity));
+                    Rating rating=new Rating(userRating, commodity);
+                    consumer.getRatings().add(rating);
+                    commodity.getRatings().add(rating);
                     commodity.setAverageRating();
                     break;
                 }

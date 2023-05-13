@@ -23,4 +23,9 @@ public class CommentRequest {
     public String getText() {
         return text;
     }
+
+    @Override
+    public String toString() {
+        return "from user '"+consumer.getUsername()+"' for commodity '"+commodity.getName()+"' :\n"+text;
+    }
 }

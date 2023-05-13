@@ -41,6 +41,12 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "By user: " + consumer.getUsername() + " about commodity " + commodityID + " User has bought the product: " + userHasBought + "\n" + "    " + text;
+        String hasBought;
+        if (userHasBought) {
+            hasBought = "";
+        } else {
+            hasBought = "not";
+        }
+        return "By user: " + consumer.getUsername() + " about commodity " + commodityID + " which has " + hasBought + "bought the product:" + "\n" + "    " + text;
     }
 }

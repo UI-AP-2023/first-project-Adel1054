@@ -134,10 +134,11 @@ public class AdminController {
     public boolean addToBalance(String username, double amount) {
         boolean added = false;
         for (ChargeRequest chargeRequest : chargeRequests) {
-            if (chargeRequest.getConsumer().getUsername().equals(chargeRequest.getConsumer().getUsername()) && chargeRequest.getAmount() == amount) {
+            if (username.equals(chargeRequest.getConsumer().getUsername()) && chargeRequest.getAmount() == amount) {
                 if (chargeRequest.getCreditCard().getBalance() >= chargeRequest.getAmount()) {
                     chargeRequest.getConsumer().changeBalance(chargeRequest.getAmount());
                     chargeRequest.getCreditCard().changeBalance(-chargeRequest.getAmount());
+                    chargeRequests.remove(chargeRequest);
                     added = true;
                     break;
                 }
@@ -150,7 +151,9 @@ public class AdminController {
         boolean hasAdded = false;
         for (CommentRequest commentRequest : commentRequests) {
             if (commentRequest.getConsumer().getUsername().equals(username) && commentRequest.getCommodity().getName().equals(commodityName)) {
-                comments.add(new Comment(commentRequest));
+                Comment comment=new Comment(commentRequest);
+                comments.add(comment);
+                commentRequest.getCommodity().getComments().add(comment);
                 commentRequests.remove(commentRequest);
                 hasAdded = true;
                 break;

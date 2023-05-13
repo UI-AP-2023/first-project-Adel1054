@@ -55,7 +55,9 @@ public abstract class Commodity {
         for (Rating rating : ratings) {
             sum += rating.getUserRating();
         }
-        averageRating = sum / (ratings.size());
+        if(ratings.size()!=0){
+            averageRating = sum / (ratings.size());
+        }else averageRating=0;
     }
 
     public void setName(String name) {
