@@ -176,6 +176,7 @@ public class ConsumerController {
                 if (consumer.getBalance() >= totalPrice) {
                     for (Commodity commodity : consumer.getCart()) {
                         consumer.getCommoditiesBought().add(commodity);
+                        consumer.changeBalance(-totalPrice);
                         commodity.changeAvailableCount(-1);
                     }
                     return true;

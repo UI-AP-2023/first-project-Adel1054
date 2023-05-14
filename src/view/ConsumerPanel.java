@@ -252,6 +252,9 @@ public class ConsumerPanel {
                             num= input.nextInt();
                             input.nextLine();
                         }
+                        System.out.println("Enter commodity number: ");
+                        num=input.nextInt();
+                        input.nextLine();
                         System.out.println("Enter your comment: ");
                         String comment = input.nextLine();
                         consumerController.addCommentRequest(consumer.getCommoditiesBought().get(num - 1), consumer, comment);
