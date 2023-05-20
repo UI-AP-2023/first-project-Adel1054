@@ -6,7 +6,7 @@ import model.user.consumer.Rating;
 
 import java.util.ArrayList;
 
-public abstract class DigitalCommodity extends Commodity {
+public abstract class DigitalCommodity extends Commodity implements Comparable {
     private final double weight;
     private final String dimensions;
 

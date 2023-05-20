@@ -26,42 +26,57 @@ public class AdminController {
 
     public void addComestible(String name, double price, int availableCount, String productionDate, String expirationDate) {
         commodities.add(new Comestible(name, price, availableCount, productionDate, expirationDate));
+        sortCommodities();
     }
 
     public void addFlashMemory(String name, double price, int availableCount, double weight, String dimensions, int capacity, double usbVersion) {
         commodities.add(new FlashMemory(name, price, availableCount, weight, dimensions, capacity, usbVersion));
+        sortCommodities();
     }
 
     public void addPC(String name, double price, int availableCount, double weight, String dimensions, int ramCapacity, String cpuType) {
         commodities.add(new PC(name, price, availableCount, weight, dimensions, ramCapacity, cpuType));
+        sortCommodities();
     }
 
     public void addSSD(String name, double price, int availableCount, double weight, String dimensions, int capacity, double readSpeed, double writeSpeed) {
         commodities.add(new SSD(name, price, availableCount, weight, dimensions, capacity, readSpeed, writeSpeed));
+        sortCommodities();
     }
 
     public void addNotebook(String name, double price, int availableCount, String country, int numberOfPages, String pageType) {
         commodities.add(new Notebook(name, price, availableCount, country, numberOfPages, pageType));
+        sortCommodities();
     }
 
     public void addPen(String name, double price, int availableCount, String country, String colour) {
         commodities.add(new Pen(name, price, availableCount, country, colour));
+        sortCommodities();
     }
 
     public void addPencil(String name, double price, int availableCount, String country, Pencil.PencilType pencilType) {
         commodities.add(new Pencil(name, price, availableCount, country, pencilType));
+        sortCommodities();
     }
 
     public void addAutomobile(String name, double price, int availableCount, String companyName, boolean isAutomatic, int motorVolume) {
         commodities.add(new Automobile(name, price, availableCount, companyName, isAutomatic, motorVolume));
+        sortCommodities();
     }
 
     public void addBicycle(String name, double price, int availableCount, String companyName, Bicycle.BicycleType bicycleType) {
         commodities.add(new Bicycle(name, price, availableCount, companyName, bicycleType));
+        sortCommodities();
     }
 
-    public void removeCommodity(Commodity commodity) {
-        commodities.remove(commodity);
+    public void removeCommodity(String commodityID) {
+        Commodity removedCommodity=null;
+        for(Commodity commodity:commodities){
+            if(commodityID.equals(commodity.getID())){
+                removedCommodity=commodity;
+            }
+        }
+        commodities.remove(removedCommodity);
     }
 
     public void changeCommodityName(String ID, String newName) {
@@ -322,5 +337,7 @@ public class AdminController {
         Admin.makeAdmin();
         admin=Admin.getAdmin();
     }
-
+    private void sortCommodities(){
+        commodities.sort(Commodity::compareTo);
+    }
 }

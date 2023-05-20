@@ -71,7 +71,7 @@ public class ConsumerPanel {
                                 System.out.println("Enter a valid password: ");
                                 newPassword = input.nextLine();
                             }
-                            consumer.setUsername(newPassword);
+                            consumer.setPassword(newPassword);
                         }
                     }
                     break;
@@ -302,7 +302,7 @@ public class ConsumerPanel {
                 while (!exit) {
                     System.out.println(consumerController.getCart(consumer.getUsername(),page));
                     if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.quit");
+                        System.out.println("1.Last page\t2.Next page\t3.remove commodity\t4.quit");
                         int pageCommand = input.nextInt();
                         input.nextLine();
                         switch (pageCommand) {
@@ -312,41 +312,62 @@ public class ConsumerPanel {
                             case 2:
                                 page++;
                                 break;
-                            case 3:
+                            case 3:{
+                                System.out.println("Enter ID of commodity you wish to remove:");
+                                String ID= input.nextLine();
+                                consumerController.removeFromCart(consumer.getUsername(),ID);
+                            }
+                            break;
+                            case 4:
                                 exit = true;
                                 break;
                         }
                         continue;
                     }
                     if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.quit");
+                        System.out.println("1.Next page\t2.remove commodity\t3.quit");
                         int pageCommand = input.nextInt();
                         input.nextLine();
                         if (pageCommand == 1) {
                             page++;
                             continue;
                         }
-                        if (pageCommand == 2) {
+                        if(pageCommand==2){
+                            System.out.println("Enter ID of commodity you wish to remove:");
+                            String ID= input.nextLine();
+                            consumerController.removeFromCart(consumer.getUsername(),ID);
+                        }
+                        if (pageCommand == 3) {
                             exit = true;
                         }
                     }
                     if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.quit");
+                        System.out.println("1.last page\t2.remove commodity\t3.quit");
                         int pageCommand = input.nextInt();
                         input.nextLine();
                         if (pageCommand == 1) {
                             page--;
                             continue;
                         }
-                        if (pageCommand == 2) {
+                        if(pageCommand==2){
+                            System.out.println("Enter ID of commodity you wish to remove:");
+                            String ID= input.nextLine();
+                            consumerController.removeFromCart(consumer.getUsername(),ID);
+                        }
+                        if (pageCommand == 3) {
                             exit = true;
                         }
                     }
                     if (page == 1 && page == pageCount) {
-                        System.out.println("1.quit");
+                        System.out.println("1.remove commodity\t2.quit");
                         int pageCommand = input.nextInt();
                         input.nextLine();
-                        if (pageCommand == 1) {
+                        if(pageCommand==1){
+                            System.out.println("Enter ID of commodity you wish to remove:");
+                            String ID= input.nextLine();
+                            consumerController.removeFromCart(consumer.getUsername(),ID);
+                        }
+                        if (pageCommand == 2) {
                             exit = true;
                         }
                     }
@@ -429,7 +450,7 @@ public class ConsumerPanel {
 
     public String consumerCommands() {
         StringBuilder commands = new StringBuilder();
-        commands.append("1.Edit info\t2.Show commodities\t3.Show commodities bought\n4.Increase balance\t5.View cart");
+        commands.append("1.Show profile\t2.Show commodities\t3.Show commodities bought\n4.Increase balance\t5.View cart");
         commands.append("\t6.Finalize purchase\t7.Shopping history\t8.Exit");
         return commands.toString();
     }

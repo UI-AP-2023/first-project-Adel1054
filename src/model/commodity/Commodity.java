@@ -5,7 +5,7 @@ import model.user.consumer.Rating;
 
 import java.util.ArrayList;
 
-public abstract class Commodity {
+public abstract class Commodity implements Comparable {
     private String ID;
     private String name;
     private double price;
@@ -14,6 +14,7 @@ public abstract class Commodity {
     private final ArrayList<Comment> comments;
     private double averageRating;
     private final Category category;
+    private final int categoryNum;
     private static int comestibleCount = 1;
     private static int digitalCount = 1;
     private static int stationeryCount = 1;
@@ -28,6 +29,23 @@ public abstract class Commodity {
         comments = new ArrayList<>();
         averageRating = 0;
         ID = IDBuilder();
+        switch (category) {
+            case DIGITAL:
+                categoryNum = 4;
+                break;
+            case VEHICLE:
+                categoryNum = 3;
+                break;
+            case STATIONERY:
+                categoryNum = 2;
+                break;
+            case COMESTIBLE:
+                categoryNum = 1;
+                break;
+            default:
+                categoryNum = 0;
+                break;
+        }
     }
 
     public double getPrice() {
@@ -55,9 +73,9 @@ public abstract class Commodity {
         for (Rating rating : ratings) {
             sum += rating.getUserRating();
         }
-        if(ratings.size()!=0){
+        if (ratings.size() != 0) {
             averageRating = sum / (ratings.size());
-        }else averageRating=0;
+        } else averageRating = 0;
     }
 
     public void setName(String name) {
@@ -179,6 +197,42 @@ public abstract class Commodity {
 
     @Override
     public String toString() {
-        return "Name: " + name + " ID: " + ID + " Category: " + category + " Price: " + price + "$"+" Available count: "+availableCount+" Number of comments: "+comments.size()+" Number of ratings: " + getRatingsCount() + " Average rating: " + averageRating;
+        return "Name: " + name + " ID: " + ID + " Category: " + category + " Price: " + price + "$" + " Available count: " + availableCount + " Number of comments: " + comments.size() + " Number of ratings: " + getRatingsCount() + " Average rating: " + averageRating;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Commodity commodity = (Commodity) o;
+        if (categoryNum < commodity.categoryNum) {
+            return 1;
+        } else if (categoryNum > commodity.categoryNum) {
+            return -1;
+        } else {
+            if (getName().compareTo(commodity.getName()) > 0) {
+                return 1;
+            } else if (getName().compareTo(commodity.getName()) < 0) {
+                return -1;
+            } else {
+                if (getAverageRating() > commodity.getAverageRating()) {
+                    return 1;
+                } else if (getAverageRating() < commodity.getAverageRating()) {
+                    return -1;
+                } else {
+                    if (getPrice() > commodity.getPrice()) {
+                        return 1;
+                    } else if (getPrice() < commodity.getPrice()) {
+                        return -1;
+                    } else {
+                        if (getAvailableCount() > commodity.getAvailableCount()) {
+                            return 1;
+                        } else if (getAvailableCount() < commodity.getAvailableCount()) {
+                            return -1;
+                        } else {
+                            return 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

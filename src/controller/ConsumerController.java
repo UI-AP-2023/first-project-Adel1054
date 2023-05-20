@@ -54,7 +54,7 @@ public class ConsumerController {
         for (Consumer consumer : consumers) {
             if (consumer.getUsername().equals(username)) {
                 if (consumer.getCommoditiesBought().contains(commodity)) {
-                    Rating rating=new Rating(userRating, commodity);
+                    Rating rating = new Rating(userRating, commodity);
                     consumer.getRatings().add(rating);
                     commodity.getRatings().add(rating);
                     commodity.setAverageRating();
@@ -316,6 +316,19 @@ public class ConsumerController {
         return ratings.toString();
     }
 
+    public void removeFromCart(String username,String ID){
+        for(Consumer consumer:consumers){
+            if(username.equals(consumer.getUsername())){
+                for(Commodity commodity:consumer.getCart()){
+                    if(ID.equals(commodity.getID())){
+                        consumer.getCart().remove(commodity);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
     public String commoditiesBought(Consumer consumer) {
         StringBuilder commodities = new StringBuilder();
         int number = 1;

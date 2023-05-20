@@ -207,7 +207,7 @@ public class AdminPanel {
                 while (!exit) {
                     System.out.println(adminController.showCommodities(page));
                     if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.quit\nEnter commodity ID and commodity attribute for editing");
+                        System.out.println("1.Last page\t2.Next page\t3.remove commodity\t4.quit\nEnter commodity ID and commodity attribute for editing");
                         String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
                             switch (Integer.parseInt(pageCommand)) {
@@ -217,7 +217,13 @@ public class AdminPanel {
                                 case 2:
                                     page++;
                                     break;
-                                case 3:
+                                case 3:{
+                                    System.out.println("Enter the commodity ID you wish to remove:");
+                                    String ID= input.nextLine();
+                                    adminController.removeCommodity(ID);
+                                }
+                                break;
+                                case 4:
                                     exit = true;
                                     break;
                             }
@@ -231,15 +237,21 @@ public class AdminPanel {
                         }
                     }
                     if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.quit\nEnter commodity ID and commodity attribute for editing");
+                        System.out.println("1.Next page\t2.remove commodity\t3.quit\nEnter commodity ID and commodity attribute for editing");
                         String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page++;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
+                            switch (Integer.parseInt(pageCommand)){
+                                case 1:
+                                    page++;
+                                    break;
+                                case 2:
+                                    System.out.println("Enter the commodity ID you wish to remove:");
+                                    String ID= input.nextLine();
+                                    adminController.removeCommodity(ID);
+                                    break;
+                                case 3:
+                                    exit=true;
+                                    break;
                             }
                         } else {
                             String[] commands2 = pageCommand.split(" ");
@@ -250,15 +262,21 @@ public class AdminPanel {
                         }
                     }
                     if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.quit\nEnter commodity ID and commodity attribute for editing");
+                        System.out.println("1.last page\t2.remove commodity\t3.quit\nEnter commodity ID and commodity attribute for editing");
                         String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page--;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
+                            switch (Integer.parseInt(pageCommand)){
+                                case 1:
+                                    page--;
+                                    break;
+                                case 2:
+                                    System.out.println("Enter the commodity ID you wish to remove:");
+                                    String ID= input.nextLine();
+                                    adminController.removeCommodity(ID);
+                                    break;
+                                case 3:
+                                    exit=true;
+                                    break;
                             }
                         } else {
                             String[] commands2 = pageCommand.split(" ");
@@ -268,12 +286,19 @@ public class AdminPanel {
                             }
                         }
                     }
-                    if (page == 1 && page == pageCount) {
-                        System.out.println("1.quit\nEnter commodity ID and commodity attribute for editing");
+                    if (page == 1 && page == pageCount||adminController.getCommodities().size()==0) {
+                        System.out.println("1.remove commodity\t2.quit\nEnter commodity ID and commodity attribute for editing");
                         String pageCommand = input.nextLine();
                         if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                exit = true;
+                            switch (Integer.parseInt(pageCommand)){
+                                case 1:
+                                    System.out.println("Enter the commodity ID you wish to remove:");
+                                    String ID= input.nextLine();
+                                    adminController.removeCommodity(ID);
+                                    break;
+                                case 2:
+                                    exit=true;
+                                    break;
                             }
                         } else {
                             String[] commands2 = pageCommand.split(" ");
