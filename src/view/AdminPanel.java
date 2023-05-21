@@ -88,493 +88,39 @@ public class AdminPanel {
                 }
             }
             break;
-            case "ShowConsumers": {
-                int page = 1;
-                boolean exit = false;
-                int pageCount = (int) Math.ceil((double) adminController.getConsumerCount() / 10);
-                while (!exit) {
-                    System.out.println(adminController.showConsumers(page));
-                    if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.quit");
-                        int pageCommand = input.nextInt();
-                        input.nextLine();
-                        switch (pageCommand) {
-                            case 1:
-                                page--;
-                                break;
-                            case 2:
-                                page++;
-                                break;
-                            case 3:
-                                exit = true;
-                                break;
-                        }
-                        continue;
-                    }
-                    if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.quit");
-                        int pageCommand = input.nextInt();
-                        input.nextLine();
-                        if (pageCommand == 1) {
-                            page++;
-                            continue;
-                        }
-                        if (pageCommand == 2) {
-                            exit = true;
-                        }
-                    }
-                    if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.quit");
-                        int pageCommand = input.nextInt();
-                        input.nextLine();
-                        if (pageCommand == 1) {
-                            page--;
-                            continue;
-                        }
-                        if (pageCommand == 2) {
-                            exit = true;
-                        }
-                    }
-                    if (page == 1 && page == pageCount) {
-                        System.out.println("1.quit");
-                        int pageCommand = input.nextInt();
-                        input.nextLine();
-                        if (pageCommand == 1) {
-                            exit = true;
-                        }
-                    }
-                }
+            case "1": {
+                showConsumers();
             }
             break;
-            case "ShowComments": {
-                int page = 1;
-                boolean exit = false;
-                int pageCount = (int) Math.ceil((double) adminController.getConsumerCount() / 10);
-                while (!exit) {
-                    System.out.println(adminController.getAllComments(page));
-                    if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.quit");
-                        int pageCommand = input.nextInt();
-                        switch (pageCommand) {
-                            case 1:
-                                page--;
-                                break;
-                            case 2:
-                                page++;
-                                break;
-                            case 3:
-                                exit = true;
-                                break;
-                        }
-                        continue;
-                    }
-                    if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.quit");
-                        int pageCommand = input.nextInt();
-                        if (pageCommand == 1) {
-                            page++;
-                            continue;
-                        }
-                        if (pageCommand == 2) {
-                            exit = true;
-                        }
-                    }
-                    if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.quit");
-                        int pageCommand = input.nextInt();
-                        if (pageCommand == 1) {
-                            page--;
-                            continue;
-                        }
-                        if (pageCommand == 2) {
-                            exit = true;
-                        }
-                    }
-                    if (page == 1 && page == pageCount) {
-                        System.out.println("1.quit");
-                        int pageCommand = input.nextInt();
-                        if (pageCommand == 1) {
-                            exit = true;
-                        }
-                    }
-                }
+            case "2": {
+                showComments();
             }
             break;
-            case "ShowCommodities": {
-                int page = 1;
-                boolean exit = false;
-                int pageCount = (int) Math.ceil((double) adminController.getCommodityCount() / 10);
-                while (!exit) {
-                    System.out.println(adminController.showCommodities(page));
-                    if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.remove commodity\t4.quit\nEnter commodity ID and commodity attribute for editing");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            switch (Integer.parseInt(pageCommand)) {
-                                case 1:
-                                    page--;
-                                    break;
-                                case 2:
-                                    page++;
-                                    break;
-                                case 3:{
-                                    System.out.println("Enter the commodity ID you wish to remove:");
-                                    String ID= input.nextLine();
-                                    adminController.removeCommodity(ID);
-                                }
-                                break;
-                                case 4:
-                                    exit = true;
-                                    break;
-                            }
-                            continue;
-                        } else {
-                            String[] commands2 = pageCommand.split(" ");
-                            if (commands2.length == 2) {
-                                commodityEdit(commands2[0], commands2[1]);
-                                continue;
-                            }
-                        }
-                    }
-                    if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.remove commodity\t3.quit\nEnter commodity ID and commodity attribute for editing");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            switch (Integer.parseInt(pageCommand)){
-                                case 1:
-                                    page++;
-                                    break;
-                                case 2:
-                                    System.out.println("Enter the commodity ID you wish to remove:");
-                                    String ID= input.nextLine();
-                                    adminController.removeCommodity(ID);
-                                    break;
-                                case 3:
-                                    exit=true;
-                                    break;
-                            }
-                        } else {
-                            String[] commands2 = pageCommand.split(" ");
-                            if (commands2.length == 2) {
-                                commodityEdit(commands2[0], commands2[1]);
-                                continue;
-                            }
-                        }
-                    }
-                    if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.remove commodity\t3.quit\nEnter commodity ID and commodity attribute for editing");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            switch (Integer.parseInt(pageCommand)){
-                                case 1:
-                                    page--;
-                                    break;
-                                case 2:
-                                    System.out.println("Enter the commodity ID you wish to remove:");
-                                    String ID= input.nextLine();
-                                    adminController.removeCommodity(ID);
-                                    break;
-                                case 3:
-                                    exit=true;
-                                    break;
-                            }
-                        } else {
-                            String[] commands2 = pageCommand.split(" ");
-                            if (commands2.length == 2) {
-                                commodityEdit(commands2[0], commands2[1]);
-                                continue;
-                            }
-                        }
-                    }
-                    if (page == 1 && page == pageCount||adminController.getCommodities().size()==0) {
-                        System.out.println("1.remove commodity\t2.quit\nEnter commodity ID and commodity attribute for editing");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            switch (Integer.parseInt(pageCommand)){
-                                case 1:
-                                    System.out.println("Enter the commodity ID you wish to remove:");
-                                    String ID= input.nextLine();
-                                    adminController.removeCommodity(ID);
-                                    break;
-                                case 2:
-                                    exit=true;
-                                    break;
-                            }
-                        } else {
-                            String[] commands2 = pageCommand.split(" ");
-                            if (commands2.length == 2) {
-                                commodityEdit(commands2[0], commands2[1]);
-                            }
-                        }
-                    }
-                }
+            case "3": {
+                showCommodities();
             }
             break;
-            case "SignupRequests": {
-                int page = 1;
-                boolean exit = false;
-                int pageCount = (int) Math.ceil((double) adminController.getSignupRequestCount() / 10);
-                while (!exit) {
-                    System.out.println(adminController.showSignupRequests(page));
-                    if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.quit\nTo accept request enter the username");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            switch (Integer.parseInt(pageCommand)) {
-                                case 1:
-                                    page--;
-                                    break;
-                                case 2:
-                                    page++;
-                                    break;
-                                case 3:
-                                    exit = true;
-                                    break;
-                            }
-                        } else {
-                            boolean bool = adminController.addConsumer(pageCommand);
-                            if (bool) {
-                                System.out.println("User added.");
-                            } else {
-                                System.out.println("Signup request not found.");
-                            }
-                        }
-                        continue;
-                    }
-                    if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.quit\nTo accept request enter the username");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page++;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
-                            }
-                        } else {
-                            adminController.addConsumer(pageCommand);
-                            continue;
-                        }
-                    }
-                    if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.quit\nTo accept request enter the username");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page--;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
-                            }
-                        } else {
-                            boolean bool = adminController.addConsumer(pageCommand);
-                            if (bool) {
-                                System.out.println("User added.");
-                            } else {
-                                System.out.println("Signup request not found.");
-                            }
-                        }
-                    }
-                    if (page == 1 && page == pageCount) {
-                        System.out.println("1.quit\nTo accept request enter the username");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                exit = true;
-                            }
-                        } else {
-                            boolean bool = adminController.addConsumer(pageCommand);
-                            if (bool) {
-                                System.out.println("User added.");
-                            } else {
-                                System.out.println("Signup request not found.");
-                            }
-                        }
-                    }
-                }
+            case "4": {
+                signupRequests();
             }
             break;
-            case "CommentRequests": {
-                int page = 1;
-                boolean exit = false;
-                int pageCount = (int) Math.ceil((double) adminController.getCommentRequestCount() / 10);
-                while (!exit) {
-                    System.out.println(adminController.showCommentRequests(page));
-                    if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.quit\tTo accept request enter the username and commodity name");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            switch (Integer.parseInt(pageCommand)) {
-                                case 1:
-                                    page--;
-                                    break;
-                                case 2:
-                                    page++;
-                                    break;
-                                case 3:
-                                    exit = true;
-                                    break;
-                            }
-                            continue;
-                        } else {
-                            String[] pageCommands = pageCommand.split(" ");
-                            if (pageCommands.length == 2) {
-                                adminController.addComment(pageCommands[0], pageCommands[1]);
-                                continue;
-                            }
-                        }
-                    }
-                    if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.quit\tTo accept request enter the username and commodity name");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page++;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
-                            }
-                        } else {
-                            String[] pageCommands = pageCommand.split(" ");
-                            if (pageCommands.length == 2) {
-                                adminController.addComment(pageCommands[0], pageCommands[1]);
-                                continue;
-                            }
-                        }
-                    }
-                    if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.quit\tTo accept request enter the username and commodity name");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page--;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
-                            }
-                        } else {
-                            String[] pageCommands = pageCommand.split(" ");
-                            if (pageCommands.length == 2) {
-                                adminController.addComment(pageCommands[0], pageCommands[1]);
-                                continue;
-                            }
-                        }
-                    }
-                    if (page == 1 && page == pageCount) {
-                        System.out.println("1.quit\tTo accept request enter the username and commodity name");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                exit = true;
-                            }
-                        } else {
-                            String[] pageCommands = pageCommand.split(" ");
-                            if (pageCommands.length == 2) {
-                                adminController.addComment(pageCommands[0], pageCommands[1]);
-                            }
-                        }
-                    }
-                }
+            case "5": {
+                commentRequests();
             }
             break;
-            case "ChargeRequests": {
-                int page = 1;
-                boolean exit = false;
-                int pageCount = (int) Math.ceil((double) adminController.getChargeRequestCount() / 10);
-                while (!exit) {
-                    System.out.println(adminController.showChargeRequests(page));
-                    if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.quit\nTo accept request enter the username and requested amount");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            switch (Integer.parseInt(pageCommand)) {
-                                case 1:
-                                    page--;
-                                    break;
-                                case 2:
-                                    page++;
-                                    break;
-                                case 3:
-                                    exit = true;
-                                    break;
-                            }
-                            continue;
-                        } else {
-                            String[] pageCommands = pageCommand.split(" ");
-                            if (pageCommands.length == 2) {
-                                adminController.addToBalance(pageCommands[0], Double.parseDouble(pageCommands[1]));
-                                continue;
-                            }
-                        }
-                    }
-                    if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.quit\nTo accept request enter the username and requested amount");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page++;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
-                            }
-                        } else {
-                            String[] pageCommands = pageCommand.split(" ");
-                            if (pageCommands.length == 2) {
-                                adminController.addToBalance(pageCommands[0], Double.parseDouble(pageCommands[1]));
-                                continue;
-                            }
-                        }
-                    }
-                    if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.quit\nTo accept request enter the username and requested amount");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page--;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
-                            }
-                        } else {
-                            String[] pageCommands = pageCommand.split(" ");
-                            if (pageCommands.length == 2) {
-                                adminController.addToBalance(pageCommands[0], Double.parseDouble(pageCommands[1]));
-                                continue;
-                            }
-                        }
-                    }
-                    if (page == 1 && page == pageCount) {
-                        System.out.println("1.quit\nTo accept request enter the username and requested amount");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                exit = true;
-                            }
-                        } else {
-                            String[] pageCommands = pageCommand.split(" ");
-                            if (pageCommands.length == 2) {
-                                adminController.addToBalance(pageCommands[0], Double.parseDouble(pageCommands[1]));
-                            }
-                        }
-                    }
-                }
+            case "6": {
+                chargeRequests();
             }
             break;
-            case "Exit": {
+            case "7": {
                 exit = true;
             }
             break;
-            case "Help": {
+            case "8": {
                 System.out.println(AdminCommands());
             }
             break;
-            case "ShutdownShop": {
+            case "9": {
                 MainPanel.setExit(true);
                 exit = true;
                 System.out.println("Shutting down the online shop.");
@@ -595,7 +141,7 @@ public class AdminPanel {
         commandsList.append("\n\tPen Name Price AvailableCount Country Colour");
         commandsList.append("\n\tAutomobile Name Price AvailableCount CompanyName IsAutomatic(true,false) MotorVolume");
         commandsList.append("\n\tBicycle Name Price AvailableCount CompanyName BicycleType(MOUNTAIN, ROAD, CITY, HYBRID)");
-        commandsList.append("\n2.ShowConsumers\n3.ShowComments\n4.ShowCommodities\n5.SignupRequests\n6.CommentRequests\n7.ChargeRequests\n8.ShutdownShop");
+        commandsList.append("\n1.ShowConsumers\n2.ShowComments\n3.ShowCommodities\n4.SignupRequests\n5.CommentRequests\n6.ChargeRequests\n9.ShutdownShop");
         return commandsList.toString();
     }
 
@@ -643,6 +189,478 @@ public class AdminPanel {
             return true;
         } else {
             return false;
+        }
+    }
+    private void signupRequests(){
+        int page = 1;
+        boolean exit = false;
+        int pageCount = (int) Math.ceil((double) adminController.getSignupRequestCount() / 10);
+        while (!exit) {
+            System.out.println(adminController.showSignupRequests(page));
+            if (page != pageCount && page != 1) {
+                System.out.println("1.Last page\t2.Next page\t3.quit\nTo accept request enter the username");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    switch (Integer.parseInt(pageCommand)) {
+                        case 1:
+                            page--;
+                            break;
+                        case 2:
+                            page++;
+                            break;
+                        case 3:
+                            exit = true;
+                            break;
+                    }
+                } else {
+                    boolean bool = adminController.addConsumer(pageCommand);
+                    if (bool) {
+                        System.out.println("User added.");
+                    } else {
+                        System.out.println("Signup request not found.");
+                    }
+                }
+                continue;
+            }
+            if (page == 1 && page != pageCount) {
+                System.out.println("1.Next page\t2.quit\nTo accept request enter the username");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        page++;
+                        continue;
+                    }
+                    if (Integer.parseInt(pageCommand) == 2) {
+                        exit = true;
+                    }
+                } else {
+                    adminController.addConsumer(pageCommand);
+                    continue;
+                }
+            }
+            if (page == pageCount && page != 1) {
+                System.out.println("1.last page\t2.quit\nTo accept request enter the username");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        page--;
+                        continue;
+                    }
+                    if (Integer.parseInt(pageCommand) == 2) {
+                        exit = true;
+                    }
+                } else {
+                    boolean bool = adminController.addConsumer(pageCommand);
+                    if (bool) {
+                        System.out.println("User added.");
+                    } else {
+                        System.out.println("Signup request not found.");
+                    }
+                }
+            }
+            if (page == 1 && page == pageCount) {
+                System.out.println("1.quit\nTo accept request enter the username");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        exit = true;
+                    }
+                } else {
+                    boolean bool = adminController.addConsumer(pageCommand);
+                    if (bool) {
+                        System.out.println("User added.");
+                    } else {
+                        System.out.println("Signup request not found.");
+                    }
+                }
+            }
+        }
+    }
+    private void showComments(){
+        int page = 1;
+        boolean exit = false;
+        int pageCount = (int) Math.ceil((double) adminController.getCommentCount() / 10);
+        while (!exit) {
+            System.out.println(adminController.getAllComments(page));
+            if (page != pageCount && page != 1) {
+                System.out.println("1.Last page\t2.Next page\t3.quit");
+                int pageCommand = input.nextInt();
+                switch (pageCommand) {
+                    case 1:
+                        page--;
+                        break;
+                    case 2:
+                        page++;
+                        break;
+                    case 3:
+                        exit = true;
+                        break;
+                }
+                continue;
+            }
+            if (page == 1 && page != pageCount) {
+                System.out.println("1.Next page\t2.quit");
+                int pageCommand = input.nextInt();
+                if (pageCommand == 1) {
+                    page++;
+                    continue;
+                }
+                if (pageCommand == 2) {
+                    exit = true;
+                }
+            }
+            if (page == pageCount && page != 1) {
+                System.out.println("1.last page\t2.quit");
+                int pageCommand = input.nextInt();
+                if (pageCommand == 1) {
+                    page--;
+                    continue;
+                }
+                if (pageCommand == 2) {
+                    exit = true;
+                }
+            }
+            if (page == 1 && page == pageCount) {
+                System.out.println("1.quit");
+                int pageCommand = input.nextInt();
+                if (pageCommand == 1) {
+                    exit = true;
+                }
+            }
+        }
+    }
+    private void showConsumers(){
+        int page = 1;
+        boolean exit = false;
+        int pageCount = (int) Math.ceil((double) adminController.getConsumerCount() / 10);
+        while (!exit) {
+            System.out.println(adminController.showConsumers(page));
+            if (page != pageCount && page != 1) {
+                System.out.println("1.Last page\t2.Next page\t3.quit");
+                int pageCommand = input.nextInt();
+                input.nextLine();
+                switch (pageCommand) {
+                    case 1:
+                        page--;
+                        break;
+                    case 2:
+                        page++;
+                        break;
+                    case 3:
+                        exit = true;
+                        break;
+                }
+                continue;
+            }
+            if (page == 1 && page != pageCount) {
+                System.out.println("1.Next page\t2.quit");
+                int pageCommand = input.nextInt();
+                input.nextLine();
+                if (pageCommand == 1) {
+                    page++;
+                    continue;
+                }
+                if (pageCommand == 2) {
+                    exit = true;
+                }
+            }
+            if (page == pageCount && page != 1) {
+                System.out.println("1.last page\t2.quit");
+                int pageCommand = input.nextInt();
+                input.nextLine();
+                if (pageCommand == 1) {
+                    page--;
+                    continue;
+                }
+                if (pageCommand == 2) {
+                    exit = true;
+                }
+            }
+            if (page == 1 && page == pageCount) {
+                System.out.println("1.quit");
+                int pageCommand = input.nextInt();
+                input.nextLine();
+                if (pageCommand == 1) {
+                    exit = true;
+                }
+            }
+        }
+    }
+    private void showCommodities(){
+        int page = 1;
+        boolean exit = false;
+        int pageCount = (int) Math.ceil((double) adminController.getCommodityCount() / 10);
+        while (!exit) {
+            System.out.println(adminController.showCommodities(page));
+            if (page != pageCount && page != 1) {
+                System.out.println("1.Last page\t2.Next page\t3.remove commodity\t4.quit\nEnter commodity ID and commodity attribute for editing");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    switch (Integer.parseInt(pageCommand)) {
+                        case 1:
+                            page--;
+                            break;
+                        case 2:
+                            page++;
+                            break;
+                        case 3:{
+                            System.out.println("Enter the commodity ID you wish to remove:");
+                            String ID= input.nextLine();
+                            adminController.removeCommodity(ID);
+                        }
+                        break;
+                        case 4:
+                            exit = true;
+                            break;
+                    }
+                    continue;
+                } else {
+                    String[] commands2 = pageCommand.split(" ");
+                    if (commands2.length == 2) {
+                        commodityEdit(commands2[0], commands2[1]);
+                        continue;
+                    }
+                }
+            }
+            if (page == 1 && page != pageCount) {
+                System.out.println("1.Next page\t2.remove commodity\t3.quit\nEnter commodity ID and commodity attribute for editing");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    switch (Integer.parseInt(pageCommand)){
+                        case 1:
+                            page++;
+                            break;
+                        case 2:
+                            System.out.println("Enter the commodity ID you wish to remove:");
+                            String ID= input.nextLine();
+                            adminController.removeCommodity(ID);
+                            break;
+                        case 3:
+                            exit=true;
+                            break;
+                    }
+                } else {
+                    String[] commands2 = pageCommand.split(" ");
+                    if (commands2.length == 2) {
+                        commodityEdit(commands2[0], commands2[1]);
+                        continue;
+                    }
+                }
+            }
+            if (page == pageCount && page != 1) {
+                System.out.println("1.last page\t2.remove commodity\t3.quit\nEnter commodity ID and commodity attribute for editing");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    switch (Integer.parseInt(pageCommand)){
+                        case 1:
+                            page--;
+                            break;
+                        case 2:
+                            System.out.println("Enter the commodity ID you wish to remove:");
+                            String ID= input.nextLine();
+                            adminController.removeCommodity(ID);
+                            break;
+                        case 3:
+                            exit=true;
+                            break;
+                    }
+                } else {
+                    String[] commands2 = pageCommand.split(" ");
+                    if (commands2.length == 2) {
+                        commodityEdit(commands2[0], commands2[1]);
+                        continue;
+                    }
+                }
+            }
+            if (page == 1 && page == pageCount||adminController.getCommodities().size()==0) {
+                System.out.println("1.remove commodity\t2.quit\nEnter commodity ID and commodity attribute for editing");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    switch (Integer.parseInt(pageCommand)){
+                        case 1:
+                            System.out.println("Enter the commodity ID you wish to remove:");
+                            String ID= input.nextLine();
+                            adminController.removeCommodity(ID);
+                            break;
+                        case 2:
+                            exit=true;
+                            break;
+                    }
+                } else {
+                    String[] commands2 = pageCommand.split(" ");
+                    if (commands2.length == 2) {
+                        commodityEdit(commands2[0], commands2[1]);
+                    }
+                }
+            }
+        }
+    }
+    private void chargeRequests(){
+        int page = 1;
+        boolean exit = false;
+        int pageCount = (int) Math.ceil((double) adminController.getChargeRequestCount() / 10);
+        while (!exit) {
+            System.out.println(adminController.showChargeRequests(page));
+            if (page != pageCount && page != 1) {
+                System.out.println("1.Last page\t2.Next page\t3.quit\nTo accept request enter the username and requested amount");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    switch (Integer.parseInt(pageCommand)) {
+                        case 1:
+                            page--;
+                            break;
+                        case 2:
+                            page++;
+                            break;
+                        case 3:
+                            exit = true;
+                            break;
+                    }
+                    continue;
+                } else {
+                    String[] pageCommands = pageCommand.split(" ");
+                    if (pageCommands.length == 2) {
+                        adminController.addToBalance(pageCommands[0], Double.parseDouble(pageCommands[1]));
+                        continue;
+                    }
+                }
+            }
+            if (page == 1 && page != pageCount) {
+                System.out.println("1.Next page\t2.quit\nTo accept request enter the username and requested amount");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        page++;
+                        continue;
+                    }
+                    if (Integer.parseInt(pageCommand) == 2) {
+                        exit = true;
+                    }
+                } else {
+                    String[] pageCommands = pageCommand.split(" ");
+                    if (pageCommands.length == 2) {
+                        adminController.addToBalance(pageCommands[0], Double.parseDouble(pageCommands[1]));
+                        continue;
+                    }
+                }
+            }
+            if (page == pageCount && page != 1) {
+                System.out.println("1.last page\t2.quit\nTo accept request enter the username and requested amount");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        page--;
+                        continue;
+                    }
+                    if (Integer.parseInt(pageCommand) == 2) {
+                        exit = true;
+                    }
+                } else {
+                    String[] pageCommands = pageCommand.split(" ");
+                    if (pageCommands.length == 2) {
+                        adminController.addToBalance(pageCommands[0], Double.parseDouble(pageCommands[1]));
+                        continue;
+                    }
+                }
+            }
+            if (page == 1 && page == pageCount) {
+                System.out.println("1.quit\nTo accept request enter the username and requested amount");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        exit = true;
+                    }
+                } else {
+                    String[] pageCommands = pageCommand.split(" ");
+                    if (pageCommands.length == 2) {
+                        adminController.addToBalance(pageCommands[0], Double.parseDouble(pageCommands[1]));
+                    }
+                }
+            }
+        }
+    }
+    private void commentRequests(){
+        int page = 1;
+        boolean exit = false;
+        int pageCount = (int) Math.ceil((double) adminController.getCommentRequestCount() / 10);
+        while (!exit) {
+            System.out.println(adminController.showCommentRequests(page));
+            if (page != pageCount && page != 1) {
+                System.out.println("1.Last page\t2.Next page\t3.quit\tTo accept request enter the username and commodity name");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    switch (Integer.parseInt(pageCommand)) {
+                        case 1:
+                            page--;
+                            break;
+                        case 2:
+                            page++;
+                            break;
+                        case 3:
+                            exit = true;
+                            break;
+                    }
+                    continue;
+                } else {
+                    String[] pageCommands = pageCommand.split(" ");
+                    if (pageCommands.length == 2) {
+                        adminController.addComment(pageCommands[0], pageCommands[1]);
+                        continue;
+                    }
+                }
+            }
+            if (page == 1 && page != pageCount) {
+                System.out.println("1.Next page\t2.quit\tTo accept request enter the username and commodity name");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        page++;
+                        continue;
+                    }
+                    if (Integer.parseInt(pageCommand) == 2) {
+                        exit = true;
+                    }
+                } else {
+                    String[] pageCommands = pageCommand.split(" ");
+                    if (pageCommands.length == 2) {
+                        adminController.addComment(pageCommands[0], pageCommands[1]);
+                        continue;
+                    }
+                }
+            }
+            if (page == pageCount && page != 1) {
+                System.out.println("1.last page\t2.quit\tTo accept request enter the username and commodity name");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        page--;
+                        continue;
+                    }
+                    if (Integer.parseInt(pageCommand) == 2) {
+                        exit = true;
+                    }
+                } else {
+                    String[] pageCommands = pageCommand.split(" ");
+                    if (pageCommands.length == 2) {
+                        adminController.addComment(pageCommands[0], pageCommands[1]);
+                        continue;
+                    }
+                }
+            }
+            if (page == 1 && page == pageCount) {
+                System.out.println("1.quit\tTo accept request enter the username and commodity name");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        exit = true;
+                    }
+                } else {
+                    String[] pageCommands = pageCommand.split(" ");
+                    if (pageCommands.length == 2) {
+                        adminController.addComment(pageCommands[0], pageCommands[1]);
+                    }
+                }
+            }
         }
     }
 }

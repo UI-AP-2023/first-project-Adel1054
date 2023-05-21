@@ -1,5 +1,6 @@
 package model.user.consumer;
 
+import model.DiscountCode;
 import model.commodity.Commodity;
 import model.user.User;
 
@@ -12,6 +13,7 @@ public class Consumer extends User {
     private final ArrayList<Commodity> commoditiesBought;
     private final ArrayList<Comment> comments;
     private double balance;
+    private final ArrayList<DiscountCode> discountCodes;
 
     public Consumer(SignupRequest request) {
         super(request.getUsername(), request.getPassword(), request.getEmail(), request.getPhoneNumber());
@@ -20,6 +22,7 @@ public class Consumer extends User {
         comments=new ArrayList<>();
         commoditiesBought=new ArrayList<>();
         ratings=new ArrayList<>();
+        discountCodes=new ArrayList<>();
         balance = 0;
     }
 
@@ -51,8 +54,12 @@ public class Consumer extends User {
         return ratings;
     }
 
+    public ArrayList<DiscountCode> getDiscountCodes() {
+        return discountCodes;
+    }
+
     @Override
     public String toString() {
-        return super.toString() + "\nNumber of purchases made: " + shoppingHistory.size() + " Current balance: " + balance+"$";
+        return super.toString() + "\nNumber of purchases made: " + shoppingHistory.size()+" Total commodities bought: "+commoditiesBought.size() + " Current balance: " + balance+"$";
     }
 }

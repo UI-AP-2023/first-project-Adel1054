@@ -1,6 +1,10 @@
 package view;
 
 import controller.ConsumerController;
+import exception.InvalidEmailException;
+import exception.InvalidPasswordException;
+import exception.InvalidPhoneNumberException;
+import exception.InvalidUsernameException;
 import model.commodity.Category;
 import model.commodity.Commodity;
 import model.user.consumer.*;
@@ -34,13 +38,6 @@ public class MainPanel {
     private final ArrayList<String> usernames;
     private final ArrayList<String> emails;
     private final ArrayList<String> phoneNumbers;
-    private final Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9._-]{6,16}$");
-    private final Pattern passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
-    private final Pattern emailPattern = Pattern.compile("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$");
-    private final Pattern phoneNumberPattern = Pattern.compile("^09\\d{9}");
-    private final Pattern creditCardPattern=Pattern.compile("[0-9]{16}");
-    private final Pattern cvv2Pattern=Pattern.compile("[0-9]{3,4}");
-    private final Pattern cardPasswordPattern=Pattern.compile("[0-9]{6}");
 
     public MainPanel() {
         input = new Scanner(System.in);
@@ -54,8 +51,8 @@ public class MainPanel {
         usernames = new ArrayList<>();
         emails = new ArrayList<>();
         phoneNumbers = new ArrayList<>();
-        consumerController=new ConsumerController(consumers,signupRequests,commentRequests,comments,commodities,chargeRequests);
-        cart=new ArrayList<>();
+        consumerController = new ConsumerController(consumers, signupRequests, commentRequests, comments, commodities, chargeRequests);
+        cart = new ArrayList<>();
     }
 
     public void mainPage() {
@@ -64,226 +61,19 @@ public class MainPanel {
         input.nextLine();
         switch (command1) {
             case 1: {
-                System.out.println("Enter username:");
-                String username = input.nextLine();
-                System.out.println("Enter password:");
-                String password = input.nextLine();
-                for (Consumer consumer : consumers) {
-                    if (consumer.getUsername().equals(username) && consumer.getPassword().equals(password)) {
-                        System.out.println("if you wish to add commodities to cart enter 1 anything else to pass");
-                        String command= input.nextLine();
-                        if(command.equals("1")) {
-                            for (Commodity commodity : cart) {
-                                consumer.getCart().add(commodity);
-                            }
-                            cart.clear();
-                        }
-                        ConsumerPanel consumerPanel = new ConsumerPanel(consumers, commodities, comments, signupRequests, commentRequests, chargeRequests, consumer);
-                        while (!consumerPanel.shouldExit()) {
-                            consumerPanel.consumerPage();
-                        }
-                        break;
-                    }
-                }
+                consumerLogin();
             }
             break;
             case 2: {
-                System.out.print("Enter Admin username: ");
-                String inputUsername = input.nextLine();
-                System.out.print("Enter Admin password: ");
-                String inputPassword = input.nextLine();
-                AdminPanel adminPanel = new AdminPanel(consumers, commodities, comments, signupRequests, commentRequests, chargeRequests);
-                if (adminPanel.login(inputUsername, inputPassword)) {
-                    while (!adminPanel.shouldExit()) {
-                        adminPanel.adminPage();
-                    }
-                }
+                adminLogin();
             }
             break;
             case 3: {
-                int page = 1;
-                boolean exit = false;
-                while (!exit) {
-                    ArrayList<Commodity> filteredCommodities = consumerController.getCommodities();
-                    if (filterByCategory) {
-                        filteredCommodities = consumerController.filterByCategory(category, filteredCommodities);
-                    }
-                    if (filterByRating) {
-                        filteredCommodities = consumerController.filterByRating(ratingLow, ratingHigh, filteredCommodities);
-                    }
-                    if (filterByAvailability) {
-                        filteredCommodities = consumerController.filterByAvailability(filteredCommodities);
-                    }
-                    if (filterByPrice) {
-                        filteredCommodities = consumerController.filterByPrice(priceLow, priceHigh, filteredCommodities);
-                    }
-                    if (filterByNameFragment) {
-                        filteredCommodities = consumerController.filterByNameFragment(nameFragment, filteredCommodities);
-                    }
-                    int pageCount = (int) Math.ceil((double) filteredCommodities.size() / 10);
-                    System.out.println(consumerController.showCommodities(page, filteredCommodities));
-                    if (page != pageCount && page != 1) {
-                        System.out.println("1.Last page\t2.Next page\t3.quit\t4.filters\nEnter commodity ID to go to its page");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            switch (Integer.parseInt(pageCommand)) {
-                                case 1:
-                                    page--;
-                                    break;
-                                case 2:
-                                    page++;
-                                    break;
-                                case 3:
-                                    exit = true;
-                                    break;
-                                case 4:
-                                    filters();
-                                    break;
-                            }
-                            continue;
-                        } else {
-                            System.out.println(consumerController.commodityPage(pageCommand));
-                            for (Commodity commodity:filteredCommodities){
-                                if(commodity.getID().equals(pageCommand)){
-                                    System.out.println("1.Add to cart\tanything else to quit");
-                                    String command= input.nextLine();
-                                    if(command.equals("1")){
-                                        cart.add(commodity);
-                                        System.out.println("Commodity added to cart.");
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (page == 1 && page != pageCount) {
-                        System.out.println("1.Next page\t2.quit\t3.filters\nEnter commodity ID to go to its page");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page++;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
-                            }
-                            if (Integer.parseInt(pageCommand) == 3) {
-                                filters();
-                            }
-                        } else {
-                            System.out.println(consumerController.commodityPage(pageCommand));
-                            for (Commodity commodity:filteredCommodities){
-                                if(commodity.getID().equals(pageCommand)){
-                                    System.out.println("1.Add to cart\tanything else to quit");
-                                    String command= input.nextLine();
-                                    if(command.equals("1")){
-                                        cart.add(commodity);
-                                        System.out.println("Commodity added to cart.");
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (page == pageCount && page != 1) {
-                        System.out.println("1.last page\t2.quit\t3.filters\nEnter commodity ID to go to its page");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                page--;
-                                continue;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                exit = true;
-                            }
-                            if (Integer.parseInt(pageCommand) == 3) {
-                                filters();
-                            }
-                        } else {
-                            System.out.println(consumerController.commodityPage(pageCommand));
-                            for (Commodity commodity:filteredCommodities){
-                                if(commodity.getID().equals(pageCommand)){
-                                    System.out.println("1.Add to cart\tanything else to quit");
-                                    String command= input.nextLine();
-                                    if(command.equals("1")){
-                                        cart.add(commodity);
-                                        System.out.println("Commodity added to cart.");
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    if (page == 1 && page == pageCount) {
-                        System.out.println("1.quit\t2.filters\nEnter commodity ID to go to its page");
-                        String pageCommand = input.nextLine();
-                        if (Pattern.matches("\\d", pageCommand)) {
-                            if (Integer.parseInt(pageCommand) == 1) {
-                                exit = true;
-                            }
-                            if (Integer.parseInt(pageCommand) == 2) {
-                                filters();
-                            }
-                        } else {
-                            System.out.println(consumerController.commodityPage(pageCommand));
-                            for (Commodity commodity:filteredCommodities){
-                                if(commodity.getID().equals(pageCommand)){
-                                    System.out.println("1.Add to cart\tanything else to quit");
-                                    String command= input.nextLine();
-                                    if(command.equals("1")){
-                                        cart.add(commodity);
-                                        System.out.println("Commodity added to cart.");
-                                    }
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-                System.out.println("If you wish to buy these commodities make an account and use the command to add these to the cart.");
+                seeCommodities();
             }
             break;
             case 4: {
-                System.out.print("Enter a unique username: ");
-                String username = input.nextLine();
-                while (!usernamePattern.matcher(username).matches() || usernames.contains(username)) {
-                    if (!usernamePattern.matcher(username).matches()) {
-                        System.out.print("Enter username between 6 and 16 letters: ");
-                    } else {
-                        System.out.print("Username already taken. Choose another username: ");
-                    }
-                    username = input.nextLine();
-                }
-                System.out.print("Create a password for the account: ");
-                String password = input.nextLine();
-                while (!passwordPattern.matcher(password).matches()) {
-                    System.out.println("Enter a valid password between 8 and 14 letters using special characters and lower and upper case letters and numbers:");
-                    password = input.nextLine();
-                }
-                System.out.print("Enter a unique email address: ");
-                String email = input.nextLine();
-                while (!emailPattern.matcher(email).matches() || emails.contains(email)) {
-                    if (!emailPattern.matcher(email).matches()) {
-                        System.out.println("Enter a valid email address:");
-                        email = input.nextLine();
-                    } else {
-                        System.out.println("Email already taken. Enter another email: ");
-                        email = input.nextLine();
-                    }
-                }
-                System.out.print("Enter a unique phone number: ");
-                String phoneNumber = input.nextLine();
-                while (!phoneNumberPattern.matcher(phoneNumber).matches() || phoneNumbers.contains(phoneNumber)) {
-                    if (!phoneNumberPattern.matcher(phoneNumber).matches()) {
-                        System.out.println("Enter a valid phoneNumbers starting with '09':");
-                        phoneNumber = input.nextLine();
-                    } else {
-                        System.out.println("Phone number already taken. enter another phone number: ");
-                        phoneNumber = input.nextLine();
-                    }
-                }
-                signupRequests.add(new SignupRequest(username, password, email, phoneNumber));
-                System.out.println("Signup request successfully submitted.");
+                signup();
             }
             break;
         }
@@ -296,6 +86,7 @@ public class MainPanel {
     public static void setExit(boolean exit) {
         MainPanel.exit = exit;
     }
+
     private void filters() {
         System.out.println("1.filter by availability\t2.filter by price\t3.filter by rating\t4.filter by category\t5.filter by name fragment");
         System.out.println("6.remove availability filter\t7.remove price filter\t8.remove rating filter\t9.remove category filter\t10.remove name filter");
@@ -316,9 +107,9 @@ public class MainPanel {
             case "3": {
                 filterByRating = true;
                 System.out.println("Enter the low rating: ");
-                priceLow = input.nextInt();
+                ratingLow = input.nextInt();
                 System.out.println("Enter the high rating: ");
-                priceHigh = input.nextInt();
+                ratingHigh = input.nextInt();
             }
             break;
             case "4": {
@@ -375,6 +166,268 @@ public class MainPanel {
                 filterByNameFragment = false;
             }
             break;
+        }
+    }
+
+    private void seeCommodities() {
+        int page = 1;
+        boolean exit = false;
+        while (!exit) {
+            ArrayList<Commodity> filteredCommodities = consumerController.getCommodities();
+            if (filterByCategory) {
+                filteredCommodities = consumerController.filterByCategory(category, filteredCommodities);
+            }
+            if (filterByRating) {
+                filteredCommodities = consumerController.filterByRating(ratingLow, ratingHigh, filteredCommodities);
+            }
+            if (filterByAvailability) {
+                filteredCommodities = consumerController.filterByAvailability(filteredCommodities);
+            }
+            if (filterByPrice) {
+                filteredCommodities = consumerController.filterByPrice(priceLow, priceHigh, filteredCommodities);
+            }
+            if (filterByNameFragment) {
+                filteredCommodities = consumerController.filterByNameFragment(nameFragment, filteredCommodities);
+            }
+            int pageCount = (int) Math.ceil((double) filteredCommodities.size() / 10);
+            System.out.println(consumerController.showCommodities(page, filteredCommodities));
+            if (page != pageCount && page != 1) {
+                System.out.println("1.Last page\t2.Next page\t3.quit\t4.filters\nEnter commodity ID to go to its page");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    switch (Integer.parseInt(pageCommand)) {
+                        case 1:
+                            page--;
+                            break;
+                        case 2:
+                            page++;
+                            break;
+                        case 3:
+                            exit = true;
+                            break;
+                        case 4:
+                            filters();
+                            break;
+                    }
+                    continue;
+                } else {
+                    System.out.println(consumerController.commodityPage(pageCommand));
+                    for (Commodity commodity : filteredCommodities) {
+                        if (commodity.getID().equals(pageCommand)) {
+                            System.out.println("1.Add to cart\tanything else to quit");
+                            String command = input.nextLine();
+                            if (command.equals("1")) {
+                                cart.add(commodity);
+                                System.out.println("Commodity added to cart.");
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            if (page == 1 && page != pageCount) {
+                System.out.println("1.Next page\t2.quit\t3.filters\nEnter commodity ID to go to its page");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        page++;
+                        continue;
+                    }
+                    if (Integer.parseInt(pageCommand) == 2) {
+                        exit = true;
+                    }
+                    if (Integer.parseInt(pageCommand) == 3) {
+                        filters();
+                    }
+                } else {
+                    System.out.println(consumerController.commodityPage(pageCommand));
+                    for (Commodity commodity : filteredCommodities) {
+                        if (commodity.getID().equals(pageCommand)) {
+                            System.out.println("1.Add to cart\tanything else to quit");
+                            String command = input.nextLine();
+                            if (command.equals("1")) {
+                                cart.add(commodity);
+                                System.out.println("Commodity added to cart.");
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            if (page == pageCount && page != 1) {
+                System.out.println("1.last page\t2.quit\t3.filters\nEnter commodity ID to go to its page");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        page--;
+                        continue;
+                    }
+                    if (Integer.parseInt(pageCommand) == 2) {
+                        exit = true;
+                    }
+                    if (Integer.parseInt(pageCommand) == 3) {
+                        filters();
+                    }
+                } else {
+                    System.out.println(consumerController.commodityPage(pageCommand));
+                    for (Commodity commodity : filteredCommodities) {
+                        if (commodity.getID().equals(pageCommand)) {
+                            System.out.println("1.Add to cart\tanything else to quit");
+                            String command = input.nextLine();
+                            if (command.equals("1")) {
+                                cart.add(commodity);
+                                System.out.println("Commodity added to cart.");
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            if (page == 1 && page == pageCount) {
+                System.out.println("1.quit\t2.filters\nEnter commodity ID to go to its page");
+                String pageCommand = input.nextLine();
+                if (Pattern.matches("\\d", pageCommand)) {
+                    if (Integer.parseInt(pageCommand) == 1) {
+                        exit = true;
+                    }
+                    if (Integer.parseInt(pageCommand) == 2) {
+                        filters();
+                    }
+                } else {
+                    System.out.println(consumerController.commodityPage(pageCommand));
+                    for (Commodity commodity : filteredCommodities) {
+                        if (commodity.getID().equals(pageCommand)) {
+                            System.out.println("1.Add to cart\tanything else to quit");
+                            String command = input.nextLine();
+                            if (command.equals("1")) {
+                                cart.add(commodity);
+                                System.out.println("Commodity added to cart.");
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("If you wish to buy these commodities make an account and use the command to add these to the cart.");
+
+    }
+
+    private void signup() {
+        System.out.print("Enter a unique username: ");
+        String username = input.nextLine();
+        try {
+            consumerController.checkUsernameT(username);
+        } catch (InvalidUsernameException e1) {
+            System.out.println(e1.getMessage());
+            while (!consumerController.checkUsername(username) || usernames.contains(username)) {
+                if (!consumerController.checkUsername(username)) {
+                    System.out.print("Enter username between 6 and 16 letters: ");
+                } else {
+                    System.out.print("Username already taken. Choose another username: ");
+                }
+                username = input.nextLine();
+                try {
+                    consumerController.checkUsernameT(username);
+                } catch (InvalidUsernameException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            }
+        }
+        System.out.print("Create a password for the account: ");
+        String password = input.nextLine();
+        try {
+            consumerController.checkPasswordT(password);
+        } catch (InvalidPasswordException e1) {
+            System.out.println(e1.getMessage());
+            while (!consumerController.checkPassword(password)) {
+                System.out.println("Enter a valid password between 8 and 14 letters using special characters and lower and upper case letters and numbers:");
+                password = input.nextLine();
+                try {
+                    consumerController.checkPasswordT(password);
+                } catch (InvalidPasswordException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            }
+        }
+        System.out.print("Enter a unique email address: ");
+        String email = input.nextLine();
+        try {
+            consumerController.checkEmailT(email);
+        } catch (InvalidEmailException e1) {
+            System.out.println(e1.getMessage());
+            while (!consumerController.checkEmail(email) || emails.contains(email)) {
+                if (!consumerController.checkEmail(email)) {
+                    System.out.println("Enter a valid email address:");
+                } else {
+                    System.out.println("Email already taken. Enter another email: ");
+                }
+                email = input.nextLine();
+                try {
+                    consumerController.checkEmailT(email);
+                } catch (InvalidEmailException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            }
+        }
+        System.out.print("Enter a unique phone number: ");
+        String phoneNumber = input.nextLine();
+        try {
+            consumerController.checkPhoneNumberT(phoneNumber);
+        }catch (InvalidPhoneNumberException e1) {
+            System.out.println(e1.getMessage());
+            while (!consumerController.checkPhoneNumber(phoneNumber) || phoneNumbers.contains(phoneNumber)) {
+                if (!consumerController.checkPhoneNumber(phoneNumber)) {
+                    System.out.println("Enter a valid phoneNumbers starting with '09':");
+                } else {
+                    System.out.println("Phone number already taken. enter another phone number: ");
+                }
+                phoneNumber = input.nextLine();
+                try {
+                    consumerController.checkPhoneNumberT(phoneNumber);
+                }catch (InvalidPhoneNumberException e2){
+                    System.out.println(e2.getMessage());
+                }
+            }
+        }
+        signupRequests.add(new SignupRequest(username, password, email, phoneNumber));
+        System.out.println("Signup request successfully submitted.");
+    }
+
+    private void adminLogin() {
+        System.out.print("Enter Admin username: ");
+        String inputUsername = input.nextLine();
+        System.out.print("Enter Admin password: ");
+        String inputPassword = input.nextLine();
+        AdminPanel adminPanel = new AdminPanel(consumers, commodities, comments, signupRequests, commentRequests, chargeRequests);
+        if (adminPanel.login(inputUsername, inputPassword)) {
+            while (!adminPanel.shouldExit()) {
+                adminPanel.adminPage();
+            }
+        }
+    }
+
+    private void consumerLogin() {
+        System.out.println("Enter username:");
+        String username = input.nextLine();
+        System.out.println("Enter password:");
+        String password = input.nextLine();
+        for (Consumer consumer : consumers) {
+            if (consumer.getUsername().equals(username) && consumer.getPassword().equals(password)) {
+                System.out.println("if you wish to add commodities to cart enter 1 anything else to pass");
+                String command = input.nextLine();
+                if (command.equals("1")) {
+                    for (Commodity commodity : cart) {
+                        consumer.getCart().add(commodity);
+                    }
+                    cart.clear();
+                }
+                ConsumerPanel consumerPanel = new ConsumerPanel(consumers, commodities, comments, signupRequests, commentRequests, chargeRequests, consumer);
+                while (!consumerPanel.shouldExit()) {
+                    consumerPanel.consumerPage();
+                }
+                break;
+            }
         }
     }
 }

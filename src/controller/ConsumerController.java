@@ -1,5 +1,9 @@
 package controller;
 
+import exception.InvalidEmailException;
+import exception.InvalidPasswordException;
+import exception.InvalidPhoneNumberException;
+import exception.InvalidUsernameException;
 import model.commodity.Category;
 import model.commodity.Commodity;
 import model.user.consumer.*;
@@ -15,6 +19,13 @@ public class ConsumerController {
     private final ArrayList<SignupRequest> signupRequests;
     private final ArrayList<CommentRequest> commentRequests;
     private final ArrayList<ChargeRequest> chargeRequests;
+    private final Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9._-]{6,16}$");
+    private final Pattern passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
+    private final Pattern emailPattern = Pattern.compile("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$");
+    private final Pattern phoneNumberPattern = Pattern.compile("^09\\d{9}");
+    private final Pattern creditCardPattern=Pattern.compile("[0-9]{16}");
+    private final Pattern cvv2Pattern=Pattern.compile("[0-9]{3,4}");
+    private final Pattern cardPasswordPattern=Pattern.compile("[0-9]{6}");
 
     public ConsumerController(ArrayList<Consumer> consumers, ArrayList<SignupRequest> signupRequests, ArrayList<CommentRequest> commentRequests, ArrayList<Comment> comments, ArrayList<Commodity> commodities, ArrayList<ChargeRequest> chargeRequests) {
         this.consumers = consumers;
@@ -328,6 +339,51 @@ public class ConsumerController {
                 break;
             }
         }
+    }
+    public boolean checkUsernameT(String username) throws InvalidUsernameException{
+        if(!usernamePattern.matcher(username).matches()){
+            throw new InvalidUsernameException();
+        }
+        return usernamePattern.matcher(username).matches();
+    }
+    public boolean checkUsername(String username){
+        return usernamePattern.matcher(username).matches();
+    }
+    public boolean checkPassword(String password){
+        return passwordPattern.matcher(password).matches();
+    }
+    public boolean checkPasswordT(String password) throws InvalidPasswordException{
+        if(!passwordPattern.matcher(password).matches()){
+            throw new InvalidPasswordException();
+        }
+        return passwordPattern.matcher(password).matches();
+    }
+    public boolean checkEmail(String email){
+        return emailPattern.matcher(email).matches();
+    }
+    public boolean checkEmailT(String email) throws InvalidEmailException {
+        if(!emailPattern.matcher(email).matches()){
+            throw new InvalidEmailException();
+        }
+        return emailPattern.matcher(email).matches();
+    }
+    public boolean checkPhoneNumber(String phoneNumber){
+        return phoneNumberPattern.matcher(phoneNumber).matches();
+    }
+    public boolean checkPhoneNumberT(String phoneNumber) throws InvalidPhoneNumberException {
+        if(!phoneNumberPattern.matcher(phoneNumber).matches()){
+            throw new InvalidPhoneNumberException();
+        }
+        return phoneNumberPattern.matcher(phoneNumber).matches();
+    }
+    public boolean checkCardNumber(String cardNumber){
+        return creditCardPattern.matcher(cardNumber).matches();
+    }
+    public boolean checkCVV2(String CVV2){
+        return cvv2Pattern.matcher(CVV2).matches();
+    }
+    public boolean checkCardPassword(String password){
+        return cardPasswordPattern.matcher(password).matches();
     }
     public String commoditiesBought(Consumer consumer) {
         StringBuilder commodities = new StringBuilder();
