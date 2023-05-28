@@ -1,9 +1,6 @@
 package com.example.onlineshop.controller;
 
-import com.example.onlineshop.exceptions.InvalidEmailException;
-import com.example.onlineshop.exceptions.InvalidPasswordException;
-import com.example.onlineshop.exceptions.InvalidPhoneNumberException;
-import com.example.onlineshop.exceptions.InvalidUsernameException;
+import com.example.onlineshop.exceptions.*;
 import com.example.onlineshop.model.commodity.Commodity;
 import com.example.onlineshop.model.discount.DiscountCode;
 import com.example.onlineshop.model.user.consumer.*;
@@ -25,7 +22,7 @@ public class ConsumerController {
     private final ArrayList<String> emails;
     private final Pattern usernamePattern = Pattern.compile("^[a-zA-Z0-9._-]{6,16}$");
     private final Pattern passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$");
-    private final Pattern emailPattern = Pattern.compile("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$");
+    private final Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     private final Pattern phoneNumberPattern = Pattern.compile("^09\\d{9}");
     private final Pattern creditCardPattern = Pattern.compile("[0-9]{16}");
     private final Pattern cvv2Pattern = Pattern.compile("[0-9]{3,4}");
@@ -315,9 +312,11 @@ public class ConsumerController {
         }
     }
 
-    public boolean checkUsernameT(String username) throws InvalidUsernameException {
-        if (!usernamePattern.matcher(username).matches()||usernames.contains(username)) {
+    public boolean checkUsernameT(String username) throws InvalidInfoException {
+        if (!usernamePattern.matcher(username).matches()) {
             throw new InvalidUsernameException();
+        }else if(usernames.contains(username)){
+            throw new UsernameTakenException();
         }
         return usernamePattern.matcher(username).matches()&&!usernames.contains(username);
     }
@@ -341,9 +340,11 @@ public class ConsumerController {
         return emailPattern.matcher(email).matches()&&!emails.contains(email);
     }
 
-    public boolean checkEmailT(String email) throws InvalidEmailException {
-        if (!emailPattern.matcher(email).matches()||emails.contains(email)) {
+    public boolean checkEmailT(String email) throws InvalidInfoException {
+        if (!emailPattern.matcher(email).matches()) {
             throw new InvalidEmailException();
+        }else if(emails.contains(email)){
+            throw new EmailTakenException();
         }
         return emailPattern.matcher(email).matches()&&!emails.contains(email);
     }
@@ -352,9 +353,11 @@ public class ConsumerController {
         return phoneNumberPattern.matcher(phoneNumber).matches()&&!phoneNumbers.contains(phoneNumber);
     }
 
-    public boolean checkPhoneNumberT(String phoneNumber) throws InvalidPhoneNumberException {
-        if (!phoneNumberPattern.matcher(phoneNumber).matches()||phoneNumbers.contains(phoneNumber)) {
+    public boolean checkPhoneNumberT(String phoneNumber) throws InvalidInfoException {
+        if (!phoneNumberPattern.matcher(phoneNumber).matches()) {
             throw new InvalidPhoneNumberException();
+        }else if(phoneNumbers.contains(phoneNumber)){
+            throw new PhoneNumberTakenException();
         }
         return phoneNumberPattern.matcher(phoneNumber).matches()&&!phoneNumbers.contains(phoneNumber);
     }

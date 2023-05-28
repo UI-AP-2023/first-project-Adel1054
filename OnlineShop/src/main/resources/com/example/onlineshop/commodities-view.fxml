@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="494.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlineshop.view.sceneControllers.CommoditiesController">
+   <children>
+      <ImageView fitHeight="494.0" fitWidth="655.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@IMG4.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableView" layoutY="49.0" onMouseClicked="#item_selected" prefHeight="368.0" prefWidth="633.0">
+        <columns>
+          <TableColumn prefWidth="67.20001524686813" text="Name" />
+          <TableColumn prefWidth="83.20001220703125" text="ID" />
+            <TableColumn prefWidth="75.0" text="Category" />
+            <TableColumn prefWidth="75.0" text="Price" />
+            <TableColumn prefWidth="63.99993896484375" text="Available" />
+            <TableColumn prefWidth="91.20001220703125" text="Average rating" />
+            <TableColumn prefWidth="81.5999755859375" text="No. Ratings" />
+            <TableColumn prefWidth="93.5999755859375" text="No. Comments" />
+        </columns>
+      </TableView>
+      <Button fx:id="back_btn" layoutY="417.0" mnemonicParsing="false" onAction="#back_event" prefHeight="39.0" prefWidth="100.0" text="Back">
+         <font>
+            <Font name="Kristen ITC" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="next_btn" layoutX="533.0" layoutY="417.0" mnemonicParsing="false" onAction="#next_event" prefHeight="39.0" prefWidth="100.0" text="Next">
+         <font>
+            <Font name="Kristen ITC" size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="last_btn" layoutX="406.0" layoutY="415.0" mnemonicParsing="false" onAction="#last_event" prefHeight="39.0" prefWidth="100.0" text="Last">
+         <font>
+            <Font name="Kristen ITC" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

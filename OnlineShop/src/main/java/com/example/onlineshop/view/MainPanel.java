@@ -3,10 +3,7 @@ package com.example.onlineshop.view;
 
 
 import com.example.onlineshop.controller.ConsumerController;
-import com.example.onlineshop.exceptions.InvalidEmailException;
-import com.example.onlineshop.exceptions.InvalidPasswordException;
-import com.example.onlineshop.exceptions.InvalidPhoneNumberException;
-import com.example.onlineshop.exceptions.InvalidUsernameException;
+import com.example.onlineshop.exceptions.*;
 import com.example.onlineshop.model.commodity.Category;
 import com.example.onlineshop.model.commodity.Commodity;
 import com.example.onlineshop.model.user.consumer.ChargeRequest;
@@ -324,7 +321,7 @@ public class MainPanel {
         String username = input.nextLine();
         try {
             consumerController.checkUsernameT(username);
-        } catch (InvalidUsernameException e1) {
+        } catch (InvalidInfoException e1) {
             System.out.println(e1.getMessage());
             while (!consumerController.checkUsername(username) || usernames.contains(username)) {
                 if (!consumerController.checkUsername(username)) {
@@ -335,7 +332,7 @@ public class MainPanel {
                 username = input.nextLine();
                 try {
                     consumerController.checkUsernameT(username);
-                } catch (InvalidUsernameException e2) {
+                } catch (InvalidInfoException e2) {
                     System.out.println(e2.getMessage());
                 }
             }
@@ -364,7 +361,7 @@ public class MainPanel {
         String email = input.nextLine();
         try {
             consumerController.checkEmailT(email);
-        } catch (InvalidEmailException e1) {
+        } catch (InvalidInfoException e1) {
             System.out.println(e1.getMessage());
             while (!consumerController.checkEmail(email) || emails.contains(email)) {
                 if (!consumerController.checkEmail(email)) {
@@ -375,7 +372,7 @@ public class MainPanel {
                 email = input.nextLine();
                 try {
                     consumerController.checkEmailT(email);
-                } catch (InvalidEmailException e2) {
+                } catch (InvalidInfoException e2) {
                     System.out.println(e2.getMessage());
                 }
             }
@@ -386,7 +383,7 @@ public class MainPanel {
         String phoneNumber = input.nextLine();
         try {
             consumerController.checkPhoneNumberT(phoneNumber);
-        }catch (InvalidPhoneNumberException e1) {
+        }catch (InvalidInfoException e1) {
             System.out.println(e1.getMessage());
             while (!consumerController.checkPhoneNumber(phoneNumber) || phoneNumbers.contains(phoneNumber)) {
                 if (!consumerController.checkPhoneNumber(phoneNumber)) {
@@ -397,7 +394,7 @@ public class MainPanel {
                 phoneNumber = input.nextLine();
                 try {
                     consumerController.checkPhoneNumberT(phoneNumber);
-                }catch (InvalidPhoneNumberException e2){
+                }catch (InvalidInfoException e2){
                     System.out.println(e2.getMessage());
                 }
             }

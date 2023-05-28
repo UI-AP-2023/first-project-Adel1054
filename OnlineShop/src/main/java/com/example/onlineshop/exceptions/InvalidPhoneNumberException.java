@@ -1,6 +1,6 @@
 package com.example.onlineshop.exceptions;
 
-public class InvalidPhoneNumberException extends Exception{
+public class InvalidPhoneNumberException extends InvalidInfoException{
     public InvalidPhoneNumberException(){
         super("Invalid  Info-Invalid Phone Number.");
     }

@@ -1,6 +1,6 @@
 package com.example.onlineshop.exceptions;
 
-public class InvalidEmailException extends Exception{
+public class InvalidEmailException extends InvalidInfoException{
     public InvalidEmailException(){
         super("Invalid  Info-Invalid Email Address");
     }
