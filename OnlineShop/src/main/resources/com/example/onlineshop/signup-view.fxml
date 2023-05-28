@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="447.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.onlineshop.view.controllers.SignupController">
+   <children>
+      <ImageView fitHeight="447.0" fitWidth="590.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@IMG2.jpg" />
+         </image>
+      </ImageView>
+      <TextField layoutX="182.0" layoutY="135.0">
+         <font>
+            <Font name="Arial" size="17.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="182.0" layoutY="174.0">
+         <font>
+            <Font name="Arial" size="17.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="182.0" layoutY="211.0">
+         <font>
+            <Font name="Arial" size="17.0" />
+         </font>
+      </TextField>
+      <TextField layoutX="182.0" layoutY="247.0">
+         <font>
+            <Font name="Arial" size="17.0" />
+         </font>
+      </TextField>
+      <Text fill="YELLOW" layoutX="82.0" layoutY="152.0" stroke="#f500ff" strokeType="OUTSIDE" text="Username :" wrappingWidth="82.13671875">
+         <font>
+            <Font name="Old English Text MT" size="17.0" />
+         </font>
+      </Text>
+      <Text fill="YELLOW" layoutX="82.0" layoutY="192.0" stroke="#f500ff" strokeType="OUTSIDE" text="Password :" wrappingWidth="92.5367431640625">
+         <font>
+            <Font name="Old English Text MT" size="17.0" />
+         </font>
+      </Text>
+      <Text fill="YELLOW" layoutX="112.0" layoutY="229.0" stroke="#f500ff" strokeType="OUTSIDE" text="Email :" wrappingWidth="69.26824951171875">
+         <font>
+            <Font name="Old English Text MT" size="17.0" />
+         </font>
+      </Text>
+      <Text fill="YELLOW" layoutX="46.0" layoutY="265.0" stroke="#f500ff" strokeType="OUTSIDE" text="Phone Number :">
+         <font>
+            <Font name="Old English Text MT" size="17.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
