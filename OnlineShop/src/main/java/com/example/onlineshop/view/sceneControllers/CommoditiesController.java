@@ -2,7 +2,14 @@ package com.example.onlineshop.view.sceneControllers;
 
 import com.example.onlineshop.model.commodity.Category;
 import com.example.onlineshop.model.commodity.Commodity;
+import com.example.onlineshop.model.commodity.comestible.Comestible;
 import com.example.onlineshop.model.commodity.digitalCommodities.FlashMemory;
+import com.example.onlineshop.model.commodity.digitalCommodities.PC;
+import com.example.onlineshop.model.commodity.digitalCommodities.SSD;
+import com.example.onlineshop.model.commodity.stationery.Notebook;
+import com.example.onlineshop.model.commodity.stationery.Pen;
+import com.example.onlineshop.model.commodity.stationery.Pencil;
+import com.example.onlineshop.model.commodity.vehicles.Automobile;
 import com.example.onlineshop.model.commodity.vehicles.Bicycle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -73,10 +81,7 @@ public class CommoditiesController implements Initializable {
 
     @FXML
     private TableView<Commodity> tableView;
-    ArrayList<Commodity> commodityArrayList=new ArrayList<>(){
-        Commodity commodity1=new Bicycle("bike",1000,10,"Saipa", Bicycle.BicycleType.HYBRID);
-    };
-    ObservableList<Commodity> commodities= FXCollections.observableArrayList(commodityArrayList);
+    private ObservableList<Commodity> commodities= FXCollections.observableArrayList(MainController.getCommodities());
 
     @FXML
     void back_event(ActionEvent event) {
@@ -99,10 +104,22 @@ public class CommoditiesController implements Initializable {
 
     }
 
+    public ObservableList<Commodity> getCommodities() {
+        return commodities;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableView.setItems(commodities);
-        commodities.add(new FlashMemory("Flash",100,10,100,"Hello",10,10));
+        commodities.add(new FlashMemory("Sandisk",20,6,15.4,"5cm*1cm",128,3.2));
+        commodities.add(new Pen("FaberCastell.7mm",2,5,"USA","Blue"));
+        commodities.add(new Bicycle("Domane",200,2,"Trek", Bicycle.BicycleType.HYBRID));
+        commodities.add(new Automobile("Genesis Coupe",40000,1,"Hyundai",true,252));
+        commodities.add(new Pencil("Panther",1.5,20,"USA", Pencil.PencilType.HB));
+        commodities.add(new Notebook("Staedtler",4.5,15,"Germany",150,"Normal paper"));
+        commodities.add(new SSD("Samsung870EVO",80,5,70,"11cm*14cm",1000,560,530));
+        commodities.add(new PC("MacbookAirM2",1300,3,1000,"13.6 Inches",8,"IntelCoreI7"));
+        commodities.add(new Comestible("Bologna sausage",20,8, LocalDate.now().toString(),LocalDate.now().plusDays(7).toString()));
         availability_column.setCellValueFactory(new PropertyValueFactory<>("available"));
         avg_column.setCellValueFactory(new PropertyValueFactory<>("averageRating"));
         category_column.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -113,3 +130,15 @@ public class CommoditiesController implements Initializable {
         name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
     }
 }
+
+/*
+Add Pen FaberCastell.7mm 2 5 USA Blue
+Add FlashMemory SanDisk 20 6 15.4 5x1 128 3.2
+Add Bicycle Domane 200 2 Trek Hybrid
+Add Automobile Genesis 40000 1 Hyundai true 252
+Add Pencil Panther 1.5 20 USA HB
+Add Notebook Staedtler 4.5 15 Germany 150 normalPaper
+Add SSD Samsung870EVO 80 5 70 2.5Inches 1000 560 530
+Add PC MacBookAirM2 1300 3 1000 13.6Inches 8 intelCoreI7
+Add Comestible BolognaSausage 20 8 4/4/2023 8/4/2023
+ */
