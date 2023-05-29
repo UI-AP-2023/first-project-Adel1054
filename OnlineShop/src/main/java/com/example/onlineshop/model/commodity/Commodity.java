@@ -12,6 +12,9 @@ public abstract class Commodity implements Comparable {
     private String name;
     private double price;
     private int availableCount;
+    private String available;
+    private int ratingsCount;
+    private int commentsCount;
     private final ArrayList<Rating> ratings;
     private final ArrayList<Comment> comments;
     private double averageRating;
@@ -27,11 +30,18 @@ public abstract class Commodity implements Comparable {
 
     protected Commodity(String name, double price, int availableCount, Category category) {
         this.availableCount = availableCount;
+        if(availableCount>0){
+            available="Yes";
+        }else {
+            available="No";
+        }
         this.name = name;
         this.category = category;
         this.price = price;
         ratings = new ArrayList<>();
         comments = new ArrayList<>();
+        ratingsCount=0;
+        commentsCount=0;
         averageRating = 0;
         ID = IDBuilder();
         switch (category) {
@@ -94,10 +104,19 @@ public abstract class Commodity implements Comparable {
 
     public void changeAvailableCount(int change) {
         availableCount += change;
+        if(availableCount<=0){
+            available="No";
+        }else {
+            available="Yes";
+        }
     }
 
     public ArrayList<Rating> getRatings() {
         return ratings;
+    }
+
+    public String getAvailable() {
+        return available;
     }
 
     public int getAvailableCount() {
@@ -265,4 +284,13 @@ public abstract class Commodity implements Comparable {
             }
         }
     }
+
+    public void setRatingsCount(int ratingsCount) {
+        this.ratingsCount = ratingsCount;
+    }
+
+    public int getCommentsCount() {
+        return commentsCount;
+    }
+
 }
